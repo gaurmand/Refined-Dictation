@@ -150,7 +150,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="wTi-Be-idW" kind="modal" id="5BA-q2-nI2"/>
+                                    <segue destination="f27-2a-C1b" kind="modal" id="5BA-q2-nI2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -213,23 +213,25 @@
                                 <state key="normal" image="record"/>
                                 <connections>
                                     <action selector="ChangeRecordButtonImage:" destination="wTi-Be-idW" eventType="touchUpInside" id="e5Z-GU-3vo"/>
+                                    <segue destination="lDQ-5X-Ndl" kind="show" id="ofn-lp-M7o"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="YEw-ev-dt5"/>
                     <connections>
                         <outlet property="RecordingButton" destination="bXV-jm-FSr" id="CFX-aS-YiA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ouk-4Z-1iX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2631" y="122"/>
+            <point key="canvasLocation" x="3568.8000000000002" y="121.88905547226388"/>
         </scene>
         <!--Is this text correct?-->
         <scene sceneID="X7T-QE-P7O">
             <objects>
-                <viewController id="lDQ-5X-Ndl" sceneMemberID="viewController">
+                <viewController id="lDQ-5X-Ndl" customClass="VerificationViewController" customModule="Refined_Dictation" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7OM-kA-jXn"/>
                         <viewControllerLayoutGuide type="bottom" id="5r9-9w-Zjw"/>
@@ -257,7 +259,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Is this text correct?" id="oCR-6M-c71">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="fjd-a4-JPz"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="fjd-a4-JPz">
+                            <connections>
+                                <segue destination="sfa-WN-1aR" kind="unwind" unwindAction="unwindToRecordingViewWithSender:" id="nWO-GW-cqv"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Done" id="sza-2z-V5K">
                             <connections>
                                 <segue destination="DAd-uv-tvM" kind="show" id="5GV-ef-7xp"/>
@@ -266,8 +272,9 @@
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6OR-I4-vfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="sfa-WN-1aR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5551.1999999999998" y="121.88905547226388"/>
+            <point key="canvasLocation" x="4614" y="122"/>
         </scene>
         <!--Share Your Text-->
         <scene sceneID="WoE-Su-M0u">
@@ -327,6 +334,9 @@
                                 <rect key="frame" x="116" y="495" width="143" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Try another dictation"/>
+                                <connections>
+                                    <segue destination="8Rm-ZU-sEy" kind="unwind" unwindAction="unwindToRecordingViewWithSender:" id="PQU-6o-rKq"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="KvR-SP-Ncc">
                                 <rect key="frame" x="64" y="161" width="38" height="38"/>
@@ -363,30 +373,35 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Share Your Text" id="oRb-P2-Rq6">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="nDy-A1-aWz"/>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="nDy-A1-aWz">
+                            <connections>
+                                <segue destination="8Rm-ZU-sEy" kind="unwind" unwindAction="unwindToVerificationViewWithSender:" id="uU7-fY-b8Y"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lQ2-k4-MPr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8Rm-ZU-sEy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6463.1999999999998" y="121.88905547226388"/>
+            <point key="canvasLocation" x="5710" y="122"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="gtq-Gg-wPG">
+        <scene sceneID="P5U-Mh-Fad">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ak4-ou-ivJ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="f27-2a-C1b" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OVA-fo-vlR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xh3-6i-L1e">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="lDQ-5X-Ndl" kind="relationship" relationship="rootViewController" id="RGH-h1-cvB"/>
+                        <segue destination="wTi-Be-idW" kind="relationship" relationship="rootViewController" id="cUd-lA-4Xm"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4KZ-PG-Gk0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fLe-jw-zsQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4612" y="121.88905547226388"/>
+            <point key="canvasLocation" x="2629.5999999999999" y="121.88905547226388"/>
         </scene>
     </scenes>
     <resources>

@@ -15,6 +15,7 @@
 		8496EEFC1FA72B2500232112 /* Refined_DictationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EEFB1FA72B2500232112 /* Refined_DictationTests.swift */; };
 		8496EF071FA72B2500232112 /* Refined_DictationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EF061FA72B2500232112 /* Refined_DictationUITests.swift */; };
 		84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A61FAC1006007E9E36 /* RecordingViewController.swift */; };
+		84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A81FAC749D007E9E36 /* VerificationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		8496EF061FA72B2500232112 /* Refined_DictationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refined_DictationUITests.swift; sourceTree = "<group>"; };
 		8496EF081FA72B2500232112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F096A61FAC1006007E9E36 /* RecordingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingViewController.swift; sourceTree = "<group>"; };
+		84F096A81FAC749D007E9E36 /* VerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				8496EEE61FA72B2500232112 /* AppDelegate.swift */,
 				8496EEE81FA72B2500232112 /* StartViewController.swift */,
 				84F096A61FAC1006007E9E36 /* RecordingViewController.swift */,
+				84F096A81FAC749D007E9E36 /* VerificationViewController.swift */,
 				8496EEEA1FA72B2500232112 /* Main.storyboard */,
 				8496EEED1FA72B2500232112 /* Assets.xcassets */,
 				8496EEEF1FA72B2500232112 /* LaunchScreen.storyboard */,
@@ -264,6 +267,7 @@
 			files = (
 				84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */,
 				8496EEE91FA72B2500232112 /* StartViewController.swift in Sources */,
+				84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */,
 				8496EEE71FA72B2500232112 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
