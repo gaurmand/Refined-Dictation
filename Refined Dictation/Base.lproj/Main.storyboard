@@ -222,6 +222,7 @@
                     <navigationItem key="navigationItem" id="YEw-ev-dt5"/>
                     <connections>
                         <outlet property="RecordingButton" destination="bXV-jm-FSr" id="CFX-aS-YiA"/>
+                        <outlet property="SearchField" destination="8cl-PO-AWa" id="qX3-O5-w1O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ouk-4Z-1iX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -338,7 +339,7 @@
                                     <segue destination="8Rm-ZU-sEy" kind="unwind" unwindAction="unwindToRecordingViewWithSender:" id="PQU-6o-rKq"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="KvR-SP-Ncc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clipboard" translatesAutoresizingMaskIntoConstraints="NO" id="KvR-SP-Ncc">
                                 <rect key="frame" x="64" y="161" width="38" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -411,6 +412,7 @@
         <image name="Facebook" width="125" height="125"/>
         <image name="Google Plus" width="250" height="250"/>
         <image name="Search" width="105" height="105"/>
+        <image name="clipboard" width="53" height="51"/>
         <image name="record" width="256" height="256"/>
     </resources>
 </document>
