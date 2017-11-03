@@ -1,5 +1,5 @@
 //
-//  RecordingViewController.swift
+//  VerificationViewController.swift
 //  Refined Dictation
 //
 //  Created by Admin on 03/11/2017.
@@ -8,8 +8,7 @@
 
 import UIKit
 
-class RecordingViewController: UIViewController {
-    @IBOutlet weak var RecordingButton: UIButton!
+class VerificationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,18 +21,14 @@ class RecordingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func ChangeRecordButtonImage(_ sender: Any) {
-        let StopRecording = UIImage(named: "stop")
-        RecordingButton.setImage(StopRecording, for: UIControlState.normal)
-    }
 
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    @IBAction func unwindToRecordingView(sender: UIStoryboardSegue) {
-        
-    }
+     @IBAction func unwindToVerificationView(sender: UIStoryboardSegue) {
+     
+     }
  
 
 }
