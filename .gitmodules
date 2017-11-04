@@ -1,0 +1,6 @@
+[submodule "swift-sdk"]
+	path = swift-sdk
+	url = https://github.com/watson-developer-cloud/swift-sdk.git
+[submodule "SwiftKeychainWrapper"]
+	path = SwiftKeychainWrapper
+	url = https://github.com/jrendel/SwiftKeychainWrapper.git

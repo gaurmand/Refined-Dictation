@@ -33,4 +33,16 @@ class Refined_DictationTests: XCTestCase {
         }
     }
     
+    
+    func testUserInit(){
+        let tstUsr = User.init()
+        XCTAssertNotNil(tstUsr)
+    }
+    
+    func testrecog(){
+        let tstUsr = User.init()
+        let tstRecog = SpeechRecog.init(usr: tstUsr)
+        XCTAssertNotNil(tstRecog)
+    }
+    
 }
