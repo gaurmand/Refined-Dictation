@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		075B19401FAFB2E300A51A34 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B193F1FAFB2E300A51A34 /* KeychainWrapper.swift */; };
+		075B19421FAFB2E400A51A34 /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B19411FAFB2E400A51A34 /* KeychainItemAccessibility.swift */; };
 		299FF2201FAD5AA00012595B /* audio-file.flac in Resources */ = {isa = PBXBuildFile; fileRef = 299FF21E1FAD5AA00012595B /* audio-file.flac */; };
 		299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF21F1FAD5AA00012595B /* dataObjs.swift */; };
 		299FF29A1FAD5CC40012595B /* SpeechToTextV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299FF2851FAD5C980012595B /* SpeechToTextV1.framework */; };
 		299FF29B1FAD5CC40012595B /* SpeechToTextV1.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 299FF2851FAD5C980012595B /* SpeechToTextV1.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		299FF2A01FAD5F4D0012595B /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF29F1FAD5F4D0012595B /* KeychainWrapper.swift */; };
-		299FF2A21FAD5F890012595B /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF2A11FAD5F890012595B /* KeychainItemAccessibility.swift */; };
 		8496EEE71FA72B2500232112 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EEE61FA72B2500232112 /* AppDelegate.swift */; };
 		8496EEE91FA72B2500232112 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EEE81FA72B2500232112 /* StartViewController.swift */; };
 		8496EEEC1FA72B2500232112 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8496EEEA1FA72B2500232112 /* Main.storyboard */; };
@@ -336,11 +336,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		075B193F1FAFB2E300A51A34 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeychainWrapper.swift; path = "/Users/serrann/Documents/Refined-Dictation (fixed)/Refined Dictation/KeychainWrapper.swift"; sourceTree = "<absolute>"; };
+		075B19411FAFB2E400A51A34 /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeychainItemAccessibility.swift; path = "/Users/serrann/Documents/Refined-Dictation (fixed)/Refined Dictation/KeychainItemAccessibility.swift"; sourceTree = "<absolute>"; };
 		299FF21E1FAD5AA00012595B /* audio-file.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-file.flac"; sourceTree = "<group>"; };
 		299FF21F1FAD5AA00012595B /* dataObjs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataObjs.swift; sourceTree = "<group>"; };
 		299FF2221FAD5C970012595B /* WatsonDeveloperCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonDeveloperCloud.xcodeproj; path = "swift-sdk/WatsonDeveloperCloud.xcodeproj"; sourceTree = "<group>"; };
-		299FF29F1FAD5F4D0012595B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainWrapper.swift; path = SwiftKeychainWrapper/SwiftKeychainWrapper/KeychainWrapper.swift; sourceTree = SOURCE_ROOT; };
-		299FF2A11FAD5F890012595B /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainItemAccessibility.swift; path = SwiftKeychainWrapper/SwiftKeychainWrapper/KeychainItemAccessibility.swift; sourceTree = SOURCE_ROOT; };
 		8496EEE31FA72B2500232112 /* Refined Dictation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Refined Dictation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8496EEE61FA72B2500232112 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8496EEE81FA72B2500232112 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -455,8 +455,8 @@
 			isa = PBXGroup;
 			children = (
 				8496EEE61FA72B2500232112 /* AppDelegate.swift */,
-				299FF29F1FAD5F4D0012595B /* KeychainWrapper.swift */,
-				299FF2A11FAD5F890012595B /* KeychainItemAccessibility.swift */,
+				075B193F1FAFB2E300A51A34 /* KeychainWrapper.swift */,
+				075B19411FAFB2E400A51A34 /* KeychainItemAccessibility.swift */,
 				8496EEE81FA72B2500232112 /* StartViewController.swift */,
 				84F096A61FAC1006007E9E36 /* RecordingViewController.swift */,
 				84F096A81FAC749D007E9E36 /* VerificationViewController.swift */,
@@ -910,9 +910,9 @@
 				84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */,
 				8496EEE91FA72B2500232112 /* StartViewController.swift in Sources */,
 				299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */,
-				299FF2A01FAD5F4D0012595B /* KeychainWrapper.swift in Sources */,
+				075B19401FAFB2E300A51A34 /* KeychainWrapper.swift in Sources */,
 				84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */,
-				299FF2A21FAD5F890012595B /* KeychainItemAccessibility.swift in Sources */,
+				075B19421FAFB2E400A51A34 /* KeychainItemAccessibility.swift in Sources */,
 				8496EEE71FA72B2500232112 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

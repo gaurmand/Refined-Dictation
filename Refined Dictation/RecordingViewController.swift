@@ -11,10 +11,14 @@ import UIKit
 class RecordingViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var RecordingButton: UIButton!
     @IBOutlet weak var SearchField: UITextField!
+    @IBOutlet weak var InstructionLabel: UILabel!
+    @IBOutlet weak var DoneButton: UIBarButtonItem!
+    var stopButton = false  //record button can be stop or start (true if stop, false if start)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         SearchField.delegate = self //sets search field delegate
+        DoneButton.isEnabled = false  //disables done button
         // Do any additional setup after loading the view.
     }
 
@@ -23,13 +27,9 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
-
-    
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    @IBAction func unwindToRecordingView(sender: UIStoryboardSegue) {
-        
+    override func viewDidDisappear(_ animated: Bool) {
+        InstructionLabel.text = "Tap the red button below to start recording your voice"
+        DoneButton.isEnabled = false
     }
     
     //MARK: UITextFieldDelegate
@@ -41,11 +41,35 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
     
     
     //MARK: Actions
-    
-    @IBAction func ChangeRecordButtonImage(_ sender: Any) {
-        let StopRecording = UIImage(named: "stop")
-        RecordingButton.setImage(StopRecording, for: UIControlState.normal)
+    @IBAction func RecordButtonPressed(_ sender: UIButton) {
+        if(stopButton){ //changes stop record button to start record and segues to next view
+            stopButton = false
+            let StartRecording = UIImage(named: "record")
+            RecordingButton.setImage(StartRecording, for: UIControlState.normal)
+            InstructionLabel.text = "Press done or tap the red button to redo your recording"
+            DoneButton.isEnabled = true
+            nextView()
+        }
+        else{   //changes start record button to stop record button
+            stopButton = true
+            let StopRecording = UIImage(named: "stop")
+            RecordingButton.setImage(StopRecording, for: UIControlState.normal)
+            InstructionLabel.text = "Tap the button again to stop recording"
+            DoneButton.isEnabled = false
+        }
     }
- 
+    
+    // MARK: - Navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    @IBAction func unwindToRecordingView(sender: UIStoryboardSegue) {
+        
+    }
+    
+    func nextView(){
+       //let storyboard = UIStoryboard(name: "Main", bundle: nil)
+       //let nextViewController = storyboard.instantiateViewController(withIdentifier: "VerificationViewController")
+       //self.navigationController?.pushViewController(nextViewController, animated: true)
+        
+    }
 
 }
