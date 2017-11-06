@@ -18,7 +18,7 @@ class CommonFilterTests: XCTestCase {
         XCTAssert(testObj.ExcludedCommonWords["the"] == true)
         XCTAssert(testObj.ExcludedCommonWords["I"] == true)
         XCTAssert(testObj.ExcludedCommonWords["with"] == true)
-        XCTAssert(testObj.ExcludedCommonWords["some"] == true)
+        XCTAssert(testObj.ExcludedCommonWords["and"] == true)
     }
     
     func testAddtoList() {
