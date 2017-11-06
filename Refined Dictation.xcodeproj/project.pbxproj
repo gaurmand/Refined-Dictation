@@ -10,7 +10,7 @@
 		075B19401FAFB2E300A51A34 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B193F1FAFB2E300A51A34 /* KeychainWrapper.swift */; };
 		075B19421FAFB2E400A51A34 /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B19411FAFB2E400A51A34 /* KeychainItemAccessibility.swift */; };
 		07FE21DF1FAFCCEB006FE00F /* CommonFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */; };
-		07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */; };
+        07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */; };
 		299FF2201FAD5AA00012595B /* audio-file.flac in Resources */ = {isa = PBXBuildFile; fileRef = 299FF21E1FAD5AA00012595B /* audio-file.flac */; };
 		299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF21F1FAD5AA00012595B /* dataObjs.swift */; };
 		299FF29A1FAD5CC40012595B /* SpeechToTextV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299FF2851FAD5C980012595B /* SpeechToTextV1.framework */; };
@@ -341,7 +341,7 @@
 		075B193F1FAFB2E300A51A34 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeychainWrapper.swift; path = "/Users/serrann/Documents/Refined-Dictation (fixed)/Refined Dictation/KeychainWrapper.swift"; sourceTree = "<absolute>"; };
 		075B19411FAFB2E400A51A34 /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeychainItemAccessibility.swift; path = "/Users/serrann/Documents/Refined-Dictation (fixed)/Refined Dictation/KeychainItemAccessibility.swift"; sourceTree = "<absolute>"; };
 		07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterTests.swift; sourceTree = "<group>"; };
-		07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExcludedCommonWordsList.txt; sourceTree = "<group>"; };
+        07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExcludedCommonWordsList.txt; sourceTree = "<group>"; };
 		299FF21E1FAD5AA00012595B /* audio-file.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-file.flac"; sourceTree = "<group>"; };
 		299FF21F1FAD5AA00012595B /* dataObjs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataObjs.swift; sourceTree = "<group>"; };
 		299FF2221FAD5C970012595B /* WatsonDeveloperCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonDeveloperCloud.xcodeproj; path = "swift-sdk/WatsonDeveloperCloud.xcodeproj"; sourceTree = "<group>"; };
@@ -464,7 +464,7 @@
 				8496EEE81FA72B2500232112 /* StartViewController.swift */,
 				84F096A61FAC1006007E9E36 /* RecordingViewController.swift */,
 				84F096A81FAC749D007E9E36 /* VerificationViewController.swift */,
-				07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */,
+                07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */,
 				8496EEEA1FA72B2500232112 /* Main.storyboard */,
 				8496EEED1FA72B2500232112 /* Assets.xcassets */,
 				8496EEEF1FA72B2500232112 /* LaunchScreen.storyboard */,
@@ -889,7 +889,7 @@
 				8496EEEE1FA72B2500232112 /* Assets.xcassets in Resources */,
 				299FF2201FAD5AA00012595B /* audio-file.flac in Resources */,
 				8496EEEC1FA72B2500232112 /* Main.storyboard in Resources */,
-				07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */,
+                07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
