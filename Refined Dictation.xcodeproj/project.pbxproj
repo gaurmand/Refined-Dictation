@@ -7,8 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		075B19401FAFB2E300A51A34 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B193F1FAFB2E300A51A34 /* KeychainWrapper.swift */; };
-		075B19421FAFB2E400A51A34 /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075B19411FAFB2E400A51A34 /* KeychainItemAccessibility.swift */; };
+		29248E9C1FAFD3A400845E9A /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29248E9A1FAFD3A400845E9A /* KeychainItemAccessibility.swift */; };
+		29248E9D1FAFD3A400845E9A /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29248E9B1FAFD3A400845E9A /* KeychainWrapper.swift */; };
+		29248E9E1FB015FB00845E9A /* dataObjs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF21F1FAD5AA00012595B /* dataObjs.swift */; };
+		29248E9F1FB015FC00845E9A /* dataObjs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF21F1FAD5AA00012595B /* dataObjs.swift */; };
+		29248EA01FB016A100845E9A /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29248E9A1FAFD3A400845E9A /* KeychainItemAccessibility.swift */; };
+		29248EA11FB016A200845E9A /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29248E9A1FAFD3A400845E9A /* KeychainItemAccessibility.swift */; };
+		29248EA21FB016A800845E9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EEE61FA72B2500232112 /* AppDelegate.swift */; };
+		29248EA31FB016A800845E9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EEE61FA72B2500232112 /* AppDelegate.swift */; };
+		29248EA41FB016AC00845E9A /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EEE81FA72B2500232112 /* StartViewController.swift */; };
+		29248EA51FB016AC00845E9A /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EEE81FA72B2500232112 /* StartViewController.swift */; };
+		29248EA61FB016AF00845E9A /* RecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A61FAC1006007E9E36 /* RecordingViewController.swift */; };
+		29248EA71FB016B000845E9A /* RecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A61FAC1006007E9E36 /* RecordingViewController.swift */; };
+		29248EA81FB016B300845E9A /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A81FAC749D007E9E36 /* VerificationViewController.swift */; };
+		29248EA91FB016B400845E9A /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A81FAC749D007E9E36 /* VerificationViewController.swift */; };
+		29248EAA1FB016B800845E9A /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29248E9B1FAFD3A400845E9A /* KeychainWrapper.swift */; };
+		29248EAB1FB016B900845E9A /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29248E9B1FAFD3A400845E9A /* KeychainWrapper.swift */; };
+		29248EAC1FB016BC00845E9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8496EEEA1FA72B2500232112 /* Main.storyboard */; };
+		29248EAD1FB016BC00845E9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8496EEEA1FA72B2500232112 /* Main.storyboard */; };
 		299FF2201FAD5AA00012595B /* audio-file.flac in Resources */ = {isa = PBXBuildFile; fileRef = 299FF21E1FAD5AA00012595B /* audio-file.flac */; };
 		299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF21F1FAD5AA00012595B /* dataObjs.swift */; };
 		299FF29A1FAD5CC40012595B /* SpeechToTextV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299FF2851FAD5C980012595B /* SpeechToTextV1.framework */; };
@@ -336,8 +352,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		075B193F1FAFB2E300A51A34 /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeychainWrapper.swift; path = "/Users/serrann/Documents/Refined-Dictation (fixed)/Refined Dictation/KeychainWrapper.swift"; sourceTree = "<absolute>"; };
-		075B19411FAFB2E400A51A34 /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeychainItemAccessibility.swift; path = "/Users/serrann/Documents/Refined-Dictation (fixed)/Refined Dictation/KeychainItemAccessibility.swift"; sourceTree = "<absolute>"; };
+		29248E9A1FAFD3A400845E9A /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		29248E9B1FAFD3A400845E9A /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		299FF21E1FAD5AA00012595B /* audio-file.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-file.flac"; sourceTree = "<group>"; };
 		299FF21F1FAD5AA00012595B /* dataObjs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataObjs.swift; sourceTree = "<group>"; };
 		299FF2221FAD5C970012595B /* WatsonDeveloperCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonDeveloperCloud.xcodeproj; path = "swift-sdk/WatsonDeveloperCloud.xcodeproj"; sourceTree = "<group>"; };
@@ -455,11 +471,11 @@
 			isa = PBXGroup;
 			children = (
 				8496EEE61FA72B2500232112 /* AppDelegate.swift */,
-				075B193F1FAFB2E300A51A34 /* KeychainWrapper.swift */,
-				075B19411FAFB2E400A51A34 /* KeychainItemAccessibility.swift */,
 				8496EEE81FA72B2500232112 /* StartViewController.swift */,
 				84F096A61FAC1006007E9E36 /* RecordingViewController.swift */,
 				84F096A81FAC749D007E9E36 /* VerificationViewController.swift */,
+				29248E9A1FAFD3A400845E9A /* KeychainItemAccessibility.swift */,
+				29248E9B1FAFD3A400845E9A /* KeychainWrapper.swift */,
 				8496EEEA1FA72B2500232112 /* Main.storyboard */,
 				8496EEED1FA72B2500232112 /* Assets.xcassets */,
 				8496EEEF1FA72B2500232112 /* LaunchScreen.storyboard */,
@@ -890,6 +906,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29248EAC1FB016BC00845E9A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -897,6 +914,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29248EAD1FB016BC00845E9A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,10 +928,10 @@
 				84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */,
 				8496EEE91FA72B2500232112 /* StartViewController.swift in Sources */,
 				299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */,
-				075B19401FAFB2E300A51A34 /* KeychainWrapper.swift in Sources */,
+				29248E9D1FAFD3A400845E9A /* KeychainWrapper.swift in Sources */,
 				84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */,
-				075B19421FAFB2E400A51A34 /* KeychainItemAccessibility.swift in Sources */,
 				8496EEE71FA72B2500232112 /* AppDelegate.swift in Sources */,
+				29248E9C1FAFD3A400845E9A /* KeychainItemAccessibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,7 +939,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29248EA41FB016AC00845E9A /* StartViewController.swift in Sources */,
+				29248EA21FB016A800845E9A /* AppDelegate.swift in Sources */,
 				8496EEFC1FA72B2500232112 /* Refined_DictationTests.swift in Sources */,
+				29248E9E1FB015FB00845E9A /* dataObjs.swift in Sources */,
+				29248EA61FB016AF00845E9A /* RecordingViewController.swift in Sources */,
+				29248EAA1FB016B800845E9A /* KeychainWrapper.swift in Sources */,
+				29248EA81FB016B300845E9A /* VerificationViewController.swift in Sources */,
+				29248EA01FB016A100845E9A /* KeychainItemAccessibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -929,7 +954,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29248EA51FB016AC00845E9A /* StartViewController.swift in Sources */,
+				29248EA31FB016A800845E9A /* AppDelegate.swift in Sources */,
 				8496EF071FA72B2500232112 /* Refined_DictationUITests.swift in Sources */,
+				29248E9F1FB015FC00845E9A /* dataObjs.swift in Sources */,
+				29248EA71FB016B000845E9A /* RecordingViewController.swift in Sources */,
+				29248EAB1FB016B900845E9A /* KeychainWrapper.swift in Sources */,
+				29248EA91FB016B400845E9A /* VerificationViewController.swift in Sources */,
+				29248EA11FB016A200845E9A /* KeychainItemAccessibility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

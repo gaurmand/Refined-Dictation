@@ -39,10 +39,19 @@ class Refined_DictationTests: XCTestCase {
         XCTAssertNotNil(tstUsr)
     }
     
+    // MARK: stub
     func testrecog(){
         let tstUsr = User.init()
-        let tstRecog = SpeechRecog.init(usr: tstUsr)
+        let tstRecog = SpeechRecog(usr: tstUsr)
         XCTAssertNotNil(tstRecog)
+    }
+    
+    func testupdateIfEdited(){
+        let tstUsr = User.init()
+        let filteredStr = "hello world my dudes"
+        let result = FilterResults(usr: tstUsr, before: filteredStr)
+        let after = "hello? world a .dudes"
+        result.updateIfEdited(after: after)
     }
     
 }

@@ -232,7 +232,7 @@ class SpeechRecog: User{
 class SpeechFilter:SpeechRecog {
     // properties:
     // raw result inherited from SpeechRecog
-    var filteredResult = ""
+    var filterResult = ""
     var filterTime: Float = 0.0
     
     // constructor:
@@ -250,12 +250,50 @@ class SpeechFilter:SpeechRecog {
     }
 }
 
-// MARK: per-dictation class used to output the final results, and book-keep; ALSO doubles as the MAIN per-dictation class, and should be called upon recording
-class FilterResultsMain:SpeechFilter{
+// MARK: per-dictation class used to output the final results, and book-keep
+// CHANGE: it is bad to call the same obj in multiple view controller (and thru inheritance in this case)
+// the proper way to do it is thru
+// https://stackoverflow.com/questions/29734954/how-do-you-share-data-between-view-controllers-and-other-objects-in-swift
+class FilterResults:SpeechFilter{
     // properties:
+    var editedResult:String?
     
     // constructor:
-    override init(usr: User){
+    init(usr: User, before: String){
         super.init(usr: usr)
+        super.filterResult = before;
     }
+    
+    // funcs:
+    // Pass result of textbox upon submission. If there are changes between filterResult and after
+    open func updateIfEdited(after: String)->Bool{
+        // parse potentially filtered string and potentially edited string to extract their words only
+        self.editedResult = after;
+        var filterWrdCnt = 0;
+        var editedWrdCnt = 0;
+        // compare words with linguistic tagger
+        let tagger = NSLinguisticTagger(tagSchemes: [NSLinguisticTagSchemeTokenType], options: 0)
+        tagger.string = after
+        let range = NSRange(location: 0, length: after.utf16.count)
+        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace]
+        tagger.enumerateTags(in: range, unit: .word, scheme: NSLinguisticTagSchemeTokenType, options: options) { _, tokenRange, _ in
+            editedWrdCnt += 1
+            let word = (after as NSString).substring(with: tokenRange)
+            print(word)
+        }
+        
+    /*: strCmp word by word{
+         if(changed){
+             // store after into editedResult
+         
+         
+ 
+ 
+ 
+ */
+        return true
+        
+    }
+    
+    
 }

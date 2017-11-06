@@ -33,10 +33,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B1A8E5041D19CEDB00678412"
-               BuildableName = "AlchemyDataNewsV1Tests.xctest"
-               BlueprintName = "AlchemyDataNewsV1Tests"
-               ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
+               BlueprintIdentifier = "8496EEF61FA72B2500232112"
+               BuildableName = "Refined DictationTests.xctest"
+               BlueprintName = "Refined DictationTests"
+               ReferencedContainer = "container:../Refined Dictation.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
