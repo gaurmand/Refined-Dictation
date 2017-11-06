@@ -98,14 +98,14 @@ class CommonFilter: User{
             // Load dictionary 1 from file
             // create empty dictionary 2. (maybe load in a couple of tic-looking words for demo)
             
-            //let file = "ExcludedCommonWordsList"  //Use for actual list
-            let file = "ExcludedCommonWordsList(test)" //Use for testing
+            let file = "ExcludedCommonWordsList"  //Use for actual list
+            //let file = "ExcludedCommonWordsList(test)" //Use for testing
             
             //Get contents of file into one string
             let ExcludedWordsString = readFromFile(filename:file)
             
             //ExcludedWordsString is subdivided into one word strings and placed into an array
-            let ExcludedWordsArr = ExcludedWordsString.components(separatedBy: " ")
+            let ExcludedWordsArr = ExcludedWordsString.components(separatedBy: "\r\n")
             
             //Add each string in ExcludedWordsArr to the ExcludedCommonWords dictionary
             for ExcludedWord in ExcludedWordsArr{

@@ -11,27 +11,15 @@ import XCTest
 
 class CommonFilterTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    //For testConstructor() to work, change filename from "ExcludedCommonWordsList" to "ExcludedCommonWordsList(test)" in CommonFilter constructor in dataObjs.swift
-    /*func testConstructor(){
+    func testConstructor(){
         let testUser = User()
         let testObj = CommonFilter(usr:testUser)
         
         XCTAssert(testObj.ExcludedCommonWords["the"] == true)
-        XCTAssert(testObj.ExcludedCommonWords["i"] == true)
+        XCTAssert(testObj.ExcludedCommonWords["I"] == true)
         XCTAssert(testObj.ExcludedCommonWords["with"] == true)
         XCTAssert(testObj.ExcludedCommonWords["some"] == true)
-    }*/
+    }
     
     func testAddtoList() {
         let testUser = User()
@@ -81,15 +69,6 @@ class CommonFilterTests: XCTestCase {
         XCTAssert(!testObj.isOnList(word: "b2"))
         //"c" is in UserFilterWords, and its value is true, should return true
         XCTAssert(testObj.isOnList(word: "c3"))
-    }
-
-
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
     
 }
