@@ -49,7 +49,7 @@ class Refined_DictationTests: XCTestCase {
     func testupdateIfEdited(){
         let tstUsr = User.init()
         let filteredStr = "hello world my dudes"
-        let result = FilterResults(usr: tstUsr, before: filteredStr)
+        let result = FinalResult(usr: tstUsr, before: filteredStr)
         let after = "hello? world a .dudes"
         result.updateIfEdited(after: after)
     }

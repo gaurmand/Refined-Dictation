@@ -276,7 +276,7 @@ class SpeechRecog: User{
 class SpeechFilter:SpeechRecog {
     // properties:
     // raw result inherited from SpeechRecog
-    var filterResult = ""
+    var filteredResult = ""
     var filterTime: Float = 0.0
     
     // constructor:
@@ -333,50 +333,100 @@ class SpeechFilter:SpeechRecog {
     }*/
 }
 
+
+
+
 // MARK: per-dictation class used to output the final results, and book-keep
 // CHANGE: it is bad to call the same obj in multiple view controller (and thru inheritance in this case)
 // the proper way to do it is thru
 // https://stackoverflow.com/questions/29734954/how-do-you-share-data-between-view-controllers-and-other-objects-in-swift
-class FilterResults:SpeechFilter{
+class FinalResult:SpeechFilter{
     // properties:
-    var editedResult:String?
+    var editedResult:String?    // nil if no edits were made from super.filterResult: String
     
     // constructor:
     init(usr: User, before: String){
         super.init(usr: usr)
-        super.filterResult = before;
+        super.filteredResult = before;
+        #if VER1
+            editedResult = before
+        #endif
     }
     
     // funcs:
-    // Pass result of textbox upon submission. If there are changes between filterResult and after
+    // VER2: Pass result of textbox upon submission. If there are changes between filterResult and after
     open func updateIfEdited(after: String)->Bool{
-        // parse potentially filtered string and potentially edited string to extract their words only
-        self.editedResult = after;
-        var filterWrdCnt = 0;
-        var editedWrdCnt = 0;
-        // compare words with linguistic tagger
-        let tagger = NSLinguisticTagger(tagSchemes: [NSLinguisticTagSchemeTokenType], options: 0)
-        tagger.string = after
-        let range = NSRange(location: 0, length: after.utf16.count)
-        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace]
-        tagger.enumerateTags(in: range, unit: .word, scheme: NSLinguisticTagSchemeTokenType, options: options) { _, tokenRange, _ in
-            editedWrdCnt += 1
-            let word = (after as NSString).substring(with: tokenRange)
-            print(word)
-        }
-        
-    /*: strCmp word by word{
-         if(changed){
-             // store after into editedResult
-         
-         
- 
- 
- 
- */
+        //        self.editedResult = after;
+        //        // VER2: instead of just comparing lemmatized word stems, compare strings to catch any necessary filtering of e.g., strugging -> struggle
+        //        let (wordsInEdited, editedWC) = getWordList(str: after)
+        //        let (wordsInFiltered, filteredWC) = getWordList(str: super.filterResult)
+        //
+        //        var j = 0
+        //        var missing: String?
+        //        for (i, word) in wordsInFiltered.enumerated(){
+        //            // mismatch detected
+        //            if(word != wordsInEdited[j]){
+        //                // determine if word(s) changed by looking forward up to 5 words until match
+        ////                var tempI = 0
+        //                for index in stride(from: i, through: i+5, by: 1){
+        //                    wordsInEdited[index]
+        //                }
+        //            }
+        //            else{
+        //                missing = missing! + word
+        //            }
+        //
+        //        }
         return true
-        
+    }
+    
+    open func getFinalResult() -> String {
+        if self.editedResult != nil {
+            return self.editedResult!
+        }
+        else{
+            return super.filteredResult
+        }
     }
     
     
+    
 }
+
+// return an array of the individual words in string, and the word count
+// returned words will be lemmatized if option == "lemma" (e.g., struggling -> struggle)
+// returned words will be just words if option == "word" (e.g., struggling -> struggling)
+// defaults to "word"
+// TODO: fix filtering of punctuation
+func getWordList(str: String, option: String = "word") -> ([String], Int){
+    var wordCnt = 0;
+    var wordsList: [String] = []
+    let tagger: NSLinguisticTagger
+    
+    // parse potentially filtered string and potentially edited string to extract their words only
+    // modified based on: https://stackoverflow.com/a/31633375
+    // compare words with linguistic tagger
+    tagger = NSLinguisticTagger(tagSchemes: [NSLinguisticTagSchemeLemma], options: 0)
+    
+    let range = NSRange(location: 0, length: str.utf16.count)
+    let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace]
+    tagger.string = str
+    
+    tagger.enumerateTags(in: range, unit: .word, scheme: NSLinguisticTagSchemeLemma, options: options) { tag, tokenRange, _ in
+        wordCnt += 1
+        if option == "lemma", let lemma = tag {
+            print(lemma)
+            wordsList.append(tag!)
+        }
+        else{
+            let word = (str as NSString).substring(with: tokenRange)
+            wordsList.append(word)
+            #if DEBUG
+                print(word)
+            #endif
+        }
+    }
+    
+    return (wordsList, wordCnt)
+}
+
