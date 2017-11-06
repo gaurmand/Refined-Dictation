@@ -286,12 +286,51 @@ class SpeechFilter:SpeechRecog {
     
     // funcs:
     // MARK: Compare the SpeechRecog.result word-by-word with the CommonFilter Dictionary, and take out the match
-/*:
- -
-     
-*/
-    open func matchCommonTics() {
+    open func matchCommonTics(usrComFilter: CommonFilter) {
+        //let rawResultTuple = getWordList(str: rawResult)
+        let rawResultArr = rawResult.components(separatedBy: " ")
+        
+        for word in rawResultArr{
+            if(!usrComFilter.isOnList(word: word)){
+                filteredResult += word
+                filteredResult += " "
+            }
+        }
+        if(!filteredResult.isEmpty){
+            filteredResult.removeLast() //removes extra space at end
+        }
     }
+    
+    //return an array of the individual words in string, and the word count
+    // returned words will be lemmatized (e.g., struggles -> struggle)
+    /*func getWordList(str: String) -> ([String], Int){
+        var wordCnt = 0;
+        var wordsList: [String] = []
+        // parse potentially filtered string and potentially edited string to extract their words only
+        // modified based on: https://stackoverflow.com/a/31633375
+        // compare words with linguistic tagger
+        let tagger = NSLinguisticTagger(tagSchemes: [NSLinguisticTagSchemeLemma], options: 0)
+        tagger.string = str
+        var range = NSRange(location: 0, length: str.utf16.count)
+        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace]
+        tagger.string=str
+        range = NSRange(location: 0, length: str.utf16.count)
+        tagger.enumerateTags(in: range, unit: .word, scheme: NSLinguisticTagSchemeLemma, options: options) { tag, tokenRange, _ in
+            wordCnt += 1
+            if let lemma = tag {
+                print(lemma)
+                wordsList.append(tag!)
+            }
+            else{
+                let word = (str as NSString).substring(with: tokenRange)
+                wordsList.append(word)
+                #if DEBUG
+                    print(word)
+                #endif
+            }
+        }
+        return (wordsList, wordCnt)
+    }*/
 }
 
 // MARK: per-dictation class used to output the final results, and book-keep; ALSO doubles as the MAIN per-dictation class, and should be called upon recording
