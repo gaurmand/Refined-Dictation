@@ -104,7 +104,7 @@ class CommonFilter: User{
             let ExcludedWordsString = readFromFile(filename:file)
             
             //ExcludedWordsString is subdivided into one word strings and placed into an array
-            let ExcludedWordsArr = ExcludedWordsString.components(separatedBy: "\r\n")
+            let ExcludedWordsArr = ExcludedWordsString.components(separatedBy: "\n")
             
             //Add each string in ExcludedWordsArr to the ExcludedCommonWords dictionary
             for ExcludedWord in ExcludedWordsArr{
