@@ -489,6 +489,8 @@
 		8496EEFA1FA72B2500232112 /* Refined DictationTests */ = {
 			isa = PBXGroup;
 			children = (
+				07FE22921FB03958006FE00F /* SpeechFilterTests.swift */,
+				07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */,
 				8496EEFB1FA72B2500232112 /* Refined_DictationTests.swift */,
 				8496EEFD1FA72B2500232112 /* Info.plist */,
 			);
@@ -899,6 +901,7 @@
 				8496EEEE1FA72B2500232112 /* Assets.xcassets in Resources */,
 				299FF2201FAD5AA00012595B /* audio-file.flac in Resources */,
 				8496EEEC1FA72B2500232112 /* Main.storyboard in Resources */,
+				07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,10 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/serrann/Documents/Refined-Dictation (fixed)/Refined Dictation/KeychainItemAccessibility.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/serrann/Documents/Refined-Dictation (fixed)/Refined Dictation/KeychainWrapper.swift">
+      location = "group:../Refined Dictation/ExcludedCommonWordsList.txt">
    </FileRef>
    <FileRef
       location = "self:">

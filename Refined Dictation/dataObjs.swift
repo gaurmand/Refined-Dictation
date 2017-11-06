@@ -84,6 +84,10 @@ class CommonFilter: User{
     // 1. Dictionary with top EXCLUDE_MOST_COMMON_WORD_COUNT words dictionary
     // 2. Dictionary with user's custom filtering words
     
+    //creates empty dictionaries
+    var ExcludedCommonWords = ["":false]
+    var UserFilterWords = ["":false]
+    
     // constructor:
     override init(usr: User){
         super.init(usr: usr)
@@ -93,6 +97,19 @@ class CommonFilter: User{
         #if VER1
             // Load dictionary 1 from file
             // create empty dictionary 2. (maybe load in a couple of tic-looking words for demo)
+            
+            let file = "ExcludedCommonWordsList"
+            
+            //Get contents of file into one string
+            let ExcludedWordsString = readFromFile(filename:file)
+            
+            //ExcludedWordsString is subdivided into one word strings and placed into an array
+            let ExcludedWordsArr = ExcludedWordsString.components(separatedBy: "\n")
+            
+            //Add each string in ExcludedWordsArr to the ExcludedCommonWords dictionary
+            for ExcludedWord in ExcludedWordsArr{
+                ExcludedCommonWords[ExcludedWord] = true
+            }
         #endif
     }
     
@@ -100,22 +117,48 @@ class CommonFilter: User{
     // MARK: If its not the top EXCLUDE_MOST_COMMON_WORD_COUNT words on the most spoken list, add to dictionary.
     // Return true if succeeded or already in the list
     // Return false if failed
-    open func addToList() -> Bool {
-        return true;
+    open func addToList(word: String) -> Bool {
+        if(ExcludedCommonWords[word] != nil && ExcludedCommonWords[word]!){
+            return false
+        }
+        else{
+            UserFilterWords[word] = true
+            return true
+        }
     }
     
     // MARK: Remove the word from List
     // Return true if succeeded or does not exist in list
     // Return false if failed
     open func rmFromList(word: String) -> Bool {
-        return true;
+        if(UserFilterWords[word] != nil && UserFilterWords[word]!){
+            UserFilterWords[word] = false
+        }
+        return true
     }
     
     // MARK: Check if the word is in the current list.
     // Return true if in list
     // Return false if not in list
     open func isOnList(word: String) -> Bool {
-        return true;
+        if(UserFilterWords[word] != nil && UserFilterWords[word]!){
+            return true
+        }
+        return false;
+    }
+    
+    private func readFromFile(filename: String) -> String{
+        // File location
+        let fileURL = Bundle.main.path(forResource: filename, ofType: "txt")
+        
+        // Read from the file
+        var readString = ""
+        do {
+            readString = try String(contentsOfFile: fileURL!, encoding: String.Encoding.utf8)
+        } catch let error as NSError {
+            print("Failed reading from URL:")
+        }
+        return readString
     }
     
     #if VER2
@@ -126,6 +169,7 @@ class CommonFilter: User{
     // Deconstructor, called upon exiting app
     // Should sync any updates to the table to the Server and/or local stored file
     deinit{
+    
     }
     #endif
 }
@@ -242,12 +286,51 @@ class SpeechFilter:SpeechRecog {
     
     // funcs:
     // MARK: Compare the SpeechRecog.result word-by-word with the CommonFilter Dictionary, and take out the match
-/*:
- -
-     
-*/
-    open func matchCommonTics() {
+    open func matchCommonTics(usrComFilter: CommonFilter) {
+        //let rawResultTuple = getWordList(str: rawResult)
+        let rawResultArr = rawResult.components(separatedBy: " ")
+        
+        for word in rawResultArr{
+            if(!usrComFilter.isOnList(word: word)){
+                filteredResult += word
+                filteredResult += " "
+            }
+        }
+        if(!filteredResult.isEmpty){
+            filteredResult.removeLast() //removes extra space at end
+        }
     }
+    
+    //return an array of the individual words in string, and the word count
+    // returned words will be lemmatized (e.g., struggles -> struggle)
+    /*func getWordList(str: String) -> ([String], Int){
+        var wordCnt = 0;
+        var wordsList: [String] = []
+        // parse potentially filtered string and potentially edited string to extract their words only
+        // modified based on: https://stackoverflow.com/a/31633375
+        // compare words with linguistic tagger
+        let tagger = NSLinguisticTagger(tagSchemes: [NSLinguisticTagSchemeLemma], options: 0)
+        tagger.string = str
+        var range = NSRange(location: 0, length: str.utf16.count)
+        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace]
+        tagger.string=str
+        range = NSRange(location: 0, length: str.utf16.count)
+        tagger.enumerateTags(in: range, unit: .word, scheme: NSLinguisticTagSchemeLemma, options: options) { tag, tokenRange, _ in
+            wordCnt += 1
+            if let lemma = tag {
+                print(lemma)
+                wordsList.append(tag!)
+            }
+            else{
+                let word = (str as NSString).substring(with: tokenRange)
+                wordsList.append(word)
+                #if DEBUG
+                    print(word)
+                #endif
+            }
+        }
+        return (wordsList, wordCnt)
+    }*/
 }
 
 // MARK: per-dictation class used to output the final results, and book-keep
