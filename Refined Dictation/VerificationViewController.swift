@@ -9,12 +9,19 @@
 import UIKit
 
 class VerificationViewController: UIViewController, UITextViewDelegate {
+    // var:
+    var usr: User = User()
+    var usrFilterLib: CommonFilter = CommonFilter()
+    var recording: SpeechRecog = SpeechRecog()
+    var filtering: SpeechFilter?
+    var finalRes: FinalResult?
+    
     @IBOutlet weak var DisplayFilteredTextField: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         DisplayFilteredTextField.delegate = self
-        // Do any additional setup after loading the view.
+        DisplayFilteredTextField.text = filtering!.filteredResult
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +42,14 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
      @IBAction func unwindToVerificationView(sender: UIStoryboardSegue) {
      
      }
+    
+//    @IBAction func seguetoVerfication(sender: UIStoryboardSegue) {
+//        if (sender.identifier == "RecToVer"){
+//            if let sourceViewController = sender.source as? RecordingViewController{
+//                filtering = sourceViewController.filtering
+//            }
+//        }
+//    }
  
 
 }

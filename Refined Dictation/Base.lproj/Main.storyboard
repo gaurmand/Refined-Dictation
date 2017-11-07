@@ -243,7 +243,7 @@
                     <navigationItem key="navigationItem" title="Record you speech" id="YEw-ev-dt5">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="uhK-ZN-EuE">
                             <connections>
-                                <segue destination="lDQ-5X-Ndl" kind="show" id="j2D-ci-akA"/>
+                                <segue destination="lDQ-5X-Ndl" kind="show" identifier="RecToVer" id="j2D-ci-akA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

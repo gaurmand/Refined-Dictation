@@ -9,6 +9,13 @@
 import UIKit
 
 class RecordingViewController: UIViewController, UITextFieldDelegate {
+    // vars:
+    var usr: User = User()
+    var usrFilterLib: CommonFilter = CommonFilter()
+    var recording: SpeechRecog = SpeechRecog()
+    var filtering: SpeechFilter = SpeechFilter()
+
+    
     @IBOutlet weak var RecordingButton: UIButton!
     @IBOutlet weak var SearchField: UITextField!
     @IBOutlet weak var InstructionLabel: UILabel!
@@ -20,6 +27,10 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
         SearchField.delegate = self //sets search field delegate
         DoneButton.isEnabled = false  //disables done button
         // Do any additional setup after loading the view.
+        
+        // TODO: pass in a proper user
+        usrFilterLib = CommonFilter(usr: usr)
+        recording = SpeechRecog(usr: usr)
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,14 +52,24 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
     
     
     //MARK: Actions
+    // TODO: take the user to VerificationViewController upon the second press of record button
     @IBAction func RecordButtonPressed(_ sender: UIButton) {
         if(stopButton){ //changes stop record button to start record and segues to next view
             stopButton = false
             let StartRecording = UIImage(named: "record")
             RecordingButton.setImage(StartRecording, for: UIControlState.normal)
             InstructionLabel.text = "Press done or tap the red button to redo your recording"
+            recording.recStop()
+            #if DEBUG
+                print(recording.rawResult)
+            #endif
+            // begin filtering
+            filtering = SpeechFilter(usr: usr, rawResult: recording.rawResult, filterLib: usrFilterLib )
+            #if DEBUG
+                print(filtering.filteredResult)
+            #endif
             DoneButton.isEnabled = true
-            nextView()
+            
         }
         else{   //changes start record button to stop record button
             stopButton = true
@@ -56,7 +77,9 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
             RecordingButton.setImage(StopRecording, for: UIControlState.normal)
             InstructionLabel.text = "Tap the button again to stop recording"
             DoneButton.isEnabled = false
+            recording.recBegin()
         }
+
     }
     
     // MARK: - Navigation
@@ -65,11 +88,22 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func nextView(){
-       //let storyboard = UIStoryboard(name: "Main", bundle: nil)
-       //let nextViewController = storyboard.instantiateViewController(withIdentifier: "VerificationViewController")
-       //self.navigationController?.pushViewController(nextViewController, animated: true)
-        
+//    func prepare(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "MySegueID" {
+//            if let destination = segue.destination as? VerificationViewController {
+//                destination.usr = self.usr
+//                destination.usrFilterLib = self.usrFilterLib
+//                destination.recording = self.recording
+//                destination.filtering.filteredResult = "hello"
+//            }
+//        }
+//    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       // let data = Data()
+        if let destinationViewController = segue.destination as? VerificationViewController {
+            destinationViewController.filtering = filtering
+        }
     }
-
 }

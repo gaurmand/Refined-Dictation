@@ -33,7 +33,9 @@ class User{
     
     // default constructor:
     // TODO: if(existing user): retrieve credentials using keychain; if(newUser): call newUserProfile()
-    init(keychainCred: KeychainWrapper? = nil){
+   // init(keychainCred: KeychainWrapper? = nil){
+    init(){
+    
         // TODO: Getting user info from server is not supported in Ver. 1
         // Sample info are hardcoded for now
         #if VER2
@@ -110,7 +112,15 @@ class CommonFilter: User{
             for ExcludedWord in ExcludedWordsArr{
                 ExcludedCommonWords[ExcludedWord] = true
             }
+            
+            //Add default words to commonfilter library
+            UserFilterWords["apple"] = true
+            
         #endif
+    }
+    
+    override init(){
+        super.init()
     }
     
     // funcs:
@@ -156,7 +166,7 @@ class CommonFilter: User{
         do {
             readString = try String(contentsOfFile: fileURL!, encoding: String.Encoding.utf8)
         } catch let error as NSError {
-            print("Failed reading from URL:")
+            print("Failed reading from URL: \(error)" )
         }
         return readString
     }
@@ -199,6 +209,10 @@ class SpeechRecog: User{
         
         super.init(usr: usr)
     }
+    override init(){
+        speechToText = SpeechToText(username: "tmp", password: "tmp")
+        super.init()
+    }
     
     
     // funcs:
@@ -209,19 +223,25 @@ class SpeechRecog: User{
     open func recBegin(){
         var settings = RecognitionSettings(contentType: .oggOpus)
         settings.interimResults = true      // send piece-wise voice for processing ASAP
+        var lastBestTranscript = ""
         let failure = { (error: Error) in print(error) }
         self.speechToText.recognizeMicrophone(settings: settings, failure: failure) { results in
             #if DEBUG
             // piece-wise result
             print(results.bestTranscript)
             #endif
-            self.rawResult += results.bestTranscript
+            if results.bestTranscript.split(separator: " ").count > 1 {
+                lastBestTranscript = results.bestTranscript
+                #if DEBUG
+                    print("New best transcript result: \(lastBestTranscript)")
+                #endif
+            }
+            self.rawResult = lastBestTranscript
         }
-        
     }
     
     // called when red recording button is tapped again
-    open func recStop(usrProfile: User){
+    open func recStop(){
         self.speechToText.stopRecognizeMicrophone()
         
         // Unable to get Alamofire HTTP call to work
@@ -273,16 +293,25 @@ class SpeechRecog: User{
 
 
 // MARK: per-dictation class used to filter the STT result by comparing against the user's CommonFilter
-class SpeechFilter:SpeechRecog {
+class SpeechFilter: SpeechRecog {
     // properties:
     // raw result inherited from SpeechRecog
     var filteredResult = ""
     var filterTime: Float = 0.0
     
     // constructor:
+    init(usr: User, rawResult: String, filterLib: CommonFilter){
+        super.init(usr: usr)
+        super.rawResult = rawResult
+        matchCommonTics(usrComFilter: filterLib)
+    }
     override init(usr: User){
         super.init(usr: usr)
     }
+    override init(){
+        super.init()
+    }
+    
     
     // funcs:
     // MARK: Compare the SpeechRecog.result word-by-word with the CommonFilter Dictionary, and take out the match
@@ -339,7 +368,7 @@ class SpeechFilter:SpeechRecog {
 // MARK: per-dictation class used to output the final results, and book-keep
 // CHANGE: it is bad to call the same obj in multiple view controller (and thru inheritance in this case)
 // the proper way to do it is thru
-// https://stackoverflow.com/questions/29734954/how-do-you-share-data-between-view-controllers-and-other-objects-in-swift
+// https://stackoverflow.com/a/29737851
 class FinalResult:SpeechFilter{
     // properties:
     var editedResult:String?    // nil if no edits were made from super.filterResult: String
@@ -351,6 +380,10 @@ class FinalResult:SpeechFilter{
         #if VER1
             editedResult = before
         #endif
+    }
+    
+    override init(){
+        super.init()
     }
     
     // funcs:
