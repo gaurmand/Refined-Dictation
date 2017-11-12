@@ -9,6 +9,7 @@
 import Foundation
 //import Alamofire    // HTTP requests  // handled by Watson SDK
 import SpeechToTextV1
+import FirebaseAuth
 
 let EXCLUDE_MOST_COMMON_WORD_COUNT = 200    // used in CommonFilter() class
 
@@ -39,14 +40,14 @@ class User{
         // TODO: Getting user info from server is not supported in Ver. 1
         // Sample info are hardcoded for now
         #if VER2
-            getUsrInfo(KeychainWrapper)
+//            getUsrInfo(KeychainWrapper)
         #endif
-        #if VER1
+//        #if VER1
         name = "Alice"
         usrID=0
         WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
         WatsonPsswrd = "Ph70dloSxwhe"
-        #endif
+//        #endif
     }
     
     // cpy constructor:

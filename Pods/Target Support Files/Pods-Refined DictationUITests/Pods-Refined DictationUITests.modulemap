@@ -1,0 +1,6 @@
+framework module Pods_Refined_DictationUITests {
+  umbrella header "Pods-Refined DictationUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

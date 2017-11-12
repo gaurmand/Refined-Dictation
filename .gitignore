@@ -99,6 +99,8 @@ fastlane/test_output
 ## Build generated
 build/
 DerivedData/
+# ADDED BY SHAWN
+*.orig
 
 ## Various settings
 *.pbxuser

@@ -10,6 +10,11 @@
 		07FE21DF1FAFCCEB006FE00F /* CommonFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */; };
 		07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */; };
 		07FE22931FB03958006FE00F /* SpeechFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE22921FB03958006FE00F /* SpeechFilterTests.swift */; };
+		294AF5311FB4EA330014356D /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */; };
+		294AF5321FB4EA330014356D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294AF5301FB4EA330014356D /* KeychainWrapper.swift */; };
+		294AF5541FB8E0450014356D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 294AF5531FB8E0450014356D /* GoogleService-Info.plist */; };
+		294AF5551FB8E0450014356D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 294AF5531FB8E0450014356D /* GoogleService-Info.plist */; };
+		294AF5561FB8E0450014356D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 294AF5531FB8E0450014356D /* GoogleService-Info.plist */; };
 		299FF2201FAD5AA00012595B /* audio-file.flac in Resources */ = {isa = PBXBuildFile; fileRef = 299FF21E1FAD5AA00012595B /* audio-file.flac */; };
 		299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF21F1FAD5AA00012595B /* dataObjs.swift */; };
 		299FF29A1FAD5CC40012595B /* SpeechToTextV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299FF2851FAD5C980012595B /* SpeechToTextV1.framework */; };
@@ -23,6 +28,9 @@
 		8496EF071FA72B2500232112 /* Refined_DictationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EF061FA72B2500232112 /* Refined_DictationUITests.swift */; };
 		84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A61FAC1006007E9E36 /* RecordingViewController.swift */; };
 		84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A81FAC749D007E9E36 /* VerificationViewController.swift */; };
+		D4DC59781DC3C5A68CB1D11B /* Pods_Refined_Dictation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B43AAF71306A2655FE13F6B /* Pods_Refined_Dictation.framework */; };
+		E42CFF3EDA2D9477D51BA064 /* Pods_Refined_DictationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CEB24020945325424E2619 /* Pods_Refined_DictationTests.framework */; };
+		EB9FBB824B6C8B6D2961085F /* Pods_Refined_DictationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C238D9B695ED6AFF11214407 /* Pods_Refined_DictationUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -340,10 +348,14 @@
 		07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterTests.swift; sourceTree = "<group>"; };
 		07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExcludedCommonWordsList.txt; sourceTree = "<group>"; };
 		07FE22921FB03958006FE00F /* SpeechFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechFilterTests.swift; sourceTree = "<group>"; };
-		2745116D1FB0DA440047B69B /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		294AF5301FB4EA330014356D /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
+		294AF5531FB8E0450014356D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		299FF21E1FAD5AA00012595B /* audio-file.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-file.flac"; sourceTree = "<group>"; };
 		299FF21F1FAD5AA00012595B /* dataObjs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataObjs.swift; sourceTree = "<group>"; };
 		299FF2221FAD5C970012595B /* WatsonDeveloperCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonDeveloperCloud.xcodeproj; path = "swift-sdk/WatsonDeveloperCloud.xcodeproj"; sourceTree = "<group>"; };
+		2B43AAF71306A2655FE13F6B /* Pods_Refined_Dictation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_Dictation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		34FB49B7118883150F4AAA5C /* Pods-Refined DictationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8496EEE31FA72B2500232112 /* Refined Dictation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Refined Dictation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8496EEE61FA72B2500232112 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8496EEE81FA72B2500232112 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -359,6 +371,13 @@
 		8496EF081FA72B2500232112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F096A61FAC1006007E9E36 /* RecordingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingViewController.swift; sourceTree = "<group>"; };
 		84F096A81FAC749D007E9E36 /* VerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
+		8706F39B204CE53572445B57 /* Pods-Refined DictationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests.release.xcconfig"; sourceTree = "<group>"; };
+		8ABBA07580B958550DDAF5B9 /* Pods-Refined Dictation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined Dictation.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation.release.xcconfig"; sourceTree = "<group>"; };
+		B0EC71B7A293AEDA186A1E96 /* Pods-Refined Dictation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined Dictation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation.debug.xcconfig"; sourceTree = "<group>"; };
+		B609DD33EF445011B39048DE /* Pods-Refined DictationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C238D9B695ED6AFF11214407 /* Pods_Refined_DictationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_DictationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAA4B7451E9D24EB6DF8DE74 /* Pods-Refined DictationUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests.release.xcconfig"; sourceTree = "<group>"; };
+		D9CEB24020945325424E2619 /* Pods_Refined_DictationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_DictationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -367,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				299FF29A1FAD5CC40012595B /* SpeechToTextV1.framework in Frameworks */,
+				D4DC59781DC3C5A68CB1D11B /* Pods_Refined_Dictation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +394,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E42CFF3EDA2D9477D51BA064 /* Pods_Refined_DictationTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -381,12 +402,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB9FBB824B6C8B6D2961085F /* Pods_Refined_DictationUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		125B07E3CF3EFE84090D4263 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B0EC71B7A293AEDA186A1E96 /* Pods-Refined Dictation.debug.xcconfig */,
+				8ABBA07580B958550DDAF5B9 /* Pods-Refined Dictation.release.xcconfig */,
+				B609DD33EF445011B39048DE /* Pods-Refined DictationTests.debug.xcconfig */,
+				8706F39B204CE53572445B57 /* Pods-Refined DictationTests.release.xcconfig */,
+				34FB49B7118883150F4AAA5C /* Pods-Refined DictationUITests.debug.xcconfig */,
+				CAA4B7451E9D24EB6DF8DE74 /* Pods-Refined DictationUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		299FF2231FAD5C970012595B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,14 +468,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		29A8F3F61FB0E4A200C0399D /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				2745116D1FB0DA440047B69B /* KeychainWrapper.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		8496EEDA1FA72B2500232112 = {
 			isa = PBXGroup;
 			children = (
@@ -449,7 +476,8 @@
 				8496EEFA1FA72B2500232112 /* Refined DictationTests */,
 				8496EF051FA72B2500232112 /* Refined DictationUITests */,
 				8496EEE41FA72B2500232112 /* Products */,
-				29A8F3F61FB0E4A200C0399D /* Recovered References */,
+				125B07E3CF3EFE84090D4263 /* Pods */,
+				E6394BEB37FED61A3C5FFA35 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -466,8 +494,11 @@
 		8496EEE51FA72B2500232112 /* Refined Dictation */ = {
 			isa = PBXGroup;
 			children = (
+				294AF5531FB8E0450014356D /* GoogleService-Info.plist */,
 				8496EEE61FA72B2500232112 /* AppDelegate.swift */,
 				8496EEE81FA72B2500232112 /* StartViewController.swift */,
+				294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */,
+				294AF5301FB4EA330014356D /* KeychainWrapper.swift */,
 				84F096A61FAC1006007E9E36 /* RecordingViewController.swift */,
 				84F096A81FAC749D007E9E36 /* VerificationViewController.swift */,
 				07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */,
@@ -501,6 +532,16 @@
 			path = "Refined DictationUITests";
 			sourceTree = "<group>";
 		};
+		E6394BEB37FED61A3C5FFA35 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2B43AAF71306A2655FE13F6B /* Pods_Refined_Dictation.framework */,
+				D9CEB24020945325424E2619 /* Pods_Refined_DictationTests.framework */,
+				C238D9B695ED6AFF11214407 /* Pods_Refined_DictationUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -508,10 +549,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8496EF0B1FA72B2500232112 /* Build configuration list for PBXNativeTarget "Refined Dictation" */;
 			buildPhases = (
+				7D26305C00F9718C4EBBF1A1 /* [CP] Check Pods Manifest.lock */,
 				8496EEDF1FA72B2500232112 /* Sources */,
 				8496EEE01FA72B2500232112 /* Frameworks */,
 				8496EEE11FA72B2500232112 /* Resources */,
 				299FF29E1FAD5CC40012595B /* Embed Frameworks */,
+				9AEFDA0B4914081598C6BB54 /* [CP] Embed Pods Frameworks */,
+				F4330AA8C17DFB231A303F99 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -527,9 +571,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8496EF0E1FA72B2500232112 /* Build configuration list for PBXNativeTarget "Refined DictationTests" */;
 			buildPhases = (
+				2A3ACED3360CAC8E6300AF44 /* [CP] Check Pods Manifest.lock */,
 				8496EEF31FA72B2500232112 /* Sources */,
 				8496EEF41FA72B2500232112 /* Frameworks */,
 				8496EEF51FA72B2500232112 /* Resources */,
+				AB7FE21C87BFC8DA74299E24 /* [CP] Embed Pods Frameworks */,
+				2C691BFE22BD518EF269EA51 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -545,9 +592,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8496EF111FA72B2500232112 /* Build configuration list for PBXNativeTarget "Refined DictationUITests" */;
 			buildPhases = (
+				53CF2D4BB11AA3B2E6DC9CB0 /* [CP] Check Pods Manifest.lock */,
 				8496EEFE1FA72B2500232112 /* Sources */,
 				8496EEFF1FA72B2500232112 /* Frameworks */,
 				8496EF001FA72B2500232112 /* Resources */,
+				3984B3DA987753B660E2DB3E /* [CP] Embed Pods Frameworks */,
+				4BB104A0BC6944929715D677 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -897,6 +947,7 @@
 				299FF2201FAD5AA00012595B /* audio-file.flac in Resources */,
 				8496EEEC1FA72B2500232112 /* Main.storyboard in Resources */,
 				07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */,
+				294AF5541FB8E0450014356D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -904,6 +955,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				294AF5551FB8E0450014356D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -911,10 +963,181 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				294AF5561FB8E0450014356D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2A3ACED3360CAC8E6300AF44 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Refined DictationTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2C691BFE22BD518EF269EA51 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3984B3DA987753B660E2DB3E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4BB104A0BC6944929715D677 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53CF2D4BB11AA3B2E6DC9CB0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Refined DictationUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D26305C00F9718C4EBBF1A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Refined Dictation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9AEFDA0B4914081598C6BB54 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB7FE21C87BFC8DA74299E24 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F4330AA8C17DFB231A303F99 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation-resources.sh",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8496EEDF1FA72B2500232112 /* Sources */ = {
@@ -924,6 +1147,8 @@
 				84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */,
 				8496EEE91FA72B2500232112 /* StartViewController.swift in Sources */,
 				299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */,
+				294AF5321FB4EA330014356D /* KeychainWrapper.swift in Sources */,
+				294AF5311FB4EA330014356D /* KeychainItemAccessibility.swift in Sources */,
 				84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */,
 				8496EEE71FA72B2500232112 /* AppDelegate.swift in Sources */,
 			);
@@ -1037,8 +1262,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG VER1";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG VER2";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
@@ -1087,8 +1313,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = VER1;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = VER2;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
@@ -1097,13 +1324,18 @@
 		};
 		8496EF0C1FA72B2500232112 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0EC71B7A293AEDA186A1E96 /* Pods-Refined Dictation.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Refined Dictation/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "c.Refined-Dictation";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.refined-dictation.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1112,13 +1344,18 @@
 		};
 		8496EF0D1FA72B2500232112 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8ABBA07580B958550DDAF5B9 /* Pods-Refined Dictation.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Refined Dictation/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "c.Refined-Dictation";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.refined-dictation.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1127,9 +1364,14 @@
 		};
 		8496EF0F1FA72B2500232112 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B609DD33EF445011B39048DE /* Pods-Refined DictationTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Refined DictationTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "c.Refined-DictationTests";
@@ -1141,9 +1383,14 @@
 		};
 		8496EF101FA72B2500232112 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8706F39B204CE53572445B57 /* Pods-Refined DictationTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Refined DictationTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "c.Refined-DictationTests";
@@ -1155,8 +1402,13 @@
 		};
 		8496EF121FA72B2500232112 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34FB49B7118883150F4AAA5C /* Pods-Refined DictationUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Refined DictationUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "c.Refined-DictationUITests";
@@ -1168,8 +1420,13 @@
 		};
 		8496EF131FA72B2500232112 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAA4B7451E9D24EB6DF8DE74 /* Pods-Refined DictationUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Refined DictationUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "c.Refined-DictationUITests";
