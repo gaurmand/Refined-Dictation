@@ -12,13 +12,13 @@
 		07FE22931FB03958006FE00F /* SpeechFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE22921FB03958006FE00F /* SpeechFilterTests.swift */; };
 		294AF5311FB4EA330014356D /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */; };
 		294AF5321FB4EA330014356D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294AF5301FB4EA330014356D /* KeychainWrapper.swift */; };
-		294AF5541FB8E0450014356D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 294AF5531FB8E0450014356D /* GoogleService-Info.plist */; };
-		294AF5551FB8E0450014356D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 294AF5531FB8E0450014356D /* GoogleService-Info.plist */; };
-		294AF5561FB8E0450014356D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 294AF5531FB8E0450014356D /* GoogleService-Info.plist */; };
 		299FF2201FAD5AA00012595B /* audio-file.flac in Resources */ = {isa = PBXBuildFile; fileRef = 299FF21E1FAD5AA00012595B /* audio-file.flac */; };
 		299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF21F1FAD5AA00012595B /* dataObjs.swift */; };
 		299FF29A1FAD5CC40012595B /* SpeechToTextV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299FF2851FAD5C980012595B /* SpeechToTextV1.framework */; };
 		299FF29B1FAD5CC40012595B /* SpeechToTextV1.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 299FF2851FAD5C980012595B /* SpeechToTextV1.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		29F71C1B1FB91A44005C7205 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29F71C1A1FB91A43005C7205 /* GoogleService-Info.plist */; };
+		29F71C1C1FB91A44005C7205 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29F71C1A1FB91A43005C7205 /* GoogleService-Info.plist */; };
+		29F71C1D1FB91A44005C7205 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29F71C1A1FB91A43005C7205 /* GoogleService-Info.plist */; };
 		8496EEE71FA72B2500232112 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EEE61FA72B2500232112 /* AppDelegate.swift */; };
 		8496EEE91FA72B2500232112 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EEE81FA72B2500232112 /* StartViewController.swift */; };
 		8496EEEC1FA72B2500232112 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8496EEEA1FA72B2500232112 /* Main.storyboard */; };
@@ -350,10 +350,11 @@
 		07FE22921FB03958006FE00F /* SpeechFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechFilterTests.swift; sourceTree = "<group>"; };
 		294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		294AF5301FB4EA330014356D /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
-		294AF5531FB8E0450014356D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		299FF21E1FAD5AA00012595B /* audio-file.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-file.flac"; sourceTree = "<group>"; };
 		299FF21F1FAD5AA00012595B /* dataObjs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataObjs.swift; sourceTree = "<group>"; };
 		299FF2221FAD5C970012595B /* WatsonDeveloperCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonDeveloperCloud.xcodeproj; path = "swift-sdk/WatsonDeveloperCloud.xcodeproj"; sourceTree = "<group>"; };
+		29F71C1A1FB91A43005C7205 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		29F71C1E1FB91BE7005C7205 /* Refined Dictation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Refined Dictation.entitlements"; sourceTree = "<group>"; };
 		2B43AAF71306A2655FE13F6B /* Pods_Refined_Dictation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_Dictation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FB49B7118883150F4AAA5C /* Pods-Refined DictationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8496EEE31FA72B2500232112 /* Refined Dictation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Refined Dictation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -494,7 +495,8 @@
 		8496EEE51FA72B2500232112 /* Refined Dictation */ = {
 			isa = PBXGroup;
 			children = (
-				294AF5531FB8E0450014356D /* GoogleService-Info.plist */,
+				29F71C1E1FB91BE7005C7205 /* Refined Dictation.entitlements */,
+				29F71C1A1FB91A43005C7205 /* GoogleService-Info.plist */,
 				8496EEE61FA72B2500232112 /* AppDelegate.swift */,
 				8496EEE81FA72B2500232112 /* StartViewController.swift */,
 				294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */,
@@ -621,7 +623,13 @@
 				TargetAttributes = {
 					8496EEE21FA72B2500232112 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = M32TV3C8M4;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					8496EEF61FA72B2500232112 = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -947,7 +955,7 @@
 				299FF2201FAD5AA00012595B /* audio-file.flac in Resources */,
 				8496EEEC1FA72B2500232112 /* Main.storyboard in Resources */,
 				07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */,
-				294AF5541FB8E0450014356D /* GoogleService-Info.plist in Resources */,
+				29F71C1B1FB91A44005C7205 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,7 +963,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				294AF5551FB8E0450014356D /* GoogleService-Info.plist in Resources */,
+				29F71C1C1FB91A44005C7205 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -963,7 +971,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				294AF5561FB8E0450014356D /* GoogleService-Info.plist in Resources */,
+				29F71C1D1FB91A44005C7205 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1077,22 +1085,36 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -1126,7 +1148,11 @@
 				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
 				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
 				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseTwitterAuthUI.bundle,
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -1328,6 +1354,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Refined Dictation/Refined Dictation.entitlements";
+				DEVELOPMENT_TEAM = M32TV3C8M4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1348,6 +1376,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Refined Dictation/Refined Dictation.entitlements";
+				DEVELOPMENT_TEAM = M32TV3C8M4;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

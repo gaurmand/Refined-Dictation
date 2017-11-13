@@ -9,9 +9,7 @@ target 'Refined Dictation' do
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'Firebase/Database'
-    pod 'FirebaseUI/Auth'
-    pod 'FirebaseUI/Google'
-    pod 'FirebaseUI/Facebook'
+    pod 'FirebaseUI', '~>4.0'
   target 'Refined DictationTests' do
     inherit! :search_paths
     # Pods for testing
