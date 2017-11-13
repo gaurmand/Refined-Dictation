@@ -9,7 +9,7 @@
 import UIKit
 
 class VerificationViewController: UIViewController, UITextViewDelegate {
-    // var:
+    // Properties
     var usr: User = User()
     var usrFilterLib: CommonFilter = CommonFilter()
     var recording: SpeechRecog = SpeechRecog()
@@ -17,11 +17,13 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
     var finalRes: FinalResult?
     
     @IBOutlet weak var DisplayFilteredTextField: UITextView!
+    @IBOutlet weak var Outline: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         DisplayFilteredTextField.delegate = self
-        DisplayFilteredTextField.text = filtering!.filteredResult
+        //DisplayFilteredTextField.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
+        DisplayFilteredTextField.text = filtering?.filteredResult
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,25 +33,27 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
     
     // MARK: UITextViewDelegate
     func textViewDidBeginEditing(_ textView: UITextView){
-        //let numLines = DisplayFilteredTextField.text.count
-        //let lastline: NSRange = NSMakeRange(numLines+15,1)
-        //DisplayFilteredTextField.scrollRangeToVisible(lastline)
+        DisplayFilteredTextField.frame.size.height = 250
+        Outline.frame.size.height = 254
     }
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-     @IBAction func unwindToVerificationView(sender: UIStoryboardSegue) {
-     
-     }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        DisplayFilteredTextField.frame.size.height = 445
+        Outline.frame.size.height = 449
+    }
+    func textViewDidChange(_ textView: UITextView) {
+        if (DisplayFilteredTextField.text.hasSuffix("\n")){             //If user hits return, dismiss keyboard
+            DisplayFilteredTextField.text.removeLast()
+            DisplayFilteredTextField.resignFirstResponder()
+        }
+    }
+ 
+    // MARK: Navigation
+     @IBAction func unwindToVerificationView(sender: UIStoryboardSegue) {}
     
-//    @IBAction func seguetoVerfication(sender: UIStoryboardSegue) {
-//        if (sender.identifier == "RecToVer"){
-//            if let sourceViewController = sender.source as? RecordingViewController{
-//                filtering = sourceViewController.filtering
-//            }
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        DisplayFilteredTextField.resignFirstResponder() //Dismiss keyboard before segueing
+    }
  
 
 }

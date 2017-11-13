@@ -1,3 +1,4 @@
+
 //
 //  RecordingViewController.swift
 //  Refined Dictation
@@ -9,28 +10,33 @@
 import UIKit
 
 class RecordingViewController: UIViewController, UITextFieldDelegate {
-    // vars:
+    
+    //MARK: Properties
     var usr: User = User()
     var usrFilterLib: CommonFilter = CommonFilter()
     var recording: SpeechRecog = SpeechRecog()
     var filtering: SpeechFilter = SpeechFilter()
+    var buttonState = "startRecButton"
 
-    
+    @IBOutlet weak var SignOutButton: UIBarButtonItem!
     @IBOutlet weak var RecordingButton: UIButton!
     @IBOutlet weak var SearchField: UITextField!
     @IBOutlet weak var InstructionLabel: UILabel!
     @IBOutlet weak var DoneButton: UIBarButtonItem!
-    var stopButton = false  //record button can be stop or start (true if stop, false if start)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         SearchField.delegate = self //sets search field delegate
         DoneButton.isEnabled = false  //disables done button
-        // Do any additional setup after loading the view.
         
         // TODO: pass in a proper user
         usrFilterLib = CommonFilter(usr: usr)
         recording = SpeechRecog(usr: usr)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)    //shows navigation bar
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,54 +60,38 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
     //MARK: Actions
     // TODO: take the user to VerificationViewController upon the second press of record button
     @IBAction func RecordButtonPressed(_ sender: UIButton) {
-        if(stopButton){ //changes stop record button to start record and segues to next view
-            stopButton = false
-            let StartRecording = UIImage(named: "record")
-            RecordingButton.setImage(StartRecording, for: UIControlState.normal)
-            InstructionLabel.text = "Press done or tap the red button to redo your recording"
-            recording.recStop()
-            #if DEBUG
-                print(recording.rawResult)
-            #endif
-            // begin filtering
-            filtering = SpeechFilter(usr: usr, rawResult: recording.rawResult, filterLib: usrFilterLib )
-            #if DEBUG
-                print(filtering.filteredResult)
-            #endif
-            DoneButton.isEnabled = true
-            
-        }
-        else{   //changes start record button to stop record button
-            stopButton = true
-            let StopRecording = UIImage(named: "stop")
-            RecordingButton.setImage(StopRecording, for: UIControlState.normal)
+        if(buttonState == "startRecButton"){ //start recording button was pressed
             InstructionLabel.text = "Tap the button again to stop recording"
-            DoneButton.isEnabled = false
             recording.recBegin()
+            RecordingButton.setImage(UIImage(named: "stop"), for: UIControlState.normal)
+            buttonState = "stopRecButton"
+            DoneButton.isEnabled = false
+            SignOutButton.isEnabled = false
         }
-
+        else{ //buttonState == "stopRecButton" -> stop recording button was pressed
+            InstructionLabel.text = "..."
+            recording.recStop()
+            
+            #if DEBUG
+                print("raw: " + recording.rawResult)
+            #endif
+            filtering = SpeechFilter(usr: usr, rawResult: recording.rawResult, filterLib: usrFilterLib ) // begin filtering
+            #if DEBUG
+                print("filtered: " + filtering.filteredResult)
+            #endif
+            
+            InstructionLabel.text = "Press done or tap the red button to redo your recording"
+            RecordingButton.setImage(UIImage(named: "record"), for: UIControlState.normal)
+            buttonState = "startRecButton"
+            DoneButton.isEnabled = true
+            SignOutButton.isEnabled = true
+        }
     }
     
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    @IBAction func unwindToRecordingView(sender: UIStoryboardSegue) {
-        
-    }
-    
-//    func prepare(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "MySegueID" {
-//            if let destination = segue.destination as? VerificationViewController {
-//                destination.usr = self.usr
-//                destination.usrFilterLib = self.usrFilterLib
-//                destination.recording = self.recording
-//                destination.filtering.filteredResult = "hello"
-//            }
-//        }
-//    }
-    
+    // MARK: Navigation
+    @IBAction func unwindToRecordingView(sender: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       // let data = Data()
         if let destinationViewController = segue.destination as? VerificationViewController {
             destinationViewController.filtering = filtering
         }
