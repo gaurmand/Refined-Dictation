@@ -9,7 +9,9 @@
 import Foundation
 //import Alamofire    // HTTP requests  // handled by Watson SDK
 import SpeechToTextV1
-import FirebaseAuth
+
+
+
 
 let EXCLUDE_MOST_COMMON_WORD_COUNT = 200    // used in CommonFilter() class
 
@@ -22,10 +24,13 @@ let EXCLUDE_MOST_COMMON_WORD_COUNT = 200    // used in CommonFilter() class
 //#define DEBUG
 // make sure DEBUG and VER2 are both turned off upon VER1 release
 
-// TODO: Ver. 1 will not implement custom profile. Hardcoded for now w
+
+
+
+
 // MARK: handles the management of a per-user custom profile
 // constructed upon launch
-class User{
+class appUser{
     // properties:
     var name: String
     var usrID: Int
@@ -33,7 +38,7 @@ class User{
     var WatsonPsswrd: String
     
     // default constructor:
-    // TODO: if(existing user): retrieve credentials using keychain; if(newUser): call newUserProfile()
+    // TODO: if(existing user): retrieve credentials using keychain; if(newappUser): call newappUserProfile()
    // init(keychainCred: KeychainWrapper? = nil){
     init(){
     
@@ -51,7 +56,7 @@ class User{
     }
     
     // cpy constructor:
-    init(usr: User){
+    init(usr: appUser){
         self.name = usr.name
         self.usrID = usr.usrID
         self.WatsonID = usr.WatsonID
@@ -59,14 +64,14 @@ class User{
     }
     
     #if VER2
-    // used to retrieve user info to populate User class from server
+    // used to retrieve user info to populate appUser class from server
     internal func getUsrInfo(){
         
     }
     
     // MARK: Assigns a new user a profile including: WatsonCredentials, userID, and name (retrieved from fb/google or asked)
-    // then store new User profile to server and keychain
-    open func newUserProfile(){
+    // then store new appUser profile to server and keychain
+    open func newappUserProfile(){
     
     }
     #endif
@@ -82,17 +87,17 @@ class User{
  word string as key
  bool as value To support turning off the keyword without deleting from table.
  */
-class CommonFilter: User{
+class CommonFilter: appUser{
     // properties (data structure lives here):
     // 1. Dictionary with top EXCLUDE_MOST_COMMON_WORD_COUNT words dictionary
     // 2. Dictionary with user's custom filtering words
     
     //creates empty dictionaries
     var ExcludedCommonWords = ["":false]
-    var UserFilterWords = ["":false]
+    var appUserFilterWords = ["":false]
     
     // constructor:
-    override init(usr: User){
+    override init(usr: appUser){
         super.init(usr: usr)
         #if VER2
             importList()
@@ -115,7 +120,7 @@ class CommonFilter: User{
             }
             
             //Add default words to commonfilter library
-            UserFilterWords["apple"] = true
+            appUserFilterWords["apple"] = true
             
         #endif
     }
@@ -133,7 +138,7 @@ class CommonFilter: User{
             return false
         }
         else{
-            UserFilterWords[word] = true
+            appUserFilterWords[word] = true
             return true
         }
     }
@@ -142,8 +147,8 @@ class CommonFilter: User{
     // Return true if succeeded or does not exist in list
     // Return false if failed
     open func rmFromList(word: String) -> Bool {
-        if(UserFilterWords[word] != nil && UserFilterWords[word]!){
-            UserFilterWords[word] = false
+        if(appUserFilterWords[word] != nil && appUserFilterWords[word]!){
+            appUserFilterWords[word] = false
         }
         return true
     }
@@ -152,7 +157,7 @@ class CommonFilter: User{
     // Return true if in list
     // Return false if not in list
     open func isOnList(word: String) -> Bool {
-        if(UserFilterWords[word] != nil && UserFilterWords[word]!){
+        if(appUserFilterWords[word] != nil && appUserFilterWords[word]!){
             return true
         }
         return false;
@@ -187,7 +192,7 @@ class CommonFilter: User{
 
 // MARK: per-dictation class used to call Watson STT API and handle data
 // instantiated on scenes with the red recording button
-class SpeechRecog: User{
+class SpeechRecog: appUser{
     // properties:
     #if DEBUG
     var speechPath = ""
@@ -198,7 +203,7 @@ class SpeechRecog: User{
     
     
     // constructor:
-    override init(usr: User){
+    override init(usr: appUser){
         // Watson supplied test speech recording
         #if DEBUG
         let fileURL=Bundle.main.bundleURL.appendingPathComponent("audio-file.flac")
@@ -301,12 +306,12 @@ class SpeechFilter: SpeechRecog {
     var filterTime: Float = 0.0
     
     // constructor:
-    init(usr: User, rawResult: String, filterLib: CommonFilter){
+    init(usr: appUser, rawResult: String, filterLib: CommonFilter){
         super.init(usr: usr)
         super.rawResult = rawResult
         matchCommonTics(usrComFilter: filterLib)
     }
-    override init(usr: User){
+    override init(usr: appUser){
         super.init(usr: usr)
     }
     override init(){
@@ -375,7 +380,7 @@ class FinalResult:SpeechFilter{
     var editedResult:String?    // nil if no edits were made from super.filterResult: String
     
     // constructor:
-    init(usr: User, before: String){
+    init(usr: appUser, before: String){
         super.init(usr: usr)
         super.filteredResult = before;
         #if VER1

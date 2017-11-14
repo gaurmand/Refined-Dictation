@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fag-ve-1po">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fag-ve-1po">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -58,9 +58,6 @@
                                 <state key="normal" title="Sign In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="6LH-jw-JMd" kind="show" id="5Fn-fu-gSh"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Refined Dictation" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5i-Ms-jmt">
                                 <rect key="frame" x="43" y="121" width="289" height="126"/>
@@ -82,16 +79,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wab-rD-tWn">
-                                <rect key="frame" x="192" y="527" width="150" height="43"/>
+                                <rect key="frame" x="190" y="527" width="152" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Sign Up" backgroundImage="Rounded Rectangle">
+                                <state key="normal" title="Sign Out" backgroundImage="Rounded Rectangle">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
-                                <connections>
-                                    <segue destination="vAm-xX-ASq" kind="show" id="YKv-Vv-cku"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -173,12 +167,11 @@
                         <outlet property="ErrorLabel" destination="o1a-Fn-WDE" id="ZYX-km-CNe"/>
                         <outlet property="PasswordTextField" destination="ZGW-y4-Sz4" id="Iyr-MK-9L1"/>
                         <outlet property="UsernameTextField" destination="VHE-ib-5B6" id="Tl6-M7-a0Q"/>
-                        <segue destination="wTi-Be-idW" kind="show" identifier="signin" id="Vfh-M9-TgT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V0B-tC-QLR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="57" y="-563"/>
+            <point key="canvasLocation" x="-543" y="-1311"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="khp-aq-yne">
@@ -247,7 +240,6 @@
                         <outlet property="ErrorLabel" destination="B7F-Q5-dHm" id="RVh-tK-UQo"/>
                         <outlet property="PasswordTextField" destination="zxt-sW-fwq" id="Kpo-vM-Grx"/>
                         <outlet property="UsernameTextField" destination="JQw-yA-rkx" id="0Oq-VQ-FgW"/>
-                        <segue destination="3FS-MI-HuC" kind="show" identifier="signup" id="wHV-vz-oYh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UXi-OZ-dNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -735,6 +727,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fmf-k2-rGx"/>
-        <segue reference="mrw-2d-GFd"/>
     </inferredMetricsTieBreakers>
 </document>

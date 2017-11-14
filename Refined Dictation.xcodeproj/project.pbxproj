@@ -8,21 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		071719EE1FB9254600EBA8F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 071719C71FB9254600EBA8F3 /* GoogleService-Info.plist */; };
-		071719F01FB925D100EBA8F3 /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071719EF1FB925D100EBA8F3 /* InitializationViewController.swift */; };
-		071719F21FB925D300EBA8F3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071719F11FB925D300EBA8F3 /* SignInViewController.swift */; };
-		071719F41FB925D500EBA8F3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071719F31FB925D500EBA8F3 /* SignUpViewController.swift */; };
 		07171A1D1FB9270600EBA8F3 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071719F61FB9270600EBA8F3 /* StartViewController.swift */; };
 		07FDAB161FB7F63C00D7D19A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */; };
 		07FE21DF1FAFCCEB006FE00F /* CommonFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */; };
 		07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */; };
 		07FE22931FB03958006FE00F /* SpeechFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE22921FB03958006FE00F /* SpeechFilterTests.swift */; };
+		2916D4AF1FB9337A00F8271C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AC1FB9337A00F8271C /* SignInViewController.swift */; };
+		2916D4B01FB9337A00F8271C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AC1FB9337A00F8271C /* SignInViewController.swift */; };
+		2916D4B11FB9337A00F8271C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AC1FB9337A00F8271C /* SignInViewController.swift */; };
+		2916D4B21FB9337A00F8271C /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */; };
+		2916D4B31FB9337A00F8271C /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */; };
+		2916D4B41FB9337A00F8271C /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */; };
+		2916D4B51FB9337A00F8271C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AE1FB9337A00F8271C /* SignUpViewController.swift */; };
+		2916D4B61FB9337A00F8271C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AE1FB9337A00F8271C /* SignUpViewController.swift */; };
+		2916D4B71FB9337A00F8271C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AE1FB9337A00F8271C /* SignUpViewController.swift */; };
 		294AF5311FB4EA330014356D /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */; };
 		294AF5321FB4EA330014356D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294AF5301FB4EA330014356D /* KeychainWrapper.swift */; };
 		299FF2201FAD5AA00012595B /* audio-file.flac in Resources */ = {isa = PBXBuildFile; fileRef = 299FF21E1FAD5AA00012595B /* audio-file.flac */; };
 		299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF21F1FAD5AA00012595B /* dataObjs.swift */; };
 		299FF29A1FAD5CC40012595B /* SpeechToTextV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299FF2851FAD5C980012595B /* SpeechToTextV1.framework */; };
 		299FF29B1FAD5CC40012595B /* SpeechToTextV1.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 299FF2851FAD5C980012595B /* SpeechToTextV1.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		29F71C1B1FB91A44005C7205 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29F71C1A1FB91A43005C7205 /* GoogleService-Info.plist */; };
 		29F71C1C1FB91A44005C7205 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29F71C1A1FB91A43005C7205 /* GoogleService-Info.plist */; };
 		29F71C1D1FB91A44005C7205 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29F71C1A1FB91A43005C7205 /* GoogleService-Info.plist */; };
 		8496EEE71FA72B2500232112 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EEE61FA72B2500232112 /* AppDelegate.swift */; };
@@ -351,14 +356,14 @@
 
 /* Begin PBXFileReference section */
 		071719C71FB9254600EBA8F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		071719EF1FB925D100EBA8F3 /* InitializationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InitializationViewController.swift; path = "/Users/serrann/Documents/Refined-Dictation (ayy)/Refined Dictation/InitializationViewController.swift"; sourceTree = "<absolute>"; };
-		071719F11FB925D300EBA8F3 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignInViewController.swift; path = "/Users/serrann/Documents/Refined-Dictation (ayy)/Refined Dictation/SignInViewController.swift"; sourceTree = "<absolute>"; };
-		071719F31FB925D500EBA8F3 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = "/Users/serrann/Documents/Refined-Dictation (ayy)/Refined Dictation/SignUpViewController.swift"; sourceTree = "<absolute>"; };
 		071719F61FB9270600EBA8F3 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterTests.swift; sourceTree = "<group>"; };
 		07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExcludedCommonWordsList.txt; sourceTree = "<group>"; };
 		07FE22921FB03958006FE00F /* SpeechFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechFilterTests.swift; sourceTree = "<group>"; };
+		2916D4AC1FB9337A00F8271C /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializationViewController.swift; sourceTree = "<group>"; };
+		2916D4AE1FB9337A00F8271C /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
 		294AF5301FB4EA330014356D /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		299FF21E1FAD5AA00012595B /* audio-file.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-file.flac"; sourceTree = "<group>"; };
@@ -508,15 +513,15 @@
 				29F71C1E1FB91BE7005C7205 /* Refined Dictation.entitlements */,
 				29F71C1A1FB91A43005C7205 /* GoogleService-Info.plist */,
 				8496EEE61FA72B2500232112 /* AppDelegate.swift */,
-				071719F11FB925D300EBA8F3 /* SignInViewController.swift */,
-				071719F31FB925D500EBA8F3 /* SignUpViewController.swift */,
-				071719EF1FB925D100EBA8F3 /* InitializationViewController.swift */,
+				071719F61FB9270600EBA8F3 /* StartViewController.swift */,
 				07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */,
 				294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */,
 				294AF5301FB4EA330014356D /* KeychainWrapper.swift */,
-				071719F61FB9270600EBA8F3 /* StartViewController.swift */,
 				84F096A61FAC1006007E9E36 /* RecordingViewController.swift */,
 				84F096A81FAC749D007E9E36 /* VerificationViewController.swift */,
+				2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */,
+				2916D4AC1FB9337A00F8271C /* SignInViewController.swift */,
+				2916D4AE1FB9337A00F8271C /* SignUpViewController.swift */,
 				07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */,
 				8496EEEA1FA72B2500232112 /* Main.storyboard */,
 				071719C71FB9254600EBA8F3 /* GoogleService-Info.plist */,
@@ -970,7 +975,6 @@
 				299FF2201FAD5AA00012595B /* audio-file.flac in Resources */,
 				8496EEEC1FA72B2500232112 /* Main.storyboard in Resources */,
 				07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */,
-				29F71C1B1FB91A44005C7205 /* GoogleService-Info.plist in Resources */,
 				071719EE1FB9254600EBA8F3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1186,16 +1190,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2916D4B51FB9337A00F8271C /* SignUpViewController.swift in Sources */,
 				84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */,
 				07FDAB161FB7F63C00D7D19A /* WelcomeViewController.swift in Sources */,
 				299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */,
 				294AF5321FB4EA330014356D /* KeychainWrapper.swift in Sources */,
-				071719F41FB925D500EBA8F3 /* SignUpViewController.swift in Sources */,
 				07171A1D1FB9270600EBA8F3 /* StartViewController.swift in Sources */,
-				071719F01FB925D100EBA8F3 /* InitializationViewController.swift in Sources */,
-				071719F21FB925D300EBA8F3 /* SignInViewController.swift in Sources */,
+				2916D4AF1FB9337A00F8271C /* SignInViewController.swift in Sources */,
 				294AF5311FB4EA330014356D /* KeychainItemAccessibility.swift in Sources */,
 				84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */,
+				2916D4B21FB9337A00F8271C /* InitializationViewController.swift in Sources */,
 				8496EEE71FA72B2500232112 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1204,8 +1208,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2916D4B61FB9337A00F8271C /* SignUpViewController.swift in Sources */,
+				2916D4B01FB9337A00F8271C /* SignInViewController.swift in Sources */,
 				07FE21DF1FAFCCEB006FE00F /* CommonFilterTests.swift in Sources */,
 				07FE22931FB03958006FE00F /* SpeechFilterTests.swift in Sources */,
+				2916D4B31FB9337A00F8271C /* InitializationViewController.swift in Sources */,
 				8496EEFC1FA72B2500232112 /* Refined_DictationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1214,7 +1221,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2916D4B11FB9337A00F8271C /* SignInViewController.swift in Sources */,
 				8496EF071FA72B2500232112 /* Refined_DictationUITests.swift in Sources */,
+				2916D4B71FB9337A00F8271C /* SignUpViewController.swift in Sources */,
+				2916D4B41FB9337A00F8271C /* InitializationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,7 +12,7 @@ import UIKit
 class RecordingViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Properties
-    var usr: User = User()
+    var usr: appUser = appUser()
     var usrFilterLib: CommonFilter = CommonFilter()
     var recording: SpeechRecog = SpeechRecog()
     var filtering: SpeechFilter = SpeechFilter()
