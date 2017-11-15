@@ -30,6 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication ?? "") ?? false
         
     }
+    
+    func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
+        return FUICustomAuthPickerViewController(nibName: "FUICustomAuthPickerViewController",
+                                                 bundle: Bundle.main,
+                                                 authUI: authUI)
+    }
 
 }
 
