@@ -38,6 +38,8 @@ class StartViewController: UIViewController {
     func configureAuth() {
         let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIFacebookAuth()]
         FUIAuth.defaultAuthUI()?.providers = provider
+//        FUIAuth.defaultAuthUI()?.delegate = self as! FUIAuthDelegate
+
         
         // listen for changes in the authorization state
         _authHandle = Auth.auth().addStateDidChangeListener { (auth: Auth, user: User?) in            
@@ -91,14 +93,15 @@ class StartViewController: UIViewController {
         let navController = UINavigationController(rootViewController: myCustomerViewController)
         navController.title = "Welcome to Refined Dictation"
         self.present(navController, animated: true, completion: nil)
+
     }
-    
+
+
 //// Writing to database
 //        mdata[Constants.MessageFields.name] = displayName
 //        ref.child("messages").childByAutoId().setValue(mdata)
     
     // MARK: Hide navigation bar
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.isNavigationBarHidden = true
@@ -135,11 +138,20 @@ class StartViewController: UIViewController {
         }
     }
 
-    
+
 
 }
 
+
 class customAuthUIViewController: FUIAuthPickerViewController {
+
+    override init(nibName: String?, bundle: Bundle?, authUI: FUIAuth) {
+        super.init(nibName: "FUIAuthPickerViewController", bundle: bundle, authUI: authUI)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,6 +165,7 @@ class customAuthUIViewController: FUIAuthPickerViewController {
         view.insertSubview(imageViewBackground, at: 0)
     }
     
+
     
 }
 //

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07171A1D1FB9270600EBA8F3 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071719F61FB9270600EBA8F3 /* StartViewController.swift */; };
 		07FDAB161FB7F63C00D7D19A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */; };
 		07FE21DF1FAFCCEB006FE00F /* CommonFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */; };
 		07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */; };
@@ -30,10 +29,11 @@
 		7E383EAF1FBFAE3A004BCF80 /* simplediff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */; };
 		7E383EB01FBFAE3A004BCF80 /* simplediff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */; };
 		7E383EB11FBFAE3A004BCF80 /* simplediff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */; };
+		7E74F75B1FC224230000648B /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74F7591FC224220000648B /* StartViewController.swift */; };
+		7E74F75C1FC224230000648B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74F75A1FC224230000648B /* AppDelegate.swift */; };
 		7EBBD3451FBCF5E400B9C7E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */; };
 		7EBBD3461FBCF5E400B9C7E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */; };
 		7EBBD3471FBCF5E400B9C7E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */; };
-		8496EEE71FA72B2500232112 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EEE61FA72B2500232112 /* AppDelegate.swift */; };
 		8496EEEC1FA72B2500232112 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8496EEEA1FA72B2500232112 /* Main.storyboard */; };
 		8496EEEE1FA72B2500232112 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8496EEED1FA72B2500232112 /* Assets.xcassets */; };
 		8496EEF11FA72B2500232112 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8496EEEF1FA72B2500232112 /* LaunchScreen.storyboard */; };
@@ -358,7 +358,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		071719F61FB9270600EBA8F3 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterTests.swift; sourceTree = "<group>"; };
 		07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExcludedCommonWordsList.txt; sourceTree = "<group>"; };
@@ -375,9 +374,10 @@
 		2B43AAF71306A2655FE13F6B /* Pods_Refined_Dictation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_Dictation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FB49B7118883150F4AAA5C /* Pods-Refined DictationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = simplediff.swift; path = "simple-diff/simplediff.swift"; sourceTree = SOURCE_ROOT; };
+		7E74F7591FC224220000648B /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		7E74F75A1FC224230000648B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8496EEE31FA72B2500232112 /* Refined Dictation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Refined Dictation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8496EEE61FA72B2500232112 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8496EEEB1FA72B2500232112 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8496EEED1FA72B2500232112 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8496EEF01FA72B2500232112 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -515,8 +515,8 @@
 			children = (
 				29F71C1E1FB91BE7005C7205 /* Refined Dictation.entitlements */,
 				7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */,
-				8496EEE61FA72B2500232112 /* AppDelegate.swift */,
-				071719F61FB9270600EBA8F3 /* StartViewController.swift */,
+				7E74F75A1FC224230000648B /* AppDelegate.swift */,
+				7E74F7591FC224220000648B /* StartViewController.swift */,
 				07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */,
 				294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */,
 				294AF5301FB4EA330014356D /* KeychainWrapper.swift */,
@@ -1192,18 +1192,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E74F75C1FC224230000648B /* AppDelegate.swift in Sources */,
 				2916D4B51FB9337A00F8271C /* SignUpViewController.swift in Sources */,
 				84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */,
 				7E383EAF1FBFAE3A004BCF80 /* simplediff.swift in Sources */,
 				07FDAB161FB7F63C00D7D19A /* WelcomeViewController.swift in Sources */,
 				299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */,
+				7E74F75B1FC224230000648B /* StartViewController.swift in Sources */,
 				294AF5321FB4EA330014356D /* KeychainWrapper.swift in Sources */,
-				07171A1D1FB9270600EBA8F3 /* StartViewController.swift in Sources */,
 				2916D4AF1FB9337A00F8271C /* SignInViewController.swift in Sources */,
 				294AF5311FB4EA330014356D /* KeychainItemAccessibility.swift in Sources */,
 				84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */,
 				2916D4B21FB9337A00F8271C /* InitializationViewController.swift in Sources */,
-				8496EEE71FA72B2500232112 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
