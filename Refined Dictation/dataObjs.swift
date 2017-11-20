@@ -7,14 +7,17 @@
 //
 
 import Foundation
-//import Alamofire    // HTTP requests  // handled by Watson SDK
 import SpeechToTextV1
-
+import FirebaseCore
+import FirebaseAuth
+import FirebaseStorage
 
 
 
 let EXCLUDE_MOST_COMMON_WORD_COUNT = 200    // used in CommonFilter() class
-
+// each word on appUserFilterWords[] has a false-positive%, the app will only filter out said word when said word has false-positive below THRESHOLD_VAL
+// each word's false-positive rate will increase/decrease upon success/fail filters, determined by whether the user attempts to correct the filtered result in the editing textbox
+let THRESHOLD_VAL = 50
 
 // Pre-processors are not allowed in Swift.
 // Instead, MACROs are now defined in project -> Build Setting -> Swift Compiler - Custom Flags -> Active Compilation Conditions
@@ -30,106 +33,86 @@ let EXCLUDE_MOST_COMMON_WORD_COUNT = 200    // used in CommonFilter() class
 
 // MARK: handles the management of a per-user custom profile
 // constructed upon launch
+// singleton obj (global, one-instance only)
 class appUser{
     // properties:
     var name: String
-    var usrID: Int
+    var usrID: String
     var WatsonID: String
     var WatsonPsswrd: String
     
-    // default constructor:
-    // TODO: if(existing user): retrieve credentials using keychain; if(newappUser): call newappUserProfile()
-   // init(keychainCred: KeychainWrapper? = nil){
-    init(){
+    private static var sharedUser: appUser = {
+        let sharedAppUser = appUser(usr: Auth.auth().currentUser!)     // appUser is only instantiated after Startview, hence guaranteed not nil
+        return sharedAppUser
+    }()
     
-        // TODO: Getting user info from server is not supported in Ver. 1
-        // Sample info are hardcoded for now
-        #if VER2
-//            getUsrInfo(KeychainWrapper)
-        #endif
-//        #if VER1
-        name = "Alice"
-        usrID=0
+    private init(usr: User){    // User here is FirebaseAuth.FIRUser, changed to User in the new SDK
+        
+        name = usr.displayName!
+        usrID = usr.uid
         WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
         WatsonPsswrd = "Ph70dloSxwhe"
-//        #endif
     }
     
-    // cpy constructor:
-    init(usr: appUser){
-        self.name = usr.name
-        self.usrID = usr.usrID
-        self.WatsonID = usr.WatsonID
-        self.WatsonPsswrd = usr.WatsonPsswrd
+    // MARK: - Accessors
+    class func shared() -> appUser {
+        return sharedUser
     }
-    
-    #if VER2
-    // used to retrieve user info to populate appUser class from server
-    internal func getUsrInfo(){
-        
-    }
-    
-    // MARK: Assigns a new user a profile including: WatsonCredentials, userID, and name (retrieved from fb/google or asked)
-    // then store new appUser profile to server and keychain
-    open func newappUserProfile(){
-    
-    }
-    #endif
+
     
 }
 
 
 // MARK: per-user data structure used to manage words that we would like to filter
-// constructed upon launch
+// constructed upon launch, singleton obj
 /*: Dictionary contains the words that the user has historically edited out from STT result that are NOT in the to EXCLUDE_MOST_COMMON_WORD_COUNT of the most spoken words list:
  http://www.talkenglish.com/vocabulary/top-2000-vocabulary.aspx
- - Should be an efficient Dictionary data structure with:
- word string as key
- bool as value To support turning off the keyword without deleting from table.
  */
-class CommonFilter: appUser{
+class CommonFilter{
     // properties (data structure lives here):
     // 1. Dictionary with top EXCLUDE_MOST_COMMON_WORD_COUNT words dictionary
     // 2. Dictionary with user's custom filtering words
     
-    //creates empty dictionaries
-    var ExcludedCommonWords = ["":false]
-    var appUserFilterWords = ["":false]
+    
+    // variables
+    
+    var ExcludedCommonWords = ["":false]    // false is reserved in the event of a possible error/invalid case. All words are definited to have 'true' for now
+    var appUserFilterWords = ["":0] // 0 represent a 0% false-positive rate
+    
     
     // constructor:
-    override init(usr: appUser){
-        super.init(usr: usr)
-        #if VER2
-            importList()
-        #endif
-        #if VER1
-            // Load dictionary 1 from file
-            // create empty dictionary 2. (maybe load in a couple of tic-looking words for demo)
-            
-            let file = "ExcludedCommonWordsList"
-            
-            //Get contents of file into one string
-            let ExcludedWordsString = readFromFile(filename:file)
-            
-            //ExcludedWordsString is subdivided into one word strings and placed into an array
-            let ExcludedWordsArr = ExcludedWordsString.components(separatedBy: "\n")
-            
-            //Add each string in ExcludedWordsArr to the ExcludedCommonWords dictionary
-            for ExcludedWord in ExcludedWordsArr{
-                ExcludedCommonWords[ExcludedWord] = true
-            }
-            
-            //Add default words to commonfilter library
-            appUserFilterWords["apple"] = true
-            
+    
+    private static var sharedList: CommonFilter = {
+        let sharedList = CommonFilter()     // appUser is only instantiated after Startview, hence guaranteed not nil
+        return sharedList
+    }()
+    
+    private init() {
+        // Load ExcludedCommonWords from file
+        let file = "ExcludedCommonWordsList"
+        
+        //Get contents of file into one string
+        let ExcludedWordsArr = readFromFile(filename:file, firstNumLines: EXCLUDE_MOST_COMMON_WORD_COUNT)
+        
+        //Add each string in ExcludedWordsArr to the ExcludedCommonWords dictionary
+        for ExcludedWord in ExcludedWordsArr{
+            ExcludedCommonWords[ExcludedWord] = true
+        }
+
+        #if DEBUG
+        //Add default words to commonfilter library
+        appUserFilterWords["apple"] = 0
         #endif
     }
     
-    override init(){
-        super.init()
+    // MARK: - Accessors
+    class func shared() -> CommonFilter {
+        return sharedList
     }
+    
     
     // funcs:
+    
     // MARK: If its not the top EXCLUDE_MOST_COMMON_WORD_COUNT words on the most spoken list, add to dictionary.
     // Return true if succeeded or already in the list
     // Return false if failed
@@ -138,7 +121,7 @@ class CommonFilter: appUser{
             return false
         }
         else{
-            appUserFilterWords[word] = true
+            appUserFilterWords[word] = 0
             return true
         }
     }
@@ -147,8 +130,8 @@ class CommonFilter: appUser{
     // Return true if succeeded or does not exist in list
     // Return false if failed
     open func rmFromList(word: String) -> Bool {
-        if(appUserFilterWords[word] != nil && appUserFilterWords[word]!){
-            appUserFilterWords[word] = false
+        if(appUserFilterWords[word] != nil){
+            appUserFilterWords.removeValue(forKey: word)
         }
         return true
     }
@@ -157,13 +140,13 @@ class CommonFilter: appUser{
     // Return true if in list
     // Return false if not in list
     open func isOnList(word: String) -> Bool {
-        if(appUserFilterWords[word] != nil && appUserFilterWords[word]!){
+        if(appUserFilterWords[word] != nil){
             return true
         }
         return false;
     }
     
-    private func readFromFile(filename: String) -> String{
+    private func readFromFile(filename: String, firstNumLines: Int) -> Array<String>{
         // File location
         let fileURL = Bundle.main.path(forResource: filename, ofType: "txt")
         
@@ -174,7 +157,8 @@ class CommonFilter: appUser{
         } catch let error as NSError {
             print("Failed reading from URL: \(error)" )
         }
-        return readString
+        let wordsArr = readString.components(separatedBy: .newlines)
+        return Array(wordsArr[0..<firstNumLines])   // get subArray of first firstNumLines words
     }
     
     #if VER2
@@ -192,7 +176,7 @@ class CommonFilter: appUser{
 
 // MARK: per-dictation class used to call Watson STT API and handle data
 // instantiated on scenes with the red recording button
-class SpeechRecog: appUser{
+class SpeechRecog{
     // properties:
     #if DEBUG
     var speechPath = ""
@@ -203,23 +187,17 @@ class SpeechRecog: appUser{
     
     
     // constructor:
-    override init(usr: appUser){
-        // Watson supplied test speech recording
-        #if DEBUG
-        let fileURL=Bundle.main.bundleURL.appendingPathComponent("audio-file.flac")
-        self.speechPath = fileURL.path
-        #endif
+    init(){
+//        #if DEBUG
+//        // Watson supplied test speech recording
+
+//        let fileURL=Bundle.main.bundleURL.appendingPathComponent("audio-file.flac")
+//        self.speechPath = fileURL.path
+//        #endif
         
         // Init STT API
-        speechToText = SpeechToText(username: usr.WatsonID, password: usr.WatsonPsswrd)
-        
-        super.init(usr: usr)
+        speechToText = SpeechToText(username: appUser.shared().WatsonID, password: appUser.shared().WatsonPsswrd)
     }
-    override init(){
-        speechToText = SpeechToText(username: "tmp", password: "tmp")
-        super.init()
-    }
-    
     
     // funcs:
     // called when red recording button is tapped
@@ -249,50 +227,6 @@ class SpeechRecog: appUser{
     // called when red recording button is tapped again
     open func recStop(){
         self.speechToText.stopRecognizeMicrophone()
-        
-        // Unable to get Alamofire HTTP call to work
-        //        let headers: HTTPHeaders = [
-        //            "Content-Type": "audio/flac",
-        //            "Transfer-Encoding": "chunked"
-        //        ]
-        //        Alamofire.upload(MultipartFormData:{multipartFormData in
-        //            multipartFormData.append(self.speechPath, withName: "sample_speech")}, usingThreshold: UInt64, to: "https://stream.watsonplatform.net/speech-to-text/api/v1/recognize", method: .post, headers: headers, encodingCompletion: {
-        //                encodingResult in
-        //                switch encodingResult{
-        //                case .success(let upload,_,_):
-        //                    upload.responseJSON{response in
-        //                        debugPrint(response)
-        //                    }
-        //                case .failure(let encodingError):
-        //                    print(encodingError)
-        //                }
-        //
-        //
-        //        })
-        //
-        //
-        //
-        //            .authenticate(user: usrProfile.WatsonID, password: usrProfile.WatsonPsswrd)
-        //            .responseJSON { response in
-        //            #if DEBUG
-        //            print("Request: \(String(describing: response.request))")   // original url request
-        //            print("Response: \(String(describing: response.response))") // http url response
-        //
-        //                switch response.result{
-        //                case .success:
-        //                    if let json = response.result.value {
-        //                        print("JSON: \(json)") // serialized json response
-        //                    }
-        //                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-        //                        print("Data: \(utf8Text)") // original server data as UTF8 string
-        //                    }
-        //
-        //                case .failure(let error):
-        //                    print(error)
-        //                }
-        //
-        //
-        //            #endif
     }
 }
     
@@ -306,13 +240,10 @@ class SpeechFilter: SpeechRecog {
     var filterTime: Float = 0.0
     
     // constructor:
-    init(usr: appUser, rawResult: String, filterLib: CommonFilter){
-        super.init(usr: usr)
+    init(rawResult: String){
+        super.init()
         super.rawResult = rawResult
-        matchCommonTics(usrComFilter: filterLib)
-    }
-    override init(usr: appUser){
-        super.init(usr: usr)
+        matchCommonTics()
     }
     override init(){
         super.init()
@@ -321,12 +252,12 @@ class SpeechFilter: SpeechRecog {
     
     // funcs:
     // MARK: Compare the SpeechRecog.result word-by-word with the CommonFilter Dictionary, and take out the match
-    open func matchCommonTics(usrComFilter: CommonFilter) {
+    open func matchCommonTics() {
         //let rawResultTuple = getWordList(str: rawResult)
         let rawResultArr = rawResult.components(separatedBy: " ")
         
         for word in rawResultArr{
-            if(!usrComFilter.isOnList(word: word)){
+            if(!CommonFilter.shared().isOnList(word: word)){
                 filteredResult += word
                 filteredResult += " "
             }
@@ -335,37 +266,6 @@ class SpeechFilter: SpeechRecog {
             filteredResult.removeLast() //removes extra space at end
         }
     }
-    
-    //return an array of the individual words in string, and the word count
-    // returned words will be lemmatized (e.g., struggles -> struggle)
-    /*func getWordList(str: String) -> ([String], Int){
-        var wordCnt = 0;
-        var wordsList: [String] = []
-        // parse potentially filtered string and potentially edited string to extract their words only
-        // modified based on: https://stackoverflow.com/a/31633375
-        // compare words with linguistic tagger
-        let tagger = NSLinguisticTagger(tagSchemes: [NSLinguisticTagSchemeLemma], options: 0)
-        tagger.string = str
-        var range = NSRange(location: 0, length: str.utf16.count)
-        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace]
-        tagger.string=str
-        range = NSRange(location: 0, length: str.utf16.count)
-        tagger.enumerateTags(in: range, unit: .word, scheme: NSLinguisticTagSchemeLemma, options: options) { tag, tokenRange, _ in
-            wordCnt += 1
-            if let lemma = tag {
-                print(lemma)
-                wordsList.append(tag!)
-            }
-            else{
-                let word = (str as NSString).substring(with: tokenRange)
-                wordsList.append(word)
-                #if DEBUG
-                    print(word)
-                #endif
-            }
-        }
-        return (wordsList, wordCnt)
-    }*/
 }
 
 
@@ -380,16 +280,12 @@ class FinalResult:SpeechFilter{
     var editedResult:String?    // nil if no edits were made from super.filterResult: String
     
     // constructor:
-    init(usr: appUser, before: String){
-        super.init(usr: usr)
+    init(before: String){
+        super.init()
         super.filteredResult = before;
         #if VER1
             editedResult = before
         #endif
-    }
-    
-    override init(){
-        super.init()
     }
     
     // funcs:

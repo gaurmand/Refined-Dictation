@@ -12,8 +12,6 @@ import UIKit
 class RecordingViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Properties
-    var usr: appUser = appUser()
-    var usrFilterLib: CommonFilter = CommonFilter()
     var recording: SpeechRecog = SpeechRecog()
     var filtering: SpeechFilter = SpeechFilter()
     var buttonState = "startRecButton"
@@ -30,19 +28,9 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
         DoneButton.isEnabled = false  //disables done button
         
         // TODO: pass in a proper user
-        usrFilterLib = CommonFilter(usr: usr)
-        recording = SpeechRecog(usr: usr)
+        recording = SpeechRecog()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)    //shows navigation bar
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func viewDidDisappear(_ animated: Bool) {
         InstructionLabel.text = "Tap the red button below to start recording your voice"
@@ -75,7 +63,7 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
             #if DEBUG
                 print("raw: " + recording.rawResult)
             #endif
-            filtering = SpeechFilter(usr: usr, rawResult: recording.rawResult, filterLib: usrFilterLib ) // begin filtering
+            filtering = SpeechFilter(rawResult: recording.rawResult) // begin filtering
             #if DEBUG
                 print("filtered: " + filtering.filteredResult)
             #endif

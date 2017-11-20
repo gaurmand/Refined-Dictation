@@ -29,11 +29,6 @@ class InitializationViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)    //shows navigation bar
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     //MARK: Actions
     @IBAction func SetIsNotFirstLaunchFlag(_ sender: UIBarButtonItem) {
         UserDefaults.standard.set(true, forKey: "IsNotFirstLaunch") // If done button is pressed, set IsNotFirstLaunch flag to true
