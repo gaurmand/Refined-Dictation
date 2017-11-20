@@ -30,13 +30,25 @@ class StartViewController: UIViewController {
     var usrFilterLib: CommonFilter = CommonFilter()
     var recording: SpeechRecog = SpeechRecog()
     var filtering: SpeechFilter = SpeechFilter()
+    var unwindFlag = false //true if
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         configureAuth()
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.isNavigationBarHidden = true
         
-        //UserDefaults.standard.removeObject(forKey: "IsNotFirstLaunch")  //always goes to welcome/initialization
+        if(unwindFlag){//sign in
+            self.signedInStatus(isSignedIn: false)
+            self.loginSession()
+        }
+        
+        UserDefaults.standard.removeObject(forKey: "IsNotFirstLaunch")  //always goes to welcome/initialization
         //UserDefaults.standard.set(true, forKey: "IsNotFirstLaunch")  //always goes to recording screen
         if (UserDefaults.standard.bool(forKey: "IsNotFirstLaunch")){
             performSegue(withIdentifier: "skip2", sender: Any?) // If not first launch go straight to record screen
@@ -44,6 +56,7 @@ class StartViewController: UIViewController {
         else{
             performSegue(withIdentifier: "skip1", sender: Any?) // If first launch go to welcome and initialization screen
         }
+
     }
     
 //    override func viewWillDisappear(_ animated: Bool) {
@@ -110,7 +123,7 @@ class StartViewController: UIViewController {
         let myCustomerViewController = customAuthUIViewController(authUI: FUIAuth.defaultAuthUI()!)
         let navController = UINavigationController(rootViewController: myCustomerViewController)
         navController.title = "Welcome to Refined Dictation"
-        self.present(navController, animated: true, completion: nil)
+        self.present(navController, animated: false, completion: nil)
 
     }
 
@@ -119,36 +132,17 @@ class StartViewController: UIViewController {
 //        mdata[Constants.MessageFields.name] = displayName
 //        ref.child("messages").childByAutoId().setValue(mdata)
     
-    // MARK: Hide navigation bar
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.navigationController?.isNavigationBarHidden = true
-    }
     
-    // MARK: Actions
+    //MARK: Navigation
 
-    @IBAction func SkipButton(_ sender: UIButton) {
-        //UserDefaults.standard.removeObject(forKey: "IsNotFirstLaunch")  //always goes to welcome/initialization
-        //UserDefaults.standard.set(true, forKey: "IsNotFirstLaunch")  //always goes to recording screen
-        if (UserDefaults.standard.bool(forKey: "IsNotFirstLaunch")){
-            performSegue(withIdentifier: "skip2", sender: Any?) // If not first launch go straight to record screen
-        }
-        else{
-            performSegue(withIdentifier: "skip1", sender: Any?) // If first launch go to welcome and initialization screen
-        }
-    }
-    
-    @IBAction func signOut(_ sender: UIButton) {
-        do {
+    @IBAction func unwindToStartView(sender: UIStoryboardSegue) {
+        do {    //sign out
             try Auth.auth().signOut()
         } catch {
             print("unable to sign out: \(error)")
         }
+        unwindFlag = true
     }
-    
-    //MARK: Navigation
-
-    @IBAction func unwindToStartView(sender: UIStoryboardSegue) {}
     
     @IBAction func showLoginView(_ sender: AnyObject) {
         loginSession()
@@ -189,13 +183,13 @@ class customAuthUIViewController: FUIAuthPickerViewController {
         let width = UIScreen.main.bounds.size.width
         let height = UIScreen.main.bounds.size.height
         let imageViewBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
-        imageViewBackground.image = UIImage(named: "")
+        imageViewBackground.image = UIImage(named: "background")
         imageViewBackground.contentMode = UIViewContentMode.scaleAspectFill
         view.insertSubview(imageViewBackground, at: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(false)
         self.navigationController?.isNavigationBarHidden = true //hide navigation bar
     }
     

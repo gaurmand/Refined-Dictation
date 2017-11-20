@@ -92,10 +92,10 @@ class InitializationViewController: UIViewController {
     
     private func updateUsrFilterLib(rawstring: String) -> Bool{
         var rawStrArr = rawstring.components(separatedBy: " ")
-        var promptStrArr = ["hi", "hi"]   //Array of words in the on screen prompt
+        var promptStrArr = ["rainy", "weather", "is", "the", "worst"]   //Array of words in the onscreen prompt
         var StrArr = [String]()
         
-        for word in rawStrArr{
+        for word in rawStrArr{  //removes empty strings from array
             if(word != ""){
                 StrArr.append(word)
             }
@@ -104,8 +104,12 @@ class InitializationViewController: UIViewController {
         if(StrArr.count < promptStrArr.count){  //# words spoken is less than the # words in prompt
             return false
         }
+        if(!StrArr.contains(promptStrArr[0])){  //The first word in prompt is not in the array of spoken words
+            return false
+        }
+
  
-        for index in 0...(StrArr.count - 1){
+        for index in 0...(StrArr.count - 1){    //finds tics by comparing prompt to the spoken sentence and adds them to userFilterLib
             if(index > promptStrArr.count - 1 ){
                 usrFilterLib?.addToList(word: StrArr[index])
                 continue
@@ -115,7 +119,9 @@ class InitializationViewController: UIViewController {
                 usrFilterLib?.addToList(word: StrArr[index])
             }
         }
-
+        
+        
+        
         return true
     }
 }
