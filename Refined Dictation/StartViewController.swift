@@ -29,6 +29,7 @@ class StartViewController: UIViewController {
         configureAuth()
     }
     
+    
 //    override func viewWillDisappear(_ animated: Bool) {
 //        super.viewWillDisappear(animated)
 //    }
@@ -37,6 +38,7 @@ class StartViewController: UIViewController {
     
     func configureAuth() {
         let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIFacebookAuth()]
+
         FUIAuth.defaultAuthUI()?.providers = provider
 //        FUIAuth.defaultAuthUI()?.delegate = self as! FUIAuthDelegate
 

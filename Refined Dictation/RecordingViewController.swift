@@ -8,11 +8,12 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RecordingViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Properties
-    var usr: appUser = appUser()
+    var usr: appUser = appUser(FirBUser: Auth.auth().currentUser!)
     var usrFilterLib: CommonFilter = CommonFilter()
     var recording: SpeechRecog = SpeechRecog()
     var filtering: SpeechFilter = SpeechFilter()

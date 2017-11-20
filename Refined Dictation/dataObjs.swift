@@ -7,7 +7,7 @@
 //
 
 import Foundation
-//import Alamofire    // HTTP requests  // handled by Watson SDK
+import FirebaseAuth
 import SpeechToTextV1
 
 
@@ -33,26 +33,21 @@ let EXCLUDE_MOST_COMMON_WORD_COUNT = 200    // used in CommonFilter() class
 class appUser{
     // properties:
     var name: String
-    var usrID: Int
+    var usrID: String
     var WatsonID: String
     var WatsonPsswrd: String
     
     // default constructor:
     // TODO: if(existing user): retrieve credentials using keychain; if(newappUser): call newappUserProfile()
    // init(keychainCred: KeychainWrapper? = nil){
-    init(){
-    
-        // TODO: Getting user info from server is not supported in Ver. 1
-        // Sample info are hardcoded for now
+    init(FirBUser: User){
         #if VER2
 //            getUsrInfo(KeychainWrapper)
         #endif
-//        #if VER1
-        name = "Alice"
-        usrID=0
+        name = FirBUser.displayName!
+        usrID = FirBUser.uid
         WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
         WatsonPsswrd = "Ph70dloSxwhe"
-//        #endif
     }
     
     // cpy constructor:
@@ -61,6 +56,14 @@ class appUser{
         self.usrID = usr.usrID
         self.WatsonID = usr.WatsonID
         self.WatsonPsswrd = usr.WatsonPsswrd
+    }
+    
+    init(){
+        // dummie variables
+        name = "Alice"
+        usrID = "FirBUser.uid"
+        WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
+        WatsonPsswrd = "Ph70dloSxwhe"
     }
     
     #if VER2
@@ -99,35 +102,30 @@ class CommonFilter: appUser{
     // constructor:
     override init(usr: appUser){
         super.init(usr: usr)
-        #if VER2
-            importList()
-        #endif
-        #if VER1
-            // Load dictionary 1 from file
-            // create empty dictionary 2. (maybe load in a couple of tic-looking words for demo)
-            
-            let file = "ExcludedCommonWordsList"
-            
-            //Get contents of file into one string
-            let ExcludedWordsString = readFromFile(filename:file)
-            
-            //ExcludedWordsString is subdivided into one word strings and placed into an array
-            let ExcludedWordsArr = ExcludedWordsString.components(separatedBy: "\n")
-            
-            //Add each string in ExcludedWordsArr to the ExcludedCommonWords dictionary
-            for ExcludedWord in ExcludedWordsArr{
-                ExcludedCommonWords[ExcludedWord] = true
-            }
-            
+
+        // Load dictionary 1 from file
+        // create empty dictionary 2. (maybe load in a couple of tic-looking words for demo)
+        
+        let file = "ExcludedCommonWordsList"
+        
+        //Get contents of file into one string
+        let ExcludedWordsArr = readFromFile(filename:file, firstNumLines: EXCLUDE_MOST_COMMON_WORD_COUNT)
+        
+        //Add each string in ExcludedWordsArr to the ExcludedCommonWords dictionary
+        for ExcludedWord in ExcludedWordsArr{
+            ExcludedCommonWords[ExcludedWord] = true
+        }
+        
+        #if DEBUG
             //Add default words to commonfilter library
             appUserFilterWords["apple"] = true
-            
         #endif
     }
     
     override init(){
         super.init()
     }
+    
     
     // funcs:
     // MARK: If its not the top EXCLUDE_MOST_COMMON_WORD_COUNT words on the most spoken list, add to dictionary.
@@ -163,7 +161,7 @@ class CommonFilter: appUser{
         return false;
     }
     
-    private func readFromFile(filename: String) -> String{
+    private func readFromFile(filename: String, firstNumLines: Int) -> Array<String>{
         // File location
         let fileURL = Bundle.main.path(forResource: filename, ofType: "txt")
         
@@ -174,7 +172,8 @@ class CommonFilter: appUser{
         } catch let error as NSError {
             print("Failed reading from URL: \(error)" )
         }
-        return readString
+        let wordsArr = readString.components(separatedBy: .newlines)
+        return Array(wordsArr[0..<firstNumLines])   // get subArray of first firstNumLines words
     }
     
     #if VER2
@@ -224,8 +223,6 @@ class SpeechRecog: appUser{
     // funcs:
     // called when red recording button is tapped
     // Result string will be returned piece-by-piece, and appended to self.result
-    // feel free to modify the func to support printing to screen as result comes in
-    // Otherwise call retrieve from self.rawResult
     open func recBegin(){
         var settings = RecognitionSettings(contentType: .oggOpus)
         settings.interimResults = true      // send piece-wise voice for processing ASAP
@@ -249,50 +246,6 @@ class SpeechRecog: appUser{
     // called when red recording button is tapped again
     open func recStop(){
         self.speechToText.stopRecognizeMicrophone()
-        
-        // Unable to get Alamofire HTTP call to work
-        //        let headers: HTTPHeaders = [
-        //            "Content-Type": "audio/flac",
-        //            "Transfer-Encoding": "chunked"
-        //        ]
-        //        Alamofire.upload(MultipartFormData:{multipartFormData in
-        //            multipartFormData.append(self.speechPath, withName: "sample_speech")}, usingThreshold: UInt64, to: "https://stream.watsonplatform.net/speech-to-text/api/v1/recognize", method: .post, headers: headers, encodingCompletion: {
-        //                encodingResult in
-        //                switch encodingResult{
-        //                case .success(let upload,_,_):
-        //                    upload.responseJSON{response in
-        //                        debugPrint(response)
-        //                    }
-        //                case .failure(let encodingError):
-        //                    print(encodingError)
-        //                }
-        //
-        //
-        //        })
-        //
-        //
-        //
-        //            .authenticate(user: usrProfile.WatsonID, password: usrProfile.WatsonPsswrd)
-        //            .responseJSON { response in
-        //            #if DEBUG
-        //            print("Request: \(String(describing: response.request))")   // original url request
-        //            print("Response: \(String(describing: response.response))") // http url response
-        //
-        //                switch response.result{
-        //                case .success:
-        //                    if let json = response.result.value {
-        //                        print("JSON: \(json)") // serialized json response
-        //                    }
-        //                    if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-        //                        print("Data: \(utf8Text)") // original server data as UTF8 string
-        //                    }
-        //
-        //                case .failure(let error):
-        //                    print(error)
-        //                }
-        //
-        //
-        //            #endif
     }
 }
     
@@ -335,37 +288,6 @@ class SpeechFilter: SpeechRecog {
             filteredResult.removeLast() //removes extra space at end
         }
     }
-    
-    //return an array of the individual words in string, and the word count
-    // returned words will be lemmatized (e.g., struggles -> struggle)
-    /*func getWordList(str: String) -> ([String], Int){
-        var wordCnt = 0;
-        var wordsList: [String] = []
-        // parse potentially filtered string and potentially edited string to extract their words only
-        // modified based on: https://stackoverflow.com/a/31633375
-        // compare words with linguistic tagger
-        let tagger = NSLinguisticTagger(tagSchemes: [NSLinguisticTagSchemeLemma], options: 0)
-        tagger.string = str
-        var range = NSRange(location: 0, length: str.utf16.count)
-        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace]
-        tagger.string=str
-        range = NSRange(location: 0, length: str.utf16.count)
-        tagger.enumerateTags(in: range, unit: .word, scheme: NSLinguisticTagSchemeLemma, options: options) { tag, tokenRange, _ in
-            wordCnt += 1
-            if let lemma = tag {
-                print(lemma)
-                wordsList.append(tag!)
-            }
-            else{
-                let word = (str as NSString).substring(with: tokenRange)
-                wordsList.append(word)
-                #if DEBUG
-                    print(word)
-                #endif
-            }
-        }
-        return (wordsList, wordCnt)
-    }*/
 }
 
 
