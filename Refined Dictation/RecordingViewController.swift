@@ -8,6 +8,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RecordingViewController: UIViewController, UITextFieldDelegate {
     

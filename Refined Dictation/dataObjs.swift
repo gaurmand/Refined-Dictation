@@ -202,8 +202,6 @@ class SpeechRecog{
     // funcs:
     // called when red recording button is tapped
     // Result string will be returned piece-by-piece, and appended to self.result
-    // feel free to modify the func to support printing to screen as result comes in
-    // Otherwise call retrieve from self.rawResult
     open func recBegin(){
         var settings = RecognitionSettings(contentType: .oggOpus)
         settings.interimResults = true      // send piece-wise voice for processing ASAP
