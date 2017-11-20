@@ -42,9 +42,13 @@ class StartViewController: UIViewController {
         }
     }
     
-
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//    }
+    
     // MARK: Config
-
+    
     func configureAuth() {
         let provider: [FUIAuthProvider] = [FUIGoogleAuth(), FUIFacebookAuth()]
 
@@ -66,6 +70,7 @@ class StartViewController: UIViewController {
             } else {
                 // user must sign in
                 self.signedInStatus(isSignedIn: false)
+                self.loginSession()
             }
         }
     }
@@ -80,18 +85,22 @@ class StartViewController: UIViewController {
 //        }
     }
     
-
+    deinit {
+        ref.child("messages").removeObserver(withHandle: _refHandle)
+        Auth.auth().removeStateDidChangeListener(_authHandle)
+    }
     
     
     // MARK: Sign In and Out
     
     func signedInStatus(isSignedIn: Bool) {
-        if isSignedIn == false {
-            self.loginSession()
-            DIDSIGNIN = true
-        }
+//        signInButton.isHidden = isSignedIn
+//        signOutButton.isHidden = !isSignedIn
+        // jump to home view controller
         
-        configureDatabase()
+        if isSignedIn {
+            configureDatabase()
+        }
     }
     
     func loginSession() {
@@ -99,6 +108,7 @@ class StartViewController: UIViewController {
         let navController = UINavigationController(rootViewController: myCustomerViewController)
         navController.title = "Welcome to Refined Dictation"
         self.present(navController, animated: true, completion: nil)
+
     }
 
 
@@ -107,18 +117,34 @@ class StartViewController: UIViewController {
 //        ref.child("messages").childByAutoId().setValue(mdata)
     
     // MARK: Hide navigation bar
-    // TODO: not hiding nav bar
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.isNavigationBarHidden = true
     }
     
+    // MARK: Actions
 
+    @IBAction func SkipButton(_ sender: UIButton) {
+        //UserDefaults.standard.removeObject(forKey: "IsNotFirstLaunch")  //always goes to welcome/initialization
+        //UserDefaults.standard.set(true, forKey: "IsNotFirstLaunch")  //always goes to recording screen
+        if (UserDefaults.standard.bool(forKey: "IsNotFirstLaunch")){
+            performSegue(withIdentifier: "skip2", sender: Any?) // If not first launch go straight to record screen
+        }
+        else{
+            performSegue(withIdentifier: "skip1", sender: Any?) // If first launch go to welcome and initialization screen
+        }
+    }
+    
+    
     //MARK: Navigation
 
     @IBAction func unwindToStartView(sender: UIStoryboardSegue) {}
+    
+    @IBAction func showLoginView(_ sender: AnyObject) {
+        loginSession()
+    }
 
-//  TODO VER3: move sign out to 'settings' view
+    
     @IBAction func signOut(_ sender: UIButton) {
         do {
             try Auth.auth().signOut()
@@ -128,10 +154,6 @@ class StartViewController: UIViewController {
     }
 
 
-    deinit {
-        ref.child("messages").removeObserver(withHandle: _refHandle)
-        Auth.auth().removeStateDidChangeListener(_authHandle)
-    }
 
 }
 
@@ -158,6 +180,7 @@ class customAuthUIViewController: FUIAuthPickerViewController {
         view.insertSubview(imageViewBackground, at: 0)
     }
     
+
     
 }
 //

@@ -7,17 +7,14 @@
 //
 
 import Foundation
-import SpeechToTextV1
-import FirebaseCore
 import FirebaseAuth
-import FirebaseStorage
+import SpeechToTextV1
+
 
 
 
 let EXCLUDE_MOST_COMMON_WORD_COUNT = 200    // used in CommonFilter() class
-// each word on appUserFilterWords[] has a false-positive%, the app will only filter out said word when said word has false-positive below THRESHOLD_VAL
-// each word's false-positive rate will increase/decrease upon success/fail filters, determined by whether the user attempts to correct the filtered result in the editing textbox
-let THRESHOLD_VAL = 50
+
 
 // Pre-processors are not allowed in Swift.
 // Instead, MACROs are now defined in project -> Build Setting -> Swift Compiler - Custom Flags -> Active Compilation Conditions
@@ -33,7 +30,6 @@ let THRESHOLD_VAL = 50
 
 // MARK: handles the management of a per-user custom profile
 // constructed upon launch
-// singleton obj (global, one-instance only)
 class appUser{
     // properties:
     var name: String
@@ -41,54 +37,75 @@ class appUser{
     var WatsonID: String
     var WatsonPsswrd: String
     
-    private static var sharedUser: appUser = {
-        let sharedAppUser = appUser(usr: Auth.auth().currentUser!)     // appUser is only instantiated after Startview, hence guaranteed not nil
-        return sharedAppUser
-    }()
-    
-    private init(usr: User){    // User here is FirebaseAuth.FIRUser, changed to User in the new SDK
-        
-        name = usr.displayName!
-        usrID = usr.uid
+    // default constructor:
+    // TODO: if(existing user): retrieve credentials using keychain; if(newappUser): call newappUserProfile()
+   // init(keychainCred: KeychainWrapper? = nil){
+    init(FirBUser: User){
+        #if VER2
+//            getUsrInfo(KeychainWrapper)
+        #endif
+        name = FirBUser.displayName!
+        usrID = FirBUser.uid
         WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
         WatsonPsswrd = "Ph70dloSxwhe"
     }
     
-    // MARK: - Accessors
-    class func shared() -> appUser {
-        return sharedUser
+    // cpy constructor:
+    init(usr: appUser){
+        self.name = usr.name
+        self.usrID = usr.usrID
+        self.WatsonID = usr.WatsonID
+        self.WatsonPsswrd = usr.WatsonPsswrd
     }
-
+    
+    init(){
+        // dummie variables
+        name = "Alice"
+        usrID = "FirBUser.uid"
+        WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
+        WatsonPsswrd = "Ph70dloSxwhe"
+    }
+    
+    #if VER2
+    // used to retrieve user info to populate appUser class from server
+    internal func getUsrInfo(){
+    
+    }
+    
+    // MARK: Assigns a new user a profile including: WatsonCredentials, userID, and name (retrieved from fb/google or asked)
+    // then store new appUser profile to server and keychain
+    open func newappUserProfile(){
+    
+    }
+    #endif
     
 }
 
 
 // MARK: per-user data structure used to manage words that we would like to filter
-// constructed upon launch, singleton obj
+// constructed upon launch
 /*: Dictionary contains the words that the user has historically edited out from STT result that are NOT in the to EXCLUDE_MOST_COMMON_WORD_COUNT of the most spoken words list:
  http://www.talkenglish.com/vocabulary/top-2000-vocabulary.aspx
+ - Should be an efficient Dictionary data structure with:
+ word string as key
+ bool as value To support turning off the keyword without deleting from table.
  */
-class CommonFilter{
+class CommonFilter: appUser{
     // properties (data structure lives here):
     // 1. Dictionary with top EXCLUDE_MOST_COMMON_WORD_COUNT words dictionary
     // 2. Dictionary with user's custom filtering words
     
-    
-    // variables
-    
-    var ExcludedCommonWords = ["":false]    // false is reserved in the event of a possible error/invalid case. All words are definited to have 'true' for now
-    var appUserFilterWords = ["":0] // 0 represent a 0% false-positive rate
-    
+    //creates empty dictionaries
+    var ExcludedCommonWords = ["":false]
+    var appUserFilterWords = ["":false]
     
     // constructor:
-    
-    private static var sharedList: CommonFilter = {
-        let sharedList = CommonFilter()     // appUser is only instantiated after Startview, hence guaranteed not nil
-        return sharedList
-    }()
-    
-    private init() {
-        // Load ExcludedCommonWords from file
+    override init(usr: appUser){
+        super.init(usr: usr)
+
+        // Load dictionary 1 from file
+        // create empty dictionary 2. (maybe load in a couple of tic-looking words for demo)
+        
         let file = "ExcludedCommonWordsList"
         
         //Get contents of file into one string
@@ -98,21 +115,19 @@ class CommonFilter{
         for ExcludedWord in ExcludedWordsArr{
             ExcludedCommonWords[ExcludedWord] = true
         }
-
+        
         #if DEBUG
-        //Add default words to commonfilter library
-        appUserFilterWords["apple"] = 0
+            //Add default words to commonfilter library
+            appUserFilterWords["apple"] = true
         #endif
     }
     
-    // MARK: - Accessors
-    class func shared() -> CommonFilter {
-        return sharedList
+    override init(){
+        super.init()
     }
     
     
     // funcs:
-    
     // MARK: If its not the top EXCLUDE_MOST_COMMON_WORD_COUNT words on the most spoken list, add to dictionary.
     // Return true if succeeded or already in the list
     // Return false if failed
@@ -121,7 +136,7 @@ class CommonFilter{
             return false
         }
         else{
-            appUserFilterWords[word] = 0
+            appUserFilterWords[word] = true
             return true
         }
     }
@@ -130,8 +145,8 @@ class CommonFilter{
     // Return true if succeeded or does not exist in list
     // Return false if failed
     open func rmFromList(word: String) -> Bool {
-        if(appUserFilterWords[word] != nil){
-            appUserFilterWords.removeValue(forKey: word)
+        if(appUserFilterWords[word] != nil && appUserFilterWords[word]!){
+            appUserFilterWords[word] = false
         }
         return true
     }
@@ -140,7 +155,7 @@ class CommonFilter{
     // Return true if in list
     // Return false if not in list
     open func isOnList(word: String) -> Bool {
-        if(appUserFilterWords[word] != nil){
+        if(appUserFilterWords[word] != nil && appUserFilterWords[word]!){
             return true
         }
         return false;
@@ -176,7 +191,7 @@ class CommonFilter{
 
 // MARK: per-dictation class used to call Watson STT API and handle data
 // instantiated on scenes with the red recording button
-class SpeechRecog{
+class SpeechRecog: appUser{
     // properties:
     #if DEBUG
     var speechPath = ""
@@ -187,17 +202,23 @@ class SpeechRecog{
     
     
     // constructor:
-    init(){
-//        #if DEBUG
-//        // Watson supplied test speech recording
-
-//        let fileURL=Bundle.main.bundleURL.appendingPathComponent("audio-file.flac")
-//        self.speechPath = fileURL.path
-//        #endif
+    override init(usr: appUser){
+        // Watson supplied test speech recording
+        #if DEBUG
+        let fileURL=Bundle.main.bundleURL.appendingPathComponent("audio-file.flac")
+        self.speechPath = fileURL.path
+        #endif
         
         // Init STT API
-        speechToText = SpeechToText(username: appUser.shared().WatsonID, password: appUser.shared().WatsonPsswrd)
+        speechToText = SpeechToText(username: usr.WatsonID, password: usr.WatsonPsswrd)
+        
+        super.init(usr: usr)
     }
+    override init(){
+        speechToText = SpeechToText(username: "tmp", password: "tmp")
+        super.init()
+    }
+    
     
     // funcs:
     // called when red recording button is tapped
@@ -238,10 +259,13 @@ class SpeechFilter: SpeechRecog {
     var filterTime: Float = 0.0
     
     // constructor:
-    init(rawResult: String){
-        super.init()
+    init(usr: appUser, rawResult: String, filterLib: CommonFilter){
+        super.init(usr: usr)
         super.rawResult = rawResult
-        matchCommonTics()
+        matchCommonTics(usrComFilter: filterLib)
+    }
+    override init(usr: appUser){
+        super.init(usr: usr)
     }
     override init(){
         super.init()
@@ -250,12 +274,12 @@ class SpeechFilter: SpeechRecog {
     
     // funcs:
     // MARK: Compare the SpeechRecog.result word-by-word with the CommonFilter Dictionary, and take out the match
-    open func matchCommonTics() {
+    open func matchCommonTics(usrComFilter: CommonFilter) {
         //let rawResultTuple = getWordList(str: rawResult)
         let rawResultArr = rawResult.components(separatedBy: " ")
         
         for word in rawResultArr{
-            if(!CommonFilter.shared().isOnList(word: word)){
+            if(!usrComFilter.isOnList(word: word)){
                 filteredResult += word
                 filteredResult += " "
             }
@@ -278,12 +302,16 @@ class FinalResult:SpeechFilter{
     var editedResult:String?    // nil if no edits were made from super.filterResult: String
     
     // constructor:
-    init(before: String){
-        super.init()
+    init(usr: appUser, before: String){
+        super.init(usr: usr)
         super.filteredResult = before;
         #if VER1
             editedResult = before
         #endif
+    }
+    
+    override init(){
+        super.init()
     }
     
     // funcs:

@@ -87,7 +87,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="signOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nhp-Gd-SGL"/>
+                                    <action selector="signOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A0R-fI-6ED"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -403,7 +403,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Record you speech" id="YEw-ev-dt5">
-                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="jBG-3w-cHL"/>
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="jBG-3w-cHL">
+                            <connections>
+                                <segue destination="8cd-UC-Z1e" kind="unwind" unwindAction="unwindToStartViewWithSender:" id="fW3-un-PM6"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="uhK-ZN-EuE">
                             <connections>
                                 <segue destination="lDQ-5X-Ndl" kind="show" identifier="RecToVer" id="j2D-ci-akA"/>
@@ -419,6 +423,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ouk-4Z-1iX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8cd-UC-Z1e" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1884" y="-539"/>
         </scene>
