@@ -13,10 +13,10 @@ import FirebaseAuth
 class RecordingViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Properties
-    var usr: appUser = appUser()
-    var usrFilterLib: CommonFilter = CommonFilter()
-    var recording: SpeechRecog = SpeechRecog()
-    var filtering: SpeechFilter = SpeechFilter()
+    var usr: appUser?
+    var usrFilterLib: CommonFilter?
+    var recording: SpeechRecog?
+    var filtering: SpeechFilter?
     var buttonState = "startRecButton"
 
     @IBOutlet weak var SignOutButton: UIBarButtonItem!
@@ -32,8 +32,7 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
         
         // pass in a proper values
         usr = appUser(FirBUser: Auth.auth().currentUser!)
-        usrFilterLib = CommonFilter(usr: usr)
-        recording = SpeechRecog(usr: usr)
+        recording = SpeechRecog(usr: usr!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +63,7 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
     @IBAction func RecordButtonPressed(_ sender: UIButton) {
         if(buttonState == "startRecButton"){ //start recording button was pressed
             InstructionLabel.text = "Tap the button again to stop recording"
-            recording.recBegin()
+            recording?.recBegin()
             RecordingButton.setImage(UIImage(named: "stop"), for: UIControlState.normal)
             buttonState = "stopRecButton"
             DoneButton.isEnabled = false
@@ -72,14 +71,14 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
         }
         else{ //buttonState == "stopRecButton" -> stop recording button was pressed
             InstructionLabel.text = "..."
-            recording.recStop()
+            recording?.recStop()
             
             #if DEBUG
-                print("raw: " + recording.rawResult)
+                print("raw: " + (recording?.rawResult)!)
             #endif
-            filtering = SpeechFilter(usr: usr, rawResult: recording.rawResult, filterLib: usrFilterLib ) // begin filtering
+            filtering = SpeechFilter(usr: usr!, rawResult: (recording?.rawResult)!, filterLib: usrFilterLib! ) // begin filtering
             #if DEBUG
-                print("filtered: " + filtering.filteredResult)
+                print("filtered: " + (filtering?.filteredResult)!)
             #endif
             
             InstructionLabel.text = "Press done or tap the red button to redo your recording"
@@ -96,6 +95,8 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
             destinationViewController.filtering = filtering
+            destinationViewController.recording = recording
+            destinationViewController.usrFilterLib = usrFilterLib
         }
     }
 }

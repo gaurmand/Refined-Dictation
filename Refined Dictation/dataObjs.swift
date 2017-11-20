@@ -118,7 +118,7 @@ class CommonFilter: appUser{
         
         #if DEBUG
             //Add default words to commonfilter library
-            appUserFilterWords["apple"] = true
+            //appUserFilterWords["apple"] = true
         #endif
     }
     

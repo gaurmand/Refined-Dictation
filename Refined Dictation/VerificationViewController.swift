@@ -10,7 +10,8 @@ import UIKit
 
 class VerificationViewController: UIViewController, UITextViewDelegate {
     // Properties
-    var recording: SpeechRecog = SpeechRecog()
+    var usrFilterLib: CommonFilter?
+    var recording: SpeechRecog?
     var filtering: SpeechFilter?
     var finalRes: FinalResult?
     

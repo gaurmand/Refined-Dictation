@@ -20,18 +20,22 @@ class StartViewController: UIViewController {
     // MARK: Properties
     
     var ref: DatabaseReference!
-//    var messages: [DataSnapshot]! = []
+//  var messages: [DataSnapshot]! = []
     fileprivate var _refHandle: DatabaseHandle!
     fileprivate var _authHandle: AuthStateDidChangeListenerHandle!
     var user: User?
     var displayName = "Anonymous"
+    
+    var usr: appUser = appUser()
+    var usrFilterLib: CommonFilter = CommonFilter()
+    var recording: SpeechRecog = SpeechRecog()
+    var filtering: SpeechFilter = SpeechFilter()
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         configureAuth()
         
-
         //UserDefaults.standard.removeObject(forKey: "IsNotFirstLaunch")  //always goes to welcome/initialization
         //UserDefaults.standard.set(true, forKey: "IsNotFirstLaunch")  //always goes to recording screen
         if (UserDefaults.standard.bool(forKey: "IsNotFirstLaunch")){
@@ -41,7 +45,6 @@ class StartViewController: UIViewController {
             performSegue(withIdentifier: "skip1", sender: Any?) // If first launch go to welcome and initialization screen
         }
     }
-    
     
 //    override func viewWillDisappear(_ animated: Bool) {
 //        super.viewWillDisappear(animated)
@@ -135,6 +138,13 @@ class StartViewController: UIViewController {
         }
     }
     
+    @IBAction func signOut(_ sender: UIButton) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("unable to sign out: \(error)")
+        }
+    }
     
     //MARK: Navigation
 
@@ -143,17 +153,21 @@ class StartViewController: UIViewController {
     @IBAction func showLoginView(_ sender: AnyObject) {
         loginSession()
     }
-
     
-    @IBAction func signOut(_ sender: UIButton) {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print("unable to sign out: \(error)")
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? WelcomeViewController {
+            destinationViewController.filtering = filtering
+            destinationViewController.recording = recording
+            destinationViewController.usrFilterLib = usrFilterLib
+            destinationViewController.usr = usr
+        }
+        else  if let destinationViewController = segue.destination as? RecordingViewController {
+            destinationViewController.filtering = filtering
+            destinationViewController.recording = recording
+            destinationViewController.usrFilterLib = usrFilterLib
+            destinationViewController.usr = usr
         }
     }
-
-
 
 }
 
@@ -180,7 +194,11 @@ class customAuthUIViewController: FUIAuthPickerViewController {
         view.insertSubview(imageViewBackground, at: 0)
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.isNavigationBarHidden = true //hide navigation bar
+    }
+    
     
 }
 //
