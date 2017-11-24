@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseAuth
 import SpeechToTextV1
+import FirebaseDatabase
 
 
 
@@ -65,20 +66,6 @@ class appUser{
         WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
         WatsonPsswrd = "Ph70dloSxwhe"
     }
-    
-    #if VER2
-    // used to retrieve user info to populate appUser class from server
-    internal func getUsrInfo(){
-    
-    }
-    
-    // MARK: Assigns a new user a profile including: WatsonCredentials, userID, and name (retrieved from fb/google or asked)
-    // then store new appUser profile to server and keychain
-    open func newappUserProfile(){
-    
-    }
-    #endif
-    
 }
 
 
@@ -191,32 +178,26 @@ class CommonFilter: appUser{
 
 // MARK: per-dictation class used to call Watson STT API and handle data
 // instantiated on scenes with the red recording button
-class SpeechRecog: appUser{
+class SpeechRecog{
     // properties:
-    #if DEBUG
-    var speechPath = ""
-    #endif
+//    #if DEBUG
+//    var speechPath = ""
+//    #endif
     var speechToText: SpeechToText
     var rawResult = ""
     var time = 0.0
     
     
     // constructor:
-    override init(usr: appUser){
+    override init(){
         // Watson supplied test speech recording
-        #if DEBUG
-        let fileURL=Bundle.main.bundleURL.appendingPathComponent("audio-file.flac")
-        self.speechPath = fileURL.path
-        #endif
+//        #if DEBUG
+//        let fileURL=Bundle.main.bundleURL.appendingPathComponent("audio-file.flac")
+//        self.speechPath = fileURL.path
+//        #endif
         
         // Init STT API
-        speechToText = SpeechToText(username: usr.WatsonID, password: usr.WatsonPsswrd)
-        
-        super.init(usr: usr)
-    }
-    override init(){
-        speechToText = SpeechToText(username: "tmp", password: "tmp")
-        super.init()
+        speechToText = SpeechToText(username: "70c6c385-6d1f-4cd1-9239-eaf59fc38a08", password: "Ph70dloSxwhe")
     }
     
     
@@ -240,6 +221,7 @@ class SpeechRecog: appUser{
                 #endif
             }
             self.rawResult = lastBestTranscript
+            
         }
     }
     
@@ -259,18 +241,21 @@ class SpeechFilter: SpeechRecog {
     var filterTime: Float = 0.0
     
     // constructor:
-    init(usr: appUser, rawResult: String, filterLib: CommonFilter){
-        super.init(usr: usr)
+    init(rawResult: String, filterLib: CommonFilter){
+        super.init()
         super.rawResult = rawResult
         matchCommonTics(usrComFilter: filterLib)
     }
-    override init(usr: appUser){
-        super.init(usr: usr)
+    // cpy constructor
+    init(_ source: SpeechFilter){
+        super.init()
+        super.rawResult = source.getRawResult()
+        source.filteredResult = filteredResult
+        source.filterTime = filterTime
     }
     override init(){
         super.init()
     }
-    
     
     // funcs:
     // MARK: Compare the SpeechRecog.result word-by-word with the CommonFilter Dictionary, and take out the match
@@ -288,6 +273,11 @@ class SpeechFilter: SpeechRecog {
             filteredResult.removeLast() //removes extra space at end
         }
     }
+    
+    // MARK: Accessor for super.rawResult
+    open func getRawResult() -> String {
+        return super.rawResult;
+    }
 }
 
 
@@ -302,8 +292,8 @@ class FinalResult:SpeechFilter{
     var editedResult:String?    // nil if no edits were made from super.filterResult: String
     
     // constructor:
-    init(usr: appUser, before: String){
-        super.init(usr: usr)
+    init(filterResult: SpeechFilter){
+        super.init(filterResult)
         super.filteredResult = before;
         #if VER1
             editedResult = before

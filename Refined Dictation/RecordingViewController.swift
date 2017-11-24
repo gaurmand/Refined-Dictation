@@ -32,7 +32,7 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
         
         // pass in a proper values
         usr = appUser(FirBUser: Auth.auth().currentUser!)
-        recording = SpeechRecog(usr: usr!)
+        recording = SpeechRecog()
     }
     
     override func viewWillAppear(_ animated: Bool) {

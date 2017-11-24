@@ -13,13 +13,14 @@ import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 import FirebaseFacebookAuthUI
 
-// global variable to record if the user performed a signed in in this launch of Refined Dictation
-var DIDSIGNIN: Bool = false
+// global variables
+var DIDSIGNIN: Bool = false // keep track of whether the user performed a signed in in this launch of Refined Dictation
+var ref: DatabaseReference!
+
 
 class StartViewController: UIViewController {
     // MARK: Properties
     
-    var ref: DatabaseReference!
 //  var messages: [DataSnapshot]! = []
     fileprivate var _refHandle: DatabaseHandle!
     fileprivate var _authHandle: AuthStateDidChangeListenerHandle!
