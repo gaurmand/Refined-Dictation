@@ -13,8 +13,6 @@ import FirebaseAuth
 class RecordingViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: Properties
-    var usr: appUser?
-    var usrFilterLib: CommonFilter?
     var recording: SpeechRecog?
     var filtering: SpeechFilter?
     var buttonState = "startRecButton"
@@ -31,7 +29,6 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
         DoneButton.isEnabled = false  //disables done button
         
         // pass in a proper values
-        usr = appUser(FirBUser: Auth.auth().currentUser!)
         recording = SpeechRecog()
     }
     
@@ -76,7 +73,7 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
             #if DEBUG
                 print("raw: " + (recording?.rawResult)!)
             #endif
-            filtering = SpeechFilter(usr: usr!, rawResult: (recording?.rawResult)!, filterLib: usrFilterLib! ) // begin filtering
+            filtering = SpeechFilter(recording!.rawResult) // begin filtering
             #if DEBUG
                 print("filtered: " + (filtering?.filteredResult)!)
             #endif
@@ -96,7 +93,6 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
         if let destinationViewController = segue.destination as? VerificationViewController {
             destinationViewController.filtering = filtering
             destinationViewController.recording = recording
-            destinationViewController.usrFilterLib = usrFilterLib
         }
     }
 }

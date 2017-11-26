@@ -15,83 +15,88 @@ import FirebaseDatabase
 
 
 let EXCLUDE_MOST_COMMON_WORD_COUNT = 200    // used in CommonFilter() class
-
+let INIT_CONFIDENCE = 80               // used in CommonFilter() class
+let THRESHOLD_CONFIDENCE = 40               // used in CommonFilter() class
 
 // Pre-processors are not allowed in Swift.
 // Instead, MACROs are now defined in project -> Build Setting -> Swift Compiler - Custom Flags -> Active Compilation Conditions
-// This project uses:
-//#define VER1      // Things to be taken out later on. DO NOT REMOVE FLAG UPON RELEASE
-//#define VER2      // Things to do later on. AKA, 'TODO's
+// This project is currently using:
 //#define DEBUG
-// make sure DEBUG and VER2 are both turned off upon VER1 release
+// make sure DEBUG is turned off upon VER1 release
 
 
 
-
-
-// MARK: handles the management of a per-user custom profile
-// constructed upon launch
-class appUser{
-    // properties:
-    var name: String
-    var usrID: String
-    var WatsonID: String
-    var WatsonPsswrd: String
-    
-    // default constructor:
-    // TODO: if(existing user): retrieve credentials using keychain; if(newappUser): call newappUserProfile()
-   // init(keychainCred: KeychainWrapper? = nil){
-    init(FirBUser: User){
-        #if VER2
-//            getUsrInfo(KeychainWrapper)
-        #endif
-        name = FirBUser.displayName!
-        usrID = FirBUser.uid
-        WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
-        WatsonPsswrd = "Ph70dloSxwhe"
-    }
-    
-    // cpy constructor:
-    init(usr: appUser){
-        self.name = usr.name
-        self.usrID = usr.usrID
-        self.WatsonID = usr.WatsonID
-        self.WatsonPsswrd = usr.WatsonPsswrd
-    }
-    
-    init(){
-        // dummie variables
-        name = "Alice"
-        usrID = "FirBUser.uid"
-        WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
-        WatsonPsswrd = "Ph70dloSxwhe"
-    }
-}
+//
+//// MARK: handles the management of a per-user custom profile
+//// constructed upon launch
+//class appUser{
+//    // properties:
+//    var name: String
+//    var usrID: String
+//    var WatsonID: String
+//    var WatsonPsswrd: String
+//
+//    // default constructor:
+//    // TODO: if(existing user): retrieve credentials using keychain; if(newappUser): call newappUserProfile()
+//   // init(keychainCred: KeychainWrapper? = nil){
+//    init(FirBUser: User){
+//        #if VER2
+////            getUsrInfo(KeychainWrapper)
+//        #endif
+//        name = FirBUser.displayName!
+//        usrID = FirBUser.uid
+//        WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
+//        WatsonPsswrd = "Ph70dloSxwhe"
+//    }
+//
+//    // cpy constructor:
+//    init(usr: appUser){
+//        self.name = usr.name
+//        self.usrID = usr.usrID
+//        self.WatsonID = usr.WatsonID
+//        self.WatsonPsswrd = usr.WatsonPsswrd
+//    }
+//
+//    init(){
+//        // dummie variables
+//        name = "Alice"
+//        usrID = "FirBUser.uid"
+//        WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
+//        WatsonPsswrd = "Ph70dloSxwhe"
+//    }
+//
+//}
 
 
 // MARK: per-user data structure used to manage words that we would like to filter
 // constructed upon launch
+/*
+ * New: Changed to type method (https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Methods.html , ctrl+F for 'Type Method')
+ * to effectively become a global variable
+ */
 /*: Dictionary contains the words that the user has historically edited out from STT result that are NOT in the to EXCLUDE_MOST_COMMON_WORD_COUNT of the most spoken words list:
  http://www.talkenglish.com/vocabulary/top-2000-vocabulary.aspx
- - Should be an efficient Dictionary data structure with:
- word string as key
- bool as value To support turning off the keyword without deleting from table.
  */
-class CommonFilter: appUser{
-    // properties (data structure lives here):
+class CommonFilter{
+    // properties:
     // 1. Dictionary with top EXCLUDE_MOST_COMMON_WORD_COUNT words dictionary
     // 2. Dictionary with user's custom filtering words
     
     //creates empty dictionaries
-    var ExcludedCommonWords = ["":false]
-    var appUserFilterWords = ["":false]
+    private static var ExcludedCommonWords = [String:Bool]()    // Bool to support turning on and off words to exclude from filtering
+    private static var userFilterWords = [String: Int]()    // Int to describle a confidence % level. Any word below THRESHOLD_CONFIDENCE will not be used in filtering
     
-    // constructor:
-    override init(usr: appUser){
-        super.init(usr: usr)
-
-        // Load dictionary 1 from file
-        // create empty dictionary 2. (maybe load in a couple of tic-looking words for demo)
+    
+    // funcs:
+    
+    // MARK: initialize ExcludedCommonWords and get userFilterWords from Firebase
+    static open func getLists(_ usr: User)
+    {
+        // Clear to prepare for re-populate
+        if (ExcludedCommonWords.count != 0 && userFilterWords.count != 0) {
+            ExcludedCommonWords.removeAll()
+            userFilterWords.removeAll()
+        }
         
         let file = "ExcludedCommonWordsList"
         
@@ -105,50 +110,54 @@ class CommonFilter: appUser{
         
         #if DEBUG
             //Add default words to commonfilter library
-            //appUserFilterWords["apple"] = true
+            //userFilterWords["apple"] = true
         #endif
     }
-    
-    override init(){
-        super.init()
-    }
-    
-    
-    // funcs:
-    // MARK: If its not the top EXCLUDE_MOST_COMMON_WORD_COUNT words on the most spoken list, add to dictionary.
-    // Return true if succeeded or already in the list
+
+    // MARK: user added a word in editor
+    // If its not the top EXCLUDE_MOST_COMMON_WORD_COUNT words on the most spoken list, add to dictionary.
+    // Return true if succeeded or already in the list (and increment confidence)
     // Return false if failed
-    open func addToList(word: String) -> Bool {
-        if(ExcludedCommonWords[word] != nil && ExcludedCommonWords[word]!){
+    static open func added(_ word: String) -> Bool {
+        if(ExcludedCommonWords[word] != nil){
             return false
         }
-        else{
-            appUserFilterWords[word] = true
-            return true
+        else if(userFilterWords[word] != nil && userFilterWords[word]! < 100){
+            userFilterWords[word]! += 20
         }
-    }
-    
-    // MARK: Remove the word from List
-    // Return true if succeeded or does not exist in list
-    // Return false if failed
-    open func rmFromList(word: String) -> Bool {
-        if(appUserFilterWords[word] != nil && appUserFilterWords[word]!){
-            appUserFilterWords[word] = false
+        else{
+            userFilterWords[word] = INIT_CONFIDENCE
         }
         return true
     }
     
+    // MARK: user removed a word in editor
+    static open func removed(_ word: String) -> Bool {
+        if(userFilterWords[word] != nil){
+            userFilterWords[word]! -= 20
+        }
+        return true
+    }
+
+    // TODO: What to do for word change?
+//    // MARK: user changed a word in editor to another word
+//    static open func changed(from: String, to: String) -> Bool {
+//
+//    }
+    
+    
     // MARK: Check if the word is in the current list.
     // Return true if in list
     // Return false if not in list
-    open func isOnList(word: String) -> Bool {
-        if(appUserFilterWords[word] != nil && appUserFilterWords[word]!){
+    static open func shouldFilter(word: String) -> Bool {
+        if(userFilterWords[word] != nil && userFilterWords[word]! > THRESHOLD_CONFIDENCE ){
             return true
         }
         return false;
     }
     
-    private func readFromFile(filename: String, firstNumLines: Int) -> Array<String>{
+    
+    static internal func readFromFile(filename: String, firstNumLines: Int) -> Array<String>{
         // File location
         let fileURL = Bundle.main.path(forResource: filename, ofType: "txt")
         
@@ -162,19 +171,8 @@ class CommonFilter: appUser{
         let wordsArr = readString.components(separatedBy: .newlines)
         return Array(wordsArr[0..<firstNumLines])   // get subArray of first firstNumLines words
     }
-    
-    #if VER2
-    // Instantiate the dictionary from locally stored database, or if there isn't one existing, request from server
-    private func importList(){
-    
-    }
-    // Deconstructor, called upon exiting app
-    // Should sync any updates to the table to the Server and/or local stored file
-    deinit{
-    
-    }
-    #endif
 }
+
 
 // MARK: per-dictation class used to call Watson STT API and handle data
 // instantiated on scenes with the red recording button
@@ -185,11 +183,11 @@ class SpeechRecog{
 //    #endif
     var speechToText: SpeechToText
     var rawResult = ""
-    var time = 0.0
+    var recordTime = 0.0
     
     
     // constructor:
-    override init(){
+    init(){
         // Watson supplied test speech recording
 //        #if DEBUG
 //        let fileURL=Bundle.main.bundleURL.appendingPathComponent("audio-file.flac")
@@ -205,6 +203,7 @@ class SpeechRecog{
     // called when red recording button is tapped
     // Result string will be returned piece-by-piece, and appended to self.result
     open func recBegin(){
+        timer.tic()
         var settings = RecognitionSettings(contentType: .oggOpus)
         settings.interimResults = true      // send piece-wise voice for processing ASAP
         var lastBestTranscript = ""
@@ -228,43 +227,36 @@ class SpeechRecog{
     // called when red recording button is tapped again
     open func recStop(){
         self.speechToText.stopRecognizeMicrophone()
+        recordTime = timer.toc()
     }
 }
-    
 
 
 // MARK: per-dictation class used to filter the STT result by comparing against the user's CommonFilter
-class SpeechFilter: SpeechRecog {
+class SpeechFilter {
     // properties:
-    // raw result inherited from SpeechRecog
+    var rawResult = ""
     var filteredResult = ""
-    var filterTime: Float = 0.0
+    var filterTime: Double = 0.0
     
     // constructor:
-    init(rawResult: String, filterLib: CommonFilter){
-        super.init()
-        super.rawResult = rawResult
-        matchCommonTics(usrComFilter: filterLib)
+    init(_ raw: String){
+        rawResult = raw
+        matchCommonTics()
     }
-    // cpy constructor
-    init(_ source: SpeechFilter){
-        super.init()
-        super.rawResult = source.getRawResult()
-        source.filteredResult = filteredResult
-        source.filterTime = filterTime
-    }
-    override init(){
-        super.init()
+    
+    init(){
+        
     }
     
     // funcs:
     // MARK: Compare the SpeechRecog.result word-by-word with the CommonFilter Dictionary, and take out the match
-    open func matchCommonTics(usrComFilter: CommonFilter) {
-        //let rawResultTuple = getWordList(str: rawResult)
+    open func matchCommonTics() {
+        timer.tic()
         let rawResultArr = rawResult.components(separatedBy: " ")
         
         for word in rawResultArr{
-            if(!usrComFilter.isOnList(word: word)){
+            if(!CommonFilter.shouldFilter(word: word)){
                 filteredResult += word
                 filteredResult += " "
             }
@@ -272,11 +264,7 @@ class SpeechFilter: SpeechRecog {
         if(!filteredResult.isEmpty){
             filteredResult.removeLast() //removes extra space at end
         }
-    }
-    
-    // MARK: Accessor for super.rawResult
-    open func getRawResult() -> String {
-        return super.rawResult;
+        filterTime = timer.toc()
     }
 }
 
@@ -284,24 +272,25 @@ class SpeechFilter: SpeechRecog {
 
 
 // MARK: per-dictation class used to output the final results, and book-keep
-// CHANGE: it is bad to call the same obj in multiple view controller (and thru inheritance in this case)
-// the proper way to do it is thru
-// https://stackoverflow.com/a/29737851
-class FinalResult:SpeechFilter{
+class FinalResult{
     // properties:
+    var rawResult: String
+    var filteredResult: String? // nil if nothing filtered
     var editedResult:String?    // nil if no edits were made from super.filterResult: String
+    var STTTime: Double
+    var filterTime: Double
     
     // constructor:
-    init(filterResult: SpeechFilter){
-        super.init(filterResult)
-        super.filteredResult = before;
-        #if VER1
-            editedResult = before
-        #endif
-    }
-    
-    override init(){
-        super.init()
+    init(raw: String, filtered: String?, edited: String?, STTT: Double, filterT: Double){
+        rawResult = raw
+        if filtered != nil{
+            filteredResult = filtered
+        }
+        if edited != nil {
+            editedResult = edited
+        }
+        STTTime = STTT
+        filterTime = filterT
     }
     
     // funcs:
@@ -336,7 +325,12 @@ class FinalResult:SpeechFilter{
             return self.editedResult!
         }
         else{
-            return super.filteredResult
+            if filteredResult != nil {
+                return filteredResult!
+            }
+            else {
+                return rawResult
+            }
         }
     }
     
@@ -379,5 +373,23 @@ func getWordList(str: String, option: String = "word") -> ([String], Int){
     }
     
     return (wordsList, wordCnt)
+}
+
+
+// MARK: timer class for statistics
+// Modified based on: https://stackoverflow.com/a/46044214
+class timer {
+    
+    private static var ticTimestamp: Date = Date()
+    
+    static func tic() {
+//        print("TICK.")
+        ticTimestamp = Date()
+    }
+    
+    static func toc()-> Double {
+        return Date().timeIntervalSince(ticTimestamp)
+    }
+    
 }
 

@@ -27,11 +27,10 @@ class StartViewController: UIViewController {
     var user: User?
     var displayName = "Anonymous"
     
-    var usr: appUser = appUser()
-    var usrFilterLib: CommonFilter = CommonFilter()
+
     var recording: SpeechRecog = SpeechRecog()
     var filtering: SpeechFilter = SpeechFilter()
-    var unwindFlag = false //true if
+    var unwindFlag = false //true if ???
     
     // MARK: Life Cycle
     
@@ -117,6 +116,7 @@ class StartViewController: UIViewController {
         
         if isSignedIn {
             configureDatabase()
+            CommonFilter.getLists(Auth.auth().currentUser!)
         }
     }
     
@@ -153,14 +153,12 @@ class StartViewController: UIViewController {
         if let destinationViewController = segue.destination as? WelcomeViewController {
             destinationViewController.filtering = filtering
             destinationViewController.recording = recording
-            destinationViewController.usrFilterLib = usrFilterLib
-            destinationViewController.usr = usr
+
         }
         else  if let destinationViewController = segue.destination as? RecordingViewController {
             destinationViewController.filtering = filtering
             destinationViewController.recording = recording
-            destinationViewController.usrFilterLib = usrFilterLib
-            destinationViewController.usr = usr
+
         }
     }
 

@@ -12,8 +12,6 @@ import FirebaseAuth
 class InitializationViewController: UIViewController {
     
     //MARK: Properties
-    var usr: appUser?
-    var usrFilterLib: CommonFilter?
     var recording: SpeechRecog?
     var filtering: SpeechFilter?
     var buttonState = "startRecButton"
@@ -29,9 +27,7 @@ class InitializationViewController: UIViewController {
         DoneButton.isEnabled = false
         
         // pass in a proper values
-        usr = appUser(FirBUser: Auth.auth().currentUser!)
-        usrFilterLib = CommonFilter(usr: usr!)
-        recording = SpeechRecog(usr: usr!)
+        recording = SpeechRecog()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +58,6 @@ class InitializationViewController: UIViewController {
                 print("raw:" + (recording?.rawResult)!)
             #endif
             
-            //usrFilterLib = CommonFilter(usr: usr!) //resets filter words library
             if(updateUsrFilterLib(rawstring: (recording?.rawResult)!)){
                 InstructionLabel.text = "Press done or tap the red button to redo your recording"
                 DoneButton.isEnabled = true
@@ -83,15 +78,13 @@ class InitializationViewController: UIViewController {
         if let destinationViewController = segue.destination as? RecordingViewController {
             destinationViewController.filtering = filtering
             destinationViewController.recording = recording
-            destinationViewController.usrFilterLib = usrFilterLib
-            destinationViewController.usr = usr
         }
     }
     
     //MARK: Private Methods
     
     private func updateUsrFilterLib(rawstring: String) -> Bool{
-        var rawStrArr = rawstring.components(separatedBy: " ")
+        let rawStrArr = rawstring.components(separatedBy: " ")
         var promptStrArr = ["rainy", "weather", "is", "the", "worst"]   //Array of words in the onscreen prompt
         var StrArr = [String]()
         
@@ -111,12 +104,12 @@ class InitializationViewController: UIViewController {
  
         for index in 0...(StrArr.count - 1){    //finds tics by comparing prompt to the spoken sentence and adds them to userFilterLib
             if(index > promptStrArr.count - 1 ){
-                usrFilterLib?.addToList(word: StrArr[index])
+                CommonFilter.added(StrArr[index])
                 continue
             }
             if(StrArr[index] != promptStrArr[index]){
                 promptStrArr.insert("", at: index)
-                usrFilterLib?.addToList(word: StrArr[index])
+                CommonFilter.added(StrArr[index])
             }
         }
         

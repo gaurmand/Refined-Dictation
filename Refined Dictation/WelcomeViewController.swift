@@ -11,8 +11,6 @@ import UIKit
 class WelcomeViewController: UIViewController {
     
     //MARK: Properties
-    var usr: appUser?
-    var usrFilterLib: CommonFilter?
     var recording: SpeechRecog?
     var filtering: SpeechFilter?
     
@@ -37,8 +35,6 @@ class WelcomeViewController: UIViewController {
         if let destinationViewController = segue.destination as? InitializationViewController {
             destinationViewController.filtering = filtering
             destinationViewController.recording = recording
-            destinationViewController.usrFilterLib = usrFilterLib
-            destinationViewController.usr = usr
         }
     }
 
