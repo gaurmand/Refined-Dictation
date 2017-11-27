@@ -17,7 +17,6 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
     var filtering: SpeechFilter?
     var buttonState = "startRecButton"
 
-    @IBOutlet weak var SignOutButton: UIBarButtonItem!
     @IBOutlet weak var RecordingButton: UIButton!
     @IBOutlet weak var SearchField: UITextField!
     @IBOutlet weak var InstructionLabel: UILabel!
@@ -35,6 +34,7 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)    //shows navigation bar
+        self.navigationController?.navigationBar.topItem?.setHidesBackButton(true, animated: false) //hides back button
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,7 +64,6 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
             RecordingButton.setImage(UIImage(named: "stop"), for: UIControlState.normal)
             buttonState = "stopRecButton"
             DoneButton.isEnabled = false
-            SignOutButton.isEnabled = false
         }
         else{ //buttonState == "stopRecButton" -> stop recording button was pressed
             InstructionLabel.text = "..."
@@ -82,7 +81,6 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
             RecordingButton.setImage(UIImage(named: "record"), for: UIControlState.normal)
             buttonState = "startRecButton"
             DoneButton.isEnabled = true
-            SignOutButton.isEnabled = true
         }
     }
     
