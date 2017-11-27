@@ -26,7 +26,6 @@ class StartViewController: UIViewController {
     fileprivate var _authHandle: AuthStateDidChangeListenerHandle!
     var user: User?
     var displayName = "Anonymous"
-    
 
     var recording: SpeechRecog = SpeechRecog()
     var filtering: SpeechFilter = SpeechFilter()
@@ -93,12 +92,6 @@ class StartViewController: UIViewController {
     
     func configureDatabase() {
         ref = Database.database().reference()
-        // VER3: retrieve search and favourite list
-//        // listen for new messages in the firebase database
-//        _refHandle = ref.child("messages").observe(.childAdded) { (snapshot: DataSnapshot)in
-//            self.messages.append(snapshot)
-//            self.messagesTable.insertRows(at: [IndexPath(row: self.messages.count-1, section: 0)], with: .automatic)
-//        }
     }
     
     deinit {
@@ -116,7 +109,7 @@ class StartViewController: UIViewController {
         
         if isSignedIn {
             configureDatabase()
-            CommonFilter.getLists(Auth.auth().currentUser!)
+            CommonFilter.InitLists(Auth.auth().currentUser!)
         }
     }
     

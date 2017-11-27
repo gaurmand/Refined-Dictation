@@ -17,6 +17,7 @@ import FirebaseDatabase
 let EXCLUDE_MOST_COMMON_WORD_COUNT = 200    // used in CommonFilter() class
 let INIT_CONFIDENCE = 80               // used in CommonFilter() class
 let THRESHOLD_CONFIDENCE = 40               // used in CommonFilter() class
+let HISTORY_GO_BACK_DATE_COUNT = 15
 
 // Pre-processors are not allowed in Swift.
 // Instead, MACROs are now defined in project -> Build Setting -> Swift Compiler - Custom Flags -> Active Compilation Conditions
@@ -85,27 +86,41 @@ class CommonFilter{
     //creates empty dictionaries
     private static var ExcludedCommonWords = [String:Bool]()    // Bool to support turning on and off words to exclude from filtering
     private static var userFilterWords = [String: Int]()    // Int to describle a confidence % level. Any word below THRESHOLD_CONFIDENCE will not be used in filtering
+    private static var usrID = String()
     
     
     // funcs:
     
     // MARK: initialize ExcludedCommonWords and get userFilterWords from Firebase
-    static open func getLists(_ usr: User)
+    static open func InitLists(_ usr: User)
     {
+        usrID = usr.uid
+
         // Clear to prepare for re-populate
-        if (ExcludedCommonWords.count != 0 && userFilterWords.count != 0) {
+        if (ExcludedCommonWords.count != 0) {
             ExcludedCommonWords.removeAll()
+        }
+        if (userFilterWords.count != 0) {
             userFilterWords.removeAll()
         }
         
-        let file = "ExcludedCommonWordsList"
         
+        /* populate ExcludedCommonWords from file */
+        let file = "ExcludedCommonWordsList"
         //Get contents of file into one string
         let ExcludedWordsArr = readFromFile(filename:file, firstNumLines: EXCLUDE_MOST_COMMON_WORD_COUNT)
         
         //Add each string in ExcludedWordsArr to the ExcludedCommonWords dictionary
         for ExcludedWord in ExcludedWordsArr{
             ExcludedCommonWords[ExcludedWord] = true
+        }
+        
+        
+        /* populate userFilterWords from fireabse database */
+        ref.child("users").child("\(usr.uid)").child("userFilterWords").observeSingleEvent(of: .value, with: { (snapshot) in
+            userFilterWords = snapshot.value as? [String : Int] ?? [:]
+            }) { (error) in
+                print(error.localizedDescription)
         }
         
         #if DEBUG
@@ -124,9 +139,11 @@ class CommonFilter{
         }
         else if(userFilterWords[word] != nil && userFilterWords[word]! < 100){
             userFilterWords[word]! += 20
+            updateFIR(word)
         }
         else{
             userFilterWords[word] = INIT_CONFIDENCE
+            updateFIR(word)
         }
         return true
     }
@@ -135,6 +152,7 @@ class CommonFilter{
     static open func removed(_ word: String) -> Bool {
         if(userFilterWords[word] != nil){
             userFilterWords[word]! -= 20
+            updateFIR(word)
         }
         return true
     }
@@ -156,7 +174,6 @@ class CommonFilter{
         return false;
     }
     
-    
     static internal func readFromFile(filename: String, firstNumLines: Int) -> Array<String>{
         // File location
         let fileURL = Bundle.main.path(forResource: filename, ofType: "txt")
@@ -171,8 +188,60 @@ class CommonFilter{
         let wordsArr = readString.components(separatedBy: .newlines)
         return Array(wordsArr[0..<firstNumLines])   // get subArray of first firstNumLines words
     }
+    
+    // MARK: Called when an entry in userFilterWords has been created/updated
+    static internal func updateFIR(_ word: String){
+        if userFilterWords[word] != nil {
+            ref.child("users/\(usrID)/userFilterWords").setValue([word:userFilterWords[word]!])
+        }
+    }
 }
 
+
+// MARK: Static class to handle searches and favourites
+class RecentDictsAndFavs{
+    // Only the first HISTORY_GO_BACK_DATE_COUNT are retrieved upon launch
+    static var recentDictations = [String:NSDate]()      // query by date: https://stackoverflow.com/a/38599978
+    static var favourites = [String:NSDate]()
+    static var userID = String()
+    
+    static open func InitLists(_ usr: User){
+        userID = usr.uid
+        
+        // Clear to prepare for re-populate
+        if (recentDictations.count != 0) {
+            recentDictations.removeAll()
+        }
+        if (favourites.count != 0) {
+            favourites.removeAll()
+        }
+//
+//
+//         //   HISTORY_GO_BACK_DATE_COUNT
+//        ref.child("users/\(userID)/dictations").queryOrderedByChild("timestamp").queryStartingAtValue(ServerValue.timestamp()).queryEndingAtValue(currentDate).observeSingleEvent(of: .value, with: { (snapshot) in
+//            recentDictations = snapshot.value as? [String : NSDate] ?? [:]
+//        }) { (error) in
+//            print(error.localizedDescription)
+//        }
+        
+        
+        
+    }
+    
+    static open func newFav(_ entry: [String:NSDate]){
+        
+        
+    }
+    
+    static open func unFav(_ phrase: [String:NSDate]){
+        
+    }
+    
+    // MARK: retrieve DEFAULT_HISTORY_COUNT more dictation records
+    static open func getMoreDictationHistory(){
+        
+    }
+}
 
 // MARK: per-dictation class used to call Watson STT API and handle data
 // instantiated on scenes with the red recording button
@@ -321,6 +390,7 @@ class FinalResult{
     }
     
     open func getFinalResult() -> String {
+        
         if self.editedResult != nil {
             return self.editedResult!
         }
@@ -332,6 +402,21 @@ class FinalResult{
                 return rawResult
             }
         }
+        
+        
+    }
+    
+    private func insertDictationToFIR(){
+        let post = ["rawResult": rawResult,
+                    "filteredResult": filteredResult ?? "",
+                    "editedResult": editedResult ?? "",
+                    "STTTime": STTTime,
+                    "filterTime": filterTime,
+                    "timestamp": ServerValue.timestamp()    // timestamping firebase data: https://stackoverflow.com/a/30244373
+            ] as [String : Any]
+        let userID = Auth.auth().currentUser!.uid
+        let childUpdates = ["/users/\(userID)/dictations/": post]
+        ref.updateChildValues(childUpdates)
     }
     
     

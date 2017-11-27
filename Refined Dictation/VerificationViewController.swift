@@ -30,6 +30,11 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // Begin analyze edited data
+    @IBAction func didTapDone(_ sender: UIBarButtonItem) {
+        
+    }
+    
     // MARK: UITextViewDelegate
     func textViewDidBeginEditing(_ textView: UITextView){
         DisplayFilteredTextField.frame.size.height = 250
