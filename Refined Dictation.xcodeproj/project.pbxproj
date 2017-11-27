@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		071EA6431FCC038E0066BE07 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071EA6421FCC038E0066BE07 /* FavouriteTableViewCell.swift */; };
+		071EA66B1FCC07A00066BE07 /* FavouriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071EA66A1FCC07A00066BE07 /* FavouriteTableViewController.swift */; };
+		071EA66D1FCC22D60066BE07 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071EA66C1FCC22D60066BE07 /* HistoryTableViewController.swift */; };
+		07672A281FCC2A0A0047E1DC /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */; };
 		07FDAB161FB7F63C00D7D19A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */; };
 		07FE21DF1FAFCCEB006FE00F /* CommonFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */; };
 		07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */; };
@@ -352,6 +356,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		071EA6421FCC038E0066BE07 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
+		071EA66A1FCC07A00066BE07 /* FavouriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewController.swift; sourceTree = "<group>"; };
+		071EA66C1FCC22D60066BE07 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterTests.swift; sourceTree = "<group>"; };
 		07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExcludedCommonWordsList.txt; sourceTree = "<group>"; };
@@ -517,6 +525,10 @@
 				294AF5301FB4EA330014356D /* KeychainWrapper.swift */,
 				07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */,
 				8496EEEA1FA72B2500232112 /* Main.storyboard */,
+				071EA66C1FCC22D60066BE07 /* HistoryTableViewController.swift */,
+				071EA66A1FCC07A00066BE07 /* FavouriteTableViewController.swift */,
+				071EA6421FCC038E0066BE07 /* FavouriteTableViewCell.swift */,
+				07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */,
 				7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */,
 				8496EEED1FA72B2500232112 /* Assets.xcassets */,
 				8496EEEF1FA72B2500232112 /* LaunchScreen.storyboard */,
@@ -1183,15 +1195,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E74F75C1FC224230000648B /* AppDelegate.swift in Sources */,
+				071EA66B1FCC07A00066BE07 /* FavouriteTableViewController.swift in Sources */,
+				07672A281FCC2A0A0047E1DC /* HistoryTableViewCell.swift in Sources */,
 				84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */,
 				7E383EAF1FBFAE3A004BCF80 /* simplediff.swift in Sources */,
 				07FDAB161FB7F63C00D7D19A /* WelcomeViewController.swift in Sources */,
+				071EA6431FCC038E0066BE07 /* FavouriteTableViewCell.swift in Sources */,
 				299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */,
 				7E74F75B1FC224230000648B /* StartViewController.swift in Sources */,
 				294AF5321FB4EA330014356D /* KeychainWrapper.swift in Sources */,
 				294AF5311FB4EA330014356D /* KeychainItemAccessibility.swift in Sources */,
 				84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */,
 				2916D4B21FB9337A00F8271C /* InitializationViewController.swift in Sources */,
+				071EA66D1FCC22D60066BE07 /* HistoryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fag-ve-1po">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fag-ve-1po">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -171,6 +171,9 @@
                                 <rect key="frame" x="290" y="540" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="favourites"/>
+                                <connections>
+                                    <segue destination="Z7S-Ka-nkp" kind="show" id="mmm-6a-6it"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap the red button below to start recording your voice" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pq9-RJ-puv">
                                 <rect key="frame" x="32" y="265" width="310" height="53"/>
@@ -205,6 +208,7 @@
                         <outlet property="InstructionLabel" destination="pq9-RJ-puv" id="0cx-hM-GwE"/>
                         <outlet property="RecordingButton" destination="bXV-jm-FSr" id="CFX-aS-YiA"/>
                         <outlet property="SearchField" destination="8cl-PO-AWa" id="qX3-O5-w1O"/>
+                        <segue destination="SMG-z3-7vl" kind="show" identifier="RecordToHistory" id="wAb-9s-NGq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ouk-4Z-1iX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -345,6 +349,108 @@
             </objects>
             <point key="canvasLocation" x="1884" y="235"/>
         </scene>
+        <!--Favourites-->
+        <scene sceneID="ioz-Oe-Axz">
+            <objects>
+                <tableViewController id="Z7S-Ka-nkp" customClass="FavouriteTableViewController" customModule="Refined_Dictation" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Zre-Tb-ujs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavouriteCell" id="8Zb-aY-j04" customClass="FavouriteTableViewCell" customModule="Refined_Dictation" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Zb-aY-j04" id="Rdk-bA-1WR">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="favourites" translatesAutoresizingMaskIntoConstraints="NO" id="Rrb-uU-u5W">
+                                            <rect key="frame" x="16" y="6" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rainy weather is the worst" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ff-sQ-p3S">
+                                            <rect key="frame" x="54" y="11" width="307" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.021705153000000001" green="0.3497329803" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration" identifier="CustomTableViewCell"/>
+                                <connections>
+                                    <outlet property="TextLabel" destination="3ff-sQ-p3S" id="WN9-W5-q8o"/>
+                                    <segue destination="lDQ-5X-Ndl" kind="show" id="cVH-g1-y8Y"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Z7S-Ka-nkp" id="0JH-fR-eG8"/>
+                            <outlet property="delegate" destination="Z7S-Ka-nkp" id="G4V-fc-9th"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Favourites" id="nIh-Ea-xNf"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6C9-Vd-Y4J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2622" y="234"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="fJJ-fm-XN3">
+            <objects>
+                <tableViewController id="SMG-z3-7vl" customClass="HistoryTableViewController" customModule="Refined_Dictation" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GPj-MQ-ssb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryCell" id="Ada-1D-bvW" customClass="HistoryTableViewCell" customModule="Refined_Dictation" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="55"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ada-1D-bvW" id="dNi-qx-cCP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rainy weather is the worst" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJS-Sn-4CK">
+                                            <rect key="frame" x="54" y="6" width="277" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.021705153000000001" green="0.3497329803" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="favourites" translatesAutoresizingMaskIntoConstraints="NO" id="6Gr-h4-1Ep">
+                                            <rect key="frame" x="16" y="12" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nov-27-2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcK-Dq-aPq">
+                                            <rect key="frame" x="54" y="28" width="86" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="DateLabel" destination="hcK-Dq-aPq" id="Rsj-4h-Uac"/>
+                                    <outlet property="FavouriteImage" destination="6Gr-h4-1Ep" id="Gqy-pI-ICB"/>
+                                    <outlet property="TextLabel" destination="bJS-Sn-4CK" id="UUi-sz-eb7"/>
+                                    <segue destination="lDQ-5X-Ndl" kind="show" id="xMq-oI-EVW"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="SMG-z3-7vl" id="98n-Wv-xFh"/>
+                            <outlet property="delegate" destination="SMG-z3-7vl" id="mNQ-wW-dch"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="History" id="dv0-uO-Irw"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Veo-6q-2qG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3318" y="233"/>
+        </scene>
         <!--Is this text correct?-->
         <scene sceneID="X7T-QE-P7O">
             <objects>
@@ -389,6 +495,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Done" id="sza-2z-V5K">
                             <connections>
                                 <action selector="didTapDone:" destination="lDQ-5X-Ndl" id="Gbe-mt-s5f"/>
+                                <segue destination="DAd-uv-tvM" kind="show" id="Ewq-jm-iPs"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -508,7 +615,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Share Your Text" id="oRb-P2-Rq6"/>
+                    <navigationItem key="navigationItem" title="Share Your Text" id="oRb-P2-Rq6">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="9DJ-ki-VK7">
+                            <connections>
+                                <segue destination="8Rm-ZU-sEy" kind="unwind" unwindAction="unwindToVerificationViewWithSender:" id="IJ8-0x-gD8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lQ2-k4-MPr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="8Rm-ZU-sEy" userLabel="Exit" sceneMemberID="exit"/>
@@ -646,6 +759,7 @@
         <image name="twitter" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="cVH-g1-y8Y"/>
         <segue reference="CBb-00-BCh"/>
     </inferredMetricsTieBreakers>
 </document>

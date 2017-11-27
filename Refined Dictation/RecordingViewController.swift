@@ -51,6 +51,7 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard when user presses return
         textField.resignFirstResponder()
+        performSegue(withIdentifier: "RecordToHistory", sender: Any?.self)
         return true
     }
     
@@ -88,9 +89,17 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
     @IBAction func unwindToRecordingView(sender: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        SearchField.text = "" //clears search field
+        
         if let destinationViewController = segue.destination as? VerificationViewController {
             destinationViewController.filtering = filtering
             destinationViewController.recording = recording
+        }
+        else if let destinationViewController = segue.destination as? FavouriteTableViewController {
+            destinationViewController.filtering = filtering
+        }
+        else if let destinationViewController = segue.destination as? HistoryTableViewController {
+            destinationViewController.filtering = filtering
         }
     }
 }
