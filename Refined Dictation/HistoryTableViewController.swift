@@ -8,15 +8,23 @@
 
 import UIKit
 
-class HistoryTableViewController: UITableViewController {
+class HistoryTableViewController: UITableViewController, UISearchResultsUpdating {
     var usrFilterLib: CommonFilter?
     var recording: SpeechRecog?
     var filtering: SpeechFilter?
     var finalRes: FinalResult?
+    
+    let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search for past dictations"
+        self.tableView.tableHeaderView = self.searchController.searchBar;
+        definesPresentationContext = true
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -30,14 +38,16 @@ class HistoryTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1    //only one section required
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(searchController.isActive && searchController.searchBar.text != ""){
+            return 5
+        }
+        
         return 20   // should return number of results in history
     }
     
@@ -51,6 +61,14 @@ class HistoryTableViewController: UITableViewController {
         // Configure the cell...
         cell.TextLabel.text = "Rainy weather is the worst"
         cell.DateLabel.text = "Nov-28-17"
+        
+        if(false){   //if result is favourited set image to solid heart
+            cell.FavouriteImage.image = UIImage(named: "solidheart")
+        }
+        else{   //if result is not favourited set image to hollow heart
+            cell.FavouriteImage.image = UIImage(named: "hollowheart")
+        }
+                
         
         return cell
     }
@@ -75,12 +93,16 @@ class HistoryTableViewController: UITableViewController {
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
-            let historyIndex = tableView.indexPathForSelectedRow
+             let historyIndex = tableView.indexPathForSelectedRow
              filtering?.filteredResult = "Rainy weather is the worst"    //TO DO: set filtered result equal to the string displayed in that cell
              destinationViewController.filtering = filtering
-             destinationViewController.recording = recording
          }
-     }
-
+    }
+    
+    //Update Search Results
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        tableView.reloadData()
+    }
 
 }

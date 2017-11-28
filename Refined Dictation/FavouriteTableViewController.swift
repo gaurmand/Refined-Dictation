@@ -96,7 +96,6 @@ class FavouriteTableViewController: UITableViewController {
             let favouriteIndex = tableView.indexPathForSelectedRow
             filtering?.filteredResult = "Rainy weather is the worst"    //TO DO: set filtered result equal to the string displayed in that cell
             destinationViewController.filtering = filtering
-            destinationViewController.recording = recording
         }
     }
  

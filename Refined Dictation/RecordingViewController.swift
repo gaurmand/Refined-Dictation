@@ -10,7 +10,7 @@
 import UIKit
 import FirebaseAuth
 
-class RecordingViewController: UIViewController, UITextFieldDelegate {
+class RecordingViewController: UIViewController {
     
     //MARK: Properties
     var recording: SpeechRecog?
@@ -18,13 +18,11 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
     var buttonState = "startRecButton"
 
     @IBOutlet weak var RecordingButton: UIButton!
-    @IBOutlet weak var SearchField: UITextField!
     @IBOutlet weak var InstructionLabel: UILabel!
     @IBOutlet weak var DoneButton: UIBarButtonItem!
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        SearchField.delegate = self //sets search field delegate
         DoneButton.isEnabled = false  //disables done button
         
         // pass in a proper values
@@ -46,15 +44,6 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
         InstructionLabel.text = "Tap the red button below to start recording your voice"
         DoneButton.isEnabled = false
     }
-    
-    //MARK: UITextFieldDelegate
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // Hide the keyboard when user presses return
-        textField.resignFirstResponder()
-        performSegue(withIdentifier: "RecordToHistory", sender: Any?.self)
-        return true
-    }
-    
     
     //MARK: Actions
     // TODO: take the user to VerificationViewController upon the second press of record button
@@ -89,8 +78,6 @@ class RecordingViewController: UIViewController, UITextFieldDelegate {
     @IBAction func unwindToRecordingView(sender: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        SearchField.text = "" //clears search field
-        
         if let destinationViewController = segue.destination as? VerificationViewController {
             destinationViewController.filtering = filtering
             destinationViewController.recording = recording
