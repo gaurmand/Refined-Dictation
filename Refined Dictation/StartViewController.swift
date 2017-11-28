@@ -47,7 +47,7 @@ class StartViewController: UIViewController {
             self.loginSession()
         }
         
-        //UserDefaults.standard.removeObject(forKey: "IsNotFirstLaunch")  //always goes to welcome/initialization
+        //UserDefaults.standard.removeObject(forKey: "IsNotFirstLaunch")  //always goes to welcome-initialization
         //UserDefaults.standard.set(true, forKey: "IsNotFirstLaunch")  //always goes to recording screen
         if (UserDefaults.standard.bool(forKey: "IsNotFirstLaunch")){
             performSegue(withIdentifier: "skip2", sender: Any?) // If not first launch go straight to record screen

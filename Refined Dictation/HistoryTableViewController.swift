@@ -50,6 +50,7 @@ class HistoryTableViewController: UITableViewController {
         
         // Configure the cell...
         cell.TextLabel.text = "Rainy weather is the worst"
+        cell.DateLabel.text = "Nov-28-17"
         
         return cell
     }

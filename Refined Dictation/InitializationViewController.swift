@@ -19,7 +19,6 @@ class InitializationViewController: UIViewController {
     @IBOutlet weak var InstructionLabel: UILabel!
     @IBOutlet weak var PromptLabel: UILabel!
     @IBOutlet weak var RecordingButton: UIButton!
-    @IBOutlet weak var SignOutButton: UIBarButtonItem!
     @IBOutlet weak var DoneButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -33,6 +32,7 @@ class InitializationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(false, animated: true)    //shows navigation bar
+        self.navigationController?.navigationBar.topItem?.setHidesBackButton(true, animated: false) //hides back button
     }
 
     //MARK: Actions
@@ -48,7 +48,6 @@ class InitializationViewController: UIViewController {
             RecordingButton.setImage(UIImage(named: "stop"), for: UIControlState.normal)
             buttonState = "stopRecButton"
             DoneButton.isEnabled = false
-            SignOutButton.isEnabled = false
         }
         else{ //buttonState == "stopRecButton" -> stop recording button was pressed
             InstructionLabel.text = "..."
@@ -69,7 +68,6 @@ class InitializationViewController: UIViewController {
             
             RecordingButton.setImage(UIImage(named: "record"), for: UIControlState.normal)
             buttonState = "startRecButton"
-            SignOutButton.isEnabled = true
         }
     }
     
