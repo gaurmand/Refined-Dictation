@@ -19,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // initialize firebase settings
         FirebaseApp.configure()
+        
+        //initailze twitter kit
+        Twitter.sharedInstance().start(withConsumerKey:"4noZ73JDhWGvcMGgOE2cLwY2j", consumerSecret:"VyBE0gBNE8ITGphqN6ahV3Vg1yv8w37QQ6aD8y2uiyLK3v9fYB")
+        
         return true
     }
     

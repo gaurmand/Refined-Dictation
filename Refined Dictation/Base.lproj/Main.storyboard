@@ -484,11 +484,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="hollowheart"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqg-qs-iMr">
-                                <rect key="frame" x="54" y="93" width="25" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="share"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcL-qE-lMx">
                                 <rect key="frame" x="31" y="143" width="312" height="455"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -511,7 +506,7 @@
                                 <segue destination="dvu-pi-iXe" kind="unwind" unwindAction="unwindToRecordingViewWithSender:" id="pHw-8U-eff"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="sza-2z-V5K">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="sza-2z-V5K">
                             <connections>
                                 <action selector="didTapDone:" destination="lDQ-5X-Ndl" id="Gbe-mt-s5f"/>
                                 <segue destination="DAd-uv-tvM" kind="show" id="Ewq-jm-iPs"/>
@@ -528,39 +523,10 @@
             </objects>
             <point key="canvasLocation" x="1884" y="278"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="9RE-ug-69r">
-            <objects>
-                <viewController id="RZ3-Bc-mvt" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eaX-H7-I6F"/>
-                        <viewControllerLayoutGuide type="bottom" id="a5q-Sf-UOd"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7Kv-3R-bxJ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="Lg4-j1-4Z3" id="Fbf-9e-27R"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dcK-5P-qd2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="Lg4-j1-4Z3">
-                    <connections>
-                        <outlet property="delegate" destination="RZ3-Bc-mvt" id="2VP-B1-fZN"/>
-                        <outlet property="searchContentsController" destination="RZ3-Bc-mvt" id="LBe-Ks-X7C"/>
-                        <outlet property="searchResultsDataSource" destination="RZ3-Bc-mvt" id="iRI-fK-wMq"/>
-                        <outlet property="searchResultsDelegate" destination="RZ3-Bc-mvt" id="3eS-1l-uOB"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="3190" y="474"/>
-        </scene>
         <!--Share Your Text-->
         <scene sceneID="WoE-Su-M0u">
             <objects>
-                <viewController id="DAd-uv-tvM" sceneMemberID="viewController">
+                <viewController id="DAd-uv-tvM" customClass="ShareViewController" customModule="Refined_Dictation" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7bQ-0I-Emf"/>
                         <viewControllerLayoutGuide type="bottom" id="Otx-xu-4Zy"/>
@@ -630,6 +596,9 @@
                                 <rect key="frame" x="61" y="163" width="45" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="clipboard"/>
+                                <connections>
+                                    <action selector="ShareClipboard:" destination="DAd-uv-tvM" eventType="touchUpInside" id="FcY-kb-ieE"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1C-Cx-HV4">
                                 <rect key="frame" x="165" y="270" width="45" height="45"/>
@@ -640,6 +609,9 @@
                                 <rect key="frame" x="165" y="163" width="45" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="twitter"/>
+                                <connections>
+                                    <action selector="ShareTwitter:" destination="DAd-uv-tvM" eventType="touchUpInside" id="XXM-60-fxt"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oaa-9o-dTD">
                                 <rect key="frame" x="32" y="385" width="310" height="39"/>
@@ -783,7 +755,6 @@
         <image name="more" width="256" height="256"/>
         <image name="record" width="256" height="256"/>
         <image name="right arrow" width="120" height="120"/>
-        <image name="share" width="357" height="491"/>
         <image name="slack" width="256" height="256"/>
         <image name="snapchat" width="112" height="112"/>
         <image name="solidheart" width="135" height="126"/>

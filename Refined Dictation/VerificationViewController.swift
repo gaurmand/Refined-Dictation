@@ -58,6 +58,10 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         DisplayFilteredTextField.resignFirstResponder() //Dismiss keyboard before segueing
+        
+        if let destinationViewController = segue.destination as? ShareViewController {
+            destinationViewController.filtering = filtering
+        }
     }
  
 
