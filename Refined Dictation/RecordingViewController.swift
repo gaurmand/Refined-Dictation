@@ -20,7 +20,7 @@ class RecordingViewController: UIViewController {
     @IBOutlet weak var RecordingButton: UIButton!
     @IBOutlet weak var InstructionLabel: UILabel!
     @IBOutlet weak var DoneButton: UIBarButtonItem!
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         DoneButton.isEnabled = false  //disables done button

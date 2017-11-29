@@ -13,9 +13,12 @@ class FavouriteTableViewController: UITableViewController {
     var recording: SpeechRecog?
     var filtering: SpeechFilter?
     var finalRes: FinalResult?
+    var Favourites = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Favourites = ["ayy", "dispose of", "uncomment", "right", "bar button", "recreate", "table", "numb", "number", "numberof", "didReceiveMemoryWarning", "o", "a", "n", "I", "dequeue"]
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -36,7 +39,7 @@ class FavouriteTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20         // should return number of favourites
+        return Favourites.count         // should return number of favourites
     }
 
     
@@ -47,7 +50,7 @@ class FavouriteTableViewController: UITableViewController {
         }
 
         // Configure the cell...
-        cell.TextLabel.text = "Rainy weather is the worst"
+        cell.TextLabel.text = Favourites[indexPath.row]
         
         return cell
     }
@@ -93,8 +96,7 @@ class FavouriteTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
-            let favouriteIndex = tableView.indexPathForSelectedRow
-            filtering?.filteredResult = "Rainy weather is the worst"    //TO DO: set filtered result equal to the string displayed in that cell
+            filtering?.filteredResult = Favourites[(tableView.indexPathForSelectedRow?.row)!]   //set filtered result equal to the string displayed in the selected cell
             destinationViewController.filtering = filtering
         }
     }

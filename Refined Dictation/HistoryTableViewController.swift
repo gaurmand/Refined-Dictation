@@ -13,16 +13,35 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
     var recording: SpeechRecog?
     var filtering: SpeechFilter?
     var finalRes: FinalResult?
+    var History = [Dictation]()
+    var DisplayedResults = [Dictation]()
     
-    let searchController = UISearchController(searchResultsController: nil)
+    let searchController = UISearchController(searchResultsController: nil) //needed for search bar and searching
+    
+    //Nested Dictation Class
+    class Dictation{
+        var phrase: String
+        var date: String
+        var isFavourite: Bool
+        
+        init(_ a: String, _ b: String, _ c: Bool){
+            phrase = a
+            date = b
+            isFavourite = c
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let DDay = "Nov-28-17"
+        History = [Dictation("ayy", DDay, false), Dictation("result", DDay, true), Dictation("w", DDay, true), Dictation("memory", DDay, true), Dictation("Haalf", DDay, false), Dictation("num", DDay, true), Dictation("numb", DDay, false), Dictation("number", DDay, true), Dictation("I", DDay, false), Dictation("between the", DDay, false), Dictation("ijk", DDay, true)]
+        DisplayedResults = History
+        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for past dictations"
-        self.tableView.tableHeaderView = self.searchController.searchBar;
+        self.tableView.tableHeaderView = self.searchController.searchBar
         definesPresentationContext = true
         
         // Uncomment the following line to preserve selection between presentations
@@ -44,11 +63,8 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(searchController.isActive && searchController.searchBar.text != ""){
-            return 5
-        }
-        
-        return 20   // should return number of results in history
+        //if(searchController.isActive && searchController.searchBar.text != "")
+        return DisplayedResults.count   // should return number of results in history
     }
     
     
@@ -59,16 +75,16 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
         }
         
         // Configure the cell...
-        cell.TextLabel.text = "Rainy weather is the worst"
-        cell.DateLabel.text = "Nov-28-17"
+        let currentResult = DisplayedResults[indexPath.row]
+        cell.TextLabel.text = currentResult.phrase
+        cell.DateLabel.text = currentResult.date
         
-        if(false){   //if result is favourited set image to solid heart
+        if(currentResult.isFavourite){   //if result is favourited set image to solid heart
             cell.FavouriteImage.image = UIImage(named: "solidheart")
         }
         else{   //if result is not favourited set image to hollow heart
             cell.FavouriteImage.image = UIImage(named: "hollowheart")
         }
-                
         
         return cell
     }
@@ -93,16 +109,27 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
-             let historyIndex = tableView.indexPathForSelectedRow
-             filtering?.filteredResult = "Rainy weather is the worst"    //TO DO: set filtered result equal to the string displayed in that cell
-             destinationViewController.filtering = filtering
+            filtering?.filteredResult = DisplayedResults[(tableView.indexPathForSelectedRow?.row)!].phrase //makes filtered result equal to the string in the selected cell
+            destinationViewController.filtering = filtering
          }
     }
     
-    //Update Search Results
-    
+    //MARK: UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
+        if(searchController.searchBar.text != ""){
+            var tempArr = [Dictation]()
+            for string in History{
+                if(string.phrase.lowercased().contains(searchController.searchBar.text!.lowercased())){
+                    tempArr.append(string)
+                }
+            }
+            DisplayedResults = tempArr
+        }
+        else{
+            DisplayedResults = History
+        }
         tableView.reloadData()
     }
+    
 
 }
