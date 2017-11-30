@@ -14,6 +14,8 @@ target 'Refined Dictation' do
   target 'Refined DictationTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Firebase'  # firebase fked up. As seen here: https://stackoverflow.com/a/38254814
+
   end
 
   target 'Refined DictationUITests' do

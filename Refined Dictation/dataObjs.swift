@@ -215,25 +215,40 @@ class RecentDictsAndFavs{
         if (favourites.count != 0) {
             favourites.removeAll()
         }
-//
-//
-//         //   HISTORY_GO_BACK_DATE_COUNT
-//        ref.child("users/\(userID)/dictations").queryOrderedByChild("timestamp").queryStartingAtValue(ServerValue.timestamp()).queryEndingAtValue(currentDate).observeSingleEvent(of: .value, with: { (snapshot) in
-//            recentDictations = snapshot.value as? [String : NSDate] ?? [:]
-//        }) { (error) in
-//            print(error.localizedDescription)
-//        }
+
+        // get the past HISTORY_GO_BACK_DATE_COUNT dictation records
+        let backupDate = Calendar.current.date(byAdding: .day, value: -HISTORY_GO_BACK_DATE_COUNT, to: Date())!
+        let backupTime = Double((backupDate.timeIntervalSince1970 * 1000.0).rounded())
+        // queryEndingAtValue(ServerValue.timestamp()) is implied
+        ref.child("users/\(userID)/dictations").queryOrdered(byChild: "timestamp").queryStarting(atValue: backupTime).observeSingleEvent(of: .value, with: { (snapshot) in
+            recentDictations = snapshot.value as? [String : NSDate] ?? [:]
+        }) { (error) in
+            print(error.localizedDescription)
+        }
         
-        
-        
+        // get user's favourites
+        ref.child("users/\(userID)/favourtes").observeSingleEvent(of: .value, with: { (snapshot) in
+            favourites = snapshot.value as? [String : NSDate] ?? [:]
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     static open func newFav(_ entry: [String:NSDate]){
-        
-        
+            ref.child("users/\(userID)/favourtes").setValue(entry)
     }
     
-    static open func unFav(_ phrase: [String:NSDate]){
+    // called upon exiting the favourite screen. Passes in ALL the favourites that got 'unhearted'
+    static open func unFav(_ entries: Dictionary<String, NSDate>){
+        for (phrase, _) in entries {
+            // Remove the entr from the DB
+            ref.child("users/\(userID)/favourtes").child(phrase).removeValue { error, _ in
+                if error != nil {
+                    print("error \(error!)")
+                }
+            }
+            
+        }
         
     }
     
@@ -403,7 +418,12 @@ class FinalResult{
             }
         }
         
-        
+
+    }
+    
+    open func favDictation(){
+        let insertResult: String? = editedResult ?? rawResult
+        RecentDictsAndFavs.newFav([insertResult ?? rawResult : NSDate()])
     }
     
     private func insertDictationToFIR(){
@@ -413,6 +433,7 @@ class FinalResult{
                     "STTTime": STTTime,
                     "filterTime": filterTime,
                     "timestamp": ServerValue.timestamp()    // timestamping firebase data: https://stackoverflow.com/a/30244373
+                                                            // This is stored in miliseconds since EPOCH time, in UTC
             ] as [String : Any]
         let userID = Auth.auth().currentUser!.uid
         let childUpdates = ["/users/\(userID)/dictations/": post]
