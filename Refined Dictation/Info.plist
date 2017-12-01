@@ -24,8 +24,8 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.553287140688-0t6r3vbg1f6d1mghnlap0ab40re3qqlu</string>
-                <string>twitterkit-4noZ73JDhWGvcMGgOE2cLwY2j</string>
-            </array>
+				<string>twitterkit-4noZ73JDhWGvcMGgOE2cLwY2j</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
@@ -34,6 +34,11 @@
 	<string>fb1981915025400310</string>
 	<key>FacebookDisplayName</key>
 	<string>Refined Dictation</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>twitter</string>
+		<string>twitterauth</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -48,10 +53,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>twitter</string>
-        <string>twitterauth</string>
-    </array>
 </dict>
 </plist>

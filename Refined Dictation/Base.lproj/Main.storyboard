@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fag-ve-1po">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fag-ve-1po">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="vp1-gp-XeV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="diamondbackground" translatesAutoresizingMaskIntoConstraints="NO" id="vp1-gp-XeV">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -758,8 +758,8 @@
         <image name="2" width="64" height="59"/>
         <image name="3" width="62" height="60"/>
         <image name="Rounded Rectangle" width="272" height="119"/>
-        <image name="background" width="375" height="667"/>
         <image name="clipboard" width="256" height="256"/>
+        <image name="diamondbackground" width="320" height="512"/>
         <image name="fb" width="169" height="169"/>
         <image name="hollowheart" width="132" height="124"/>
         <image name="mail" width="256" height="256"/>
@@ -776,6 +776,6 @@
         <segue reference="j2D-ci-akA"/>
         <segue reference="mmm-6a-6it"/>
         <segue reference="hDo-K8-jJj"/>
-        <segue reference="CBb-00-BCh"/>
+        <segue reference="fmf-k2-rGx"/>
     </inferredMetricsTieBreakers>
 </document>

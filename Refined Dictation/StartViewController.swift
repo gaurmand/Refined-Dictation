@@ -175,7 +175,7 @@ class customAuthUIViewController: FUIAuthPickerViewController {
         let width = UIScreen.main.bounds.size.width
         let height = UIScreen.main.bounds.size.height
         let imageViewBackground = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
-        imageViewBackground.image = UIImage(named: "background")
+        imageViewBackground.image = UIImage(named: "diamondbackground")
         imageViewBackground.contentMode = UIViewContentMode.scaleAspectFill
         view.insertSubview(imageViewBackground, at: 0)
     }
