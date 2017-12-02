@@ -14,7 +14,7 @@ import FirebaseDatabase
 
 
 
-let EXCLUDE_MOST_COMMON_WORD_COUNT = 200    // used in CommonFilter() class
+let EXCLUDE_MOST_COMMON_WORD_COUNT = 50    // used in CommonFilter() class
 let INIT_CONFIDENCE = 80               // used in CommonFilter() class
 let THRESHOLD_CONFIDENCE = 40               // used in CommonFilter() class
 let HISTORY_GO_BACK_DATE_COUNT = 15
@@ -23,50 +23,8 @@ let HISTORY_GO_BACK_DATE_COUNT = 15
 // Instead, MACROs are now defined in project -> Build Setting -> Swift Compiler - Custom Flags -> Active Compilation Conditions
 // This project is currently using:
 //#define DEBUG
-// make sure DEBUG is turned off upon VER1 release
+// make sure DEBUG is turned off upon release
 
-
-
-//
-//// MARK: handles the management of a per-user custom profile
-//// constructed upon launch
-//class appUser{
-//    // properties:
-//    var name: String
-//    var usrID: String
-//    var WatsonID: String
-//    var WatsonPsswrd: String
-//
-//    // default constructor:
-//    // TODO: if(existing user): retrieve credentials using keychain; if(newappUser): call newappUserProfile()
-//   // init(keychainCred: KeychainWrapper? = nil){
-//    init(FirBUser: User){
-//        #if VER2
-////            getUsrInfo(KeychainWrapper)
-//        #endif
-//        name = FirBUser.displayName!
-//        usrID = FirBUser.uid
-//        WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
-//        WatsonPsswrd = "Ph70dloSxwhe"
-//    }
-//
-//    // cpy constructor:
-//    init(usr: appUser){
-//        self.name = usr.name
-//        self.usrID = usr.usrID
-//        self.WatsonID = usr.WatsonID
-//        self.WatsonPsswrd = usr.WatsonPsswrd
-//    }
-//
-//    init(){
-//        // dummie variables
-//        name = "Alice"
-//        usrID = "FirBUser.uid"
-//        WatsonID = "70c6c385-6d1f-4cd1-9239-eaf59fc38a08"
-//        WatsonPsswrd = "Ph70dloSxwhe"
-//    }
-//
-//}
 
 
 // MARK: per-user data structure used to manage words that we would like to filter
@@ -134,10 +92,7 @@ class CommonFilter{
     // Return true if succeeded or already in the list (and increment confidence)
     // Return false if failed
     static open func added(_ word: String) -> Bool {
-        if(ExcludedCommonWords[word] != nil){
-            return false
-        }
-        else if(userFilterWords[word] != nil && userFilterWords[word]! < 100){
+        if(userFilterWords[word] != nil && userFilterWords[word]! < 100){
             userFilterWords[word]! += 20
             updateFIR(word)
         }
@@ -157,11 +112,18 @@ class CommonFilter{
         return true
     }
 
-    // TODO: What to do for word change?
-//    // MARK: user changed a word in editor to another word
-//    static open func changed(from: String, to: String) -> Bool {
-//
-//    }
+    // MARK: user changed a word in editor to another word
+    // instead of lowering the confidence lvl by 20 like we did for removing, we lower it by 10, and increment the new word by 10
+    static open func changed(from: String, to: String) -> Bool {
+        if(userFilterWords[from] != nil){
+            userFilterWords[from]! -= 10
+            updateFIR(from)
+        }
+        userFilterWords[to] = 10
+        updateFIR(to)
+
+        return true
+    }
     
     
     // MARK: Check if the word is in the current list.
@@ -174,6 +136,7 @@ class CommonFilter{
         return false;
     }
     
+    // used to import the ExcludedCommonWordsList
     static internal func readFromFile(filename: String, firstNumLines: Int) -> Array<String>{
         // File location
         let fileURL = Bundle.main.path(forResource: filename, ofType: "txt")

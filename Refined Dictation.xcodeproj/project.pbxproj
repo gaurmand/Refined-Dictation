@@ -17,10 +17,6 @@
 		07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */; };
 		07FE22931FB03958006FE00F /* SpeechFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE22921FB03958006FE00F /* SpeechFilterTests.swift */; };
 		2916D4B21FB9337A00F8271C /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */; };
-		2916D4B31FB9337A00F8271C /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */; };
-		2916D4B41FB9337A00F8271C /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */; };
-		294AF5311FB4EA330014356D /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */; };
-		294AF5321FB4EA330014356D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294AF5301FB4EA330014356D /* KeychainWrapper.swift */; };
 		299FF2201FAD5AA00012595B /* audio-file.flac in Resources */ = {isa = PBXBuildFile; fileRef = 299FF21E1FAD5AA00012595B /* audio-file.flac */; };
 		299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF21F1FAD5AA00012595B /* dataObjs.swift */; };
 		299FF29A1FAD5CC40012595B /* SpeechToTextV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299FF2851FAD5C980012595B /* SpeechToTextV1.framework */; };
@@ -368,8 +364,6 @@
 		07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExcludedCommonWordsList.txt; sourceTree = "<group>"; };
 		07FE22921FB03958006FE00F /* SpeechFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechFilterTests.swift; sourceTree = "<group>"; };
 		2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializationViewController.swift; sourceTree = "<group>"; };
-		294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
-		294AF5301FB4EA330014356D /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		299FF21E1FAD5AA00012595B /* audio-file.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-file.flac"; sourceTree = "<group>"; };
 		299FF21F1FAD5AA00012595B /* dataObjs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataObjs.swift; sourceTree = "<group>"; };
 		299FF2221FAD5C970012595B /* WatsonDeveloperCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonDeveloperCloud.xcodeproj; path = "swift-sdk/WatsonDeveloperCloud.xcodeproj"; sourceTree = "<group>"; };
@@ -377,7 +371,7 @@
 		2B43AAF71306A2655FE13F6B /* Pods_Refined_Dictation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_Dictation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FB49B7118883150F4AAA5C /* Pods-Refined DictationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		45BEDD4D3447CD7084160725 /* Pods-Refined DictationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests.release.xcconfig"; sourceTree = "<group>"; };
-		7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = simplediff.swift; path = "simple-diff/simplediff.swift"; sourceTree = SOURCE_ROOT; };
+		7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = simplediff.swift; path = "Refined Dictation/LibrariesWithoutPod/simplediff.swift"; sourceTree = SOURCE_ROOT; };
 		7E74F7591FC224220000648B /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7E74F75A1FC224230000648B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -490,6 +484,51 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7EA543E31FD33D1C008E007E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */,
+				84F096A61FAC1006007E9E36 /* RecordingViewController.swift */,
+				84F096A81FAC749D007E9E36 /* VerificationViewController.swift */,
+				072B88F51FCD1F4800D712AC /* ShareViewController.swift */,
+				071EA66C1FCC22D60066BE07 /* HistoryTableViewController.swift */,
+				071EA66A1FCC07A00066BE07 /* FavouriteTableViewController.swift */,
+				07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */,
+				071EA6421FCC038E0066BE07 /* FavouriteTableViewCell.swift */,
+				7E74F7591FC224220000648B /* StartViewController.swift */,
+				07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7EA5440A1FD33D77008E007E /* LibrariesWithoutPod */ = {
+			isa = PBXGroup;
+			children = (
+				7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */,
+			);
+			path = LibrariesWithoutPod;
+			sourceTree = "<group>";
+		};
+		7EA5440B1FD33DA7008E007E /* OtherResources */ = {
+			isa = PBXGroup;
+			children = (
+				299FF21E1FAD5AA00012595B /* audio-file.flac */,
+				8496EEF21FA72B2500232112 /* Info.plist */,
+				07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */,
+				7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */,
+			);
+			path = OtherResources;
+			sourceTree = "<group>";
+		};
+		7EA5440C1FD33DFB008E007E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				8496EEEA1FA72B2500232112 /* Main.storyboard */,
+				8496EEEF1FA72B2500232112 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		8496EEDA1FA72B2500232112 = {
 			isa = PBXGroup;
 			children = (
@@ -518,28 +557,13 @@
 			children = (
 				29F71C1E1FB91BE7005C7205 /* Refined Dictation.entitlements */,
 				7E74F75A1FC224230000648B /* AppDelegate.swift */,
-				7E74F7591FC224220000648B /* StartViewController.swift */,
-				07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */,
-				2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */,
-				84F096A61FAC1006007E9E36 /* RecordingViewController.swift */,
-				84F096A81FAC749D007E9E36 /* VerificationViewController.swift */,
-				072B88F51FCD1F4800D712AC /* ShareViewController.swift */,
-				071EA66C1FCC22D60066BE07 /* HistoryTableViewController.swift */,
-				071EA66A1FCC07A00066BE07 /* FavouriteTableViewController.swift */,
-				07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */,
-				071EA6421FCC038E0066BE07 /* FavouriteTableViewCell.swift */,
-				8496EEEA1FA72B2500232112 /* Main.storyboard */,
-				7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */,
-				07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */,
+				7EA5440A1FD33D77008E007E /* LibrariesWithoutPod */,
+				7EA5440B1FD33DA7008E007E /* OtherResources */,
+				7EA543E31FD33D1C008E007E /* ViewControllers */,
+				7EA5440C1FD33DFB008E007E /* Storyboards */,
 				8496EEED1FA72B2500232112 /* Assets.xcassets */,
-				8496EEEF1FA72B2500232112 /* LaunchScreen.storyboard */,
-				8496EEF21FA72B2500232112 /* Info.plist */,
 				072B891E1FCD27A500D712AC /* Header.h */,
-				7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */,
-				294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */,
-				294AF5301FB4EA330014356D /* KeychainWrapper.swift */,
 				299FF21F1FAD5AA00012595B /* dataObjs.swift */,
-				299FF21E1FAD5AA00012595B /* audio-file.flac */,
 			);
 			path = "Refined Dictation";
 			sourceTree = "<group>";
@@ -1182,11 +1206,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseTwitterAuthUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseTwitterAuthUI.bundle,
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
@@ -1216,8 +1240,6 @@
 				071EA6431FCC038E0066BE07 /* FavouriteTableViewCell.swift in Sources */,
 				299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */,
 				7E74F75B1FC224230000648B /* StartViewController.swift in Sources */,
-				294AF5321FB4EA330014356D /* KeychainWrapper.swift in Sources */,
-				294AF5311FB4EA330014356D /* KeychainItemAccessibility.swift in Sources */,
 				84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */,
 				072B88F61FCD1F4800D712AC /* ShareViewController.swift in Sources */,
 				2916D4B21FB9337A00F8271C /* InitializationViewController.swift in Sources */,
@@ -1232,7 +1254,6 @@
 				07FE21DF1FAFCCEB006FE00F /* CommonFilterTests.swift in Sources */,
 				7E383EB01FBFAE3A004BCF80 /* simplediff.swift in Sources */,
 				07FE22931FB03958006FE00F /* SpeechFilterTests.swift in Sources */,
-				2916D4B31FB9337A00F8271C /* InitializationViewController.swift in Sources */,
 				8496EEFC1FA72B2500232112 /* Refined_DictationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1243,7 +1264,6 @@
 			files = (
 				7E383EB11FBFAE3A004BCF80 /* simplediff.swift in Sources */,
 				8496EF071FA72B2500232112 /* Refined_DictationUITests.swift in Sources */,
-				2916D4B41FB9337A00F8271C /* InitializationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
