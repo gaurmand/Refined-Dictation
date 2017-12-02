@@ -444,6 +444,7 @@ class FinalResult{
     
 }
 
+/*
 // return an array of the individual words in string, and the word count
 // returned words will be lemmatized if option == "lemma" (e.g., struggling -> struggle)
 // returned words will be just words if option == "word" (e.g., struggling -> struggling)
@@ -477,8 +478,44 @@ func getWordList(str: String, option: String = "word") -> ([String], Int){
             #endif
         }
     }
-    
     return (wordsList, wordCnt)
+}*/
+
+// return an array of the individual words in string, and the word count
+// returned words will be lemmatized if option == "lemma" (e.g., struggling -> struggle)
+// returned words will be just words if option == "word" (e.g., struggling -> struggling)
+// defaults to "word"
+// TODO: fix filtering of punctuation
+func getWordList(str: String) -> ([String], Int){
+  var wordCnt = 0; //wordCount
+  var wordsList: [String] = []
+  let tagger: NSLinguisticTagger
+  // parse potentially filtered string and potentially edited string to extract their words only
+  // modified based on: https://stackoverflow.com/a/31633375
+  // resived on 2017/11/20 by Rex on: https://developer.apple.com/documentation/foundation/nslinguistictagger/tokenizing_natural_language_text
+  // compare words with linguistic tagger
+  //        let tagger = NSLinguisticTagger(tagSchemes: [NSLinguisticTagSchemeLemma], options: 0)
+  tagger = NSLinguisticTagger(tagSchemes: [.tokenType], options: 0);
+  tagger.string=str
+  var range = NSRange(location: 0, length: str.utf16.count)
+  let options: NSLinguisticTagger.Options = [.omitWhitespace, .omitPunctuation]
+  //        tagger.string=str
+  range = NSRange(location: 0, length: str.utf16.count)
+  tagger.enumerateTags(in: range, unit: .word, scheme: .tokenType /*NSLinguisticTagSchemeLemma*/, options: options) { tag, tokenRange, _ in
+    wordCnt += 1
+    if option == "lemma", let lemma = tag {
+      print(lemma)
+      wordsList.append(tag!)
+    }
+    else{
+      let word = (str as NSString).substring(with: tokenRange)
+      wordsList.append(word)
+      #if DEBUG
+        print(word)
+      #endif
+    }
+  }
+  return (wordsList, wordCnt)
 }
 
 
