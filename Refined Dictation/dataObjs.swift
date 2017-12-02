@@ -444,6 +444,7 @@ func getWordList(str: String, option: String = "word") -> ([String], Int){
     return (wordsList, wordCnt)
 }*/
 
+
 // return an array of the individual words in string, and the word count
 // returned words will be lemmatized if option == "lemma" (e.g., struggling -> struggle)
 // returned words will be just words if option == "word" (e.g., struggling -> struggling)
