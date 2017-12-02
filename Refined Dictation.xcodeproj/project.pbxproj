@@ -40,6 +40,7 @@
 		8496EF071FA72B2500232112 /* Refined_DictationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EF061FA72B2500232112 /* Refined_DictationUITests.swift */; };
 		84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A61FAC1006007E9E36 /* RecordingViewController.swift */; };
 		84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A81FAC749D007E9E36 /* VerificationViewController.swift */; };
+		A5675501316C672694784E83 /* Pods_Refined_DictationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CEB24020945325424E2619 /* Pods_Refined_DictationTests.framework */; };
 		D4DC59781DC3C5A68CB1D11B /* Pods_Refined_Dictation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B43AAF71306A2655FE13F6B /* Pods_Refined_Dictation.framework */; };
 		EB9FBB824B6C8B6D2961085F /* Pods_Refined_DictationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C238D9B695ED6AFF11214407 /* Pods_Refined_DictationUITests.framework */; };
 /* End PBXBuildFile section */
@@ -375,6 +376,7 @@
 		29F71C1E1FB91BE7005C7205 /* Refined Dictation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Refined Dictation.entitlements"; sourceTree = "<group>"; };
 		2B43AAF71306A2655FE13F6B /* Pods_Refined_Dictation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_Dictation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FB49B7118883150F4AAA5C /* Pods-Refined DictationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		45BEDD4D3447CD7084160725 /* Pods-Refined DictationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests.release.xcconfig"; sourceTree = "<group>"; };
 		7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = simplediff.swift; path = "simple-diff/simplediff.swift"; sourceTree = SOURCE_ROOT; };
 		7E74F7591FC224220000648B /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7E74F75A1FC224230000648B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 		8ABBA07580B958550DDAF5B9 /* Pods-Refined Dictation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined Dictation.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation.release.xcconfig"; sourceTree = "<group>"; };
 		B0EC71B7A293AEDA186A1E96 /* Pods-Refined Dictation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined Dictation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation.debug.xcconfig"; sourceTree = "<group>"; };
 		C238D9B695ED6AFF11214407 /* Pods_Refined_DictationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_DictationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C52EE2DBD4A45326DA73C1C5 /* Pods-Refined DictationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CAA4B7451E9D24EB6DF8DE74 /* Pods-Refined DictationUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D9CEB24020945325424E2619 /* Pods_Refined_DictationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_DictationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -413,6 +416,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5675501316C672694784E83 /* Pods_Refined_DictationTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +438,8 @@
 				8ABBA07580B958550DDAF5B9 /* Pods-Refined Dictation.release.xcconfig */,
 				34FB49B7118883150F4AAA5C /* Pods-Refined DictationUITests.debug.xcconfig */,
 				CAA4B7451E9D24EB6DF8DE74 /* Pods-Refined DictationUITests.release.xcconfig */,
+				C52EE2DBD4A45326DA73C1C5 /* Pods-Refined DictationTests.debug.xcconfig */,
+				45BEDD4D3447CD7084160725 /* Pods-Refined DictationTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -597,9 +603,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8496EF0E1FA72B2500232112 /* Build configuration list for PBXNativeTarget "Refined DictationTests" */;
 			buildPhases = (
+				CE845DCCBAE5DB1ED9E27C3E /* [CP] Check Pods Manifest.lock */,
 				8496EEF31FA72B2500232112 /* Sources */,
 				8496EEF41FA72B2500232112 /* Frameworks */,
 				8496EEF51FA72B2500232112 /* Resources */,
+				5A006E883ABAE94ABEA5FE1B /* [CP] Embed Pods Frameworks */,
+				C4938A543DD729D98A4E538D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1047,6 +1056,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5A006E883ABAE94ABEA5FE1B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7D26305C00F9718C4EBBF1A1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1111,6 +1140,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4938A543DD729D98A4E538D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE845DCCBAE5DB1ED9E27C3E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Refined DictationTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F4330AA8C17DFB231A303F99 /* [CP] Copy Pods Resources */ = {
@@ -1391,6 +1453,7 @@
 		};
 		8496EF0F1FA72B2500232112 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C52EE2DBD4A45326DA73C1C5 /* Pods-Refined DictationTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1409,6 +1472,7 @@
 		};
 		8496EF101FA72B2500232112 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45BEDD4D3447CD7084160725 /* Pods-Refined DictationTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
