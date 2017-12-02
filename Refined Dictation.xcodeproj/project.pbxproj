@@ -17,10 +17,6 @@
 		07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */; };
 		07FE22931FB03958006FE00F /* SpeechFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE22921FB03958006FE00F /* SpeechFilterTests.swift */; };
 		2916D4B21FB9337A00F8271C /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */; };
-		2916D4B31FB9337A00F8271C /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */; };
-		2916D4B41FB9337A00F8271C /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */; };
-		294AF5311FB4EA330014356D /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */; };
-		294AF5321FB4EA330014356D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294AF5301FB4EA330014356D /* KeychainWrapper.swift */; };
 		299FF2201FAD5AA00012595B /* audio-file.flac in Resources */ = {isa = PBXBuildFile; fileRef = 299FF21E1FAD5AA00012595B /* audio-file.flac */; };
 		299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FF21F1FAD5AA00012595B /* dataObjs.swift */; };
 		299FF29A1FAD5CC40012595B /* SpeechToTextV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299FF2851FAD5C980012595B /* SpeechToTextV1.framework */; };
@@ -40,8 +36,8 @@
 		8496EF071FA72B2500232112 /* Refined_DictationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8496EF061FA72B2500232112 /* Refined_DictationUITests.swift */; };
 		84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A61FAC1006007E9E36 /* RecordingViewController.swift */; };
 		84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A81FAC749D007E9E36 /* VerificationViewController.swift */; };
+		A5675501316C672694784E83 /* Pods_Refined_DictationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CEB24020945325424E2619 /* Pods_Refined_DictationTests.framework */; };
 		D4DC59781DC3C5A68CB1D11B /* Pods_Refined_Dictation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B43AAF71306A2655FE13F6B /* Pods_Refined_Dictation.framework */; };
-		E42CFF3EDA2D9477D51BA064 /* Pods_Refined_DictationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CEB24020945325424E2619 /* Pods_Refined_DictationTests.framework */; };
 		EB9FBB824B6C8B6D2961085F /* Pods_Refined_DictationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C238D9B695ED6AFF11214407 /* Pods_Refined_DictationUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -368,15 +364,14 @@
 		07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExcludedCommonWordsList.txt; sourceTree = "<group>"; };
 		07FE22921FB03958006FE00F /* SpeechFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechFilterTests.swift; sourceTree = "<group>"; };
 		2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializationViewController.swift; sourceTree = "<group>"; };
-		294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
-		294AF5301FB4EA330014356D /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		299FF21E1FAD5AA00012595B /* audio-file.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-file.flac"; sourceTree = "<group>"; };
 		299FF21F1FAD5AA00012595B /* dataObjs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataObjs.swift; sourceTree = "<group>"; };
 		299FF2221FAD5C970012595B /* WatsonDeveloperCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WatsonDeveloperCloud.xcodeproj; path = "swift-sdk/WatsonDeveloperCloud.xcodeproj"; sourceTree = "<group>"; };
 		29F71C1E1FB91BE7005C7205 /* Refined Dictation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Refined Dictation.entitlements"; sourceTree = "<group>"; };
 		2B43AAF71306A2655FE13F6B /* Pods_Refined_Dictation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_Dictation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		34FB49B7118883150F4AAA5C /* Pods-Refined DictationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = simplediff.swift; path = "simple-diff/simplediff.swift"; sourceTree = SOURCE_ROOT; };
+		45BEDD4D3447CD7084160725 /* Pods-Refined DictationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests.release.xcconfig"; sourceTree = "<group>"; };
+		7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = simplediff.swift; path = "Refined Dictation/LibrariesWithoutPod/simplediff.swift"; sourceTree = SOURCE_ROOT; };
 		7E74F7591FC224220000648B /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7E74F75A1FC224230000648B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -393,11 +388,10 @@
 		8496EF081FA72B2500232112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F096A61FAC1006007E9E36 /* RecordingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingViewController.swift; sourceTree = "<group>"; };
 		84F096A81FAC749D007E9E36 /* VerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
-		8706F39B204CE53572445B57 /* Pods-Refined DictationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests.release.xcconfig"; sourceTree = "<group>"; };
 		8ABBA07580B958550DDAF5B9 /* Pods-Refined Dictation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined Dictation.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation.release.xcconfig"; sourceTree = "<group>"; };
 		B0EC71B7A293AEDA186A1E96 /* Pods-Refined Dictation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined Dictation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation.debug.xcconfig"; sourceTree = "<group>"; };
-		B609DD33EF445011B39048DE /* Pods-Refined DictationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C238D9B695ED6AFF11214407 /* Pods_Refined_DictationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_DictationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C52EE2DBD4A45326DA73C1C5 /* Pods-Refined DictationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CAA4B7451E9D24EB6DF8DE74 /* Pods-Refined DictationUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D9CEB24020945325424E2619 /* Pods_Refined_DictationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_DictationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -416,7 +410,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E42CFF3EDA2D9477D51BA064 /* Pods_Refined_DictationTests.framework in Frameworks */,
+				A5675501316C672694784E83 /* Pods_Refined_DictationTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,10 +430,10 @@
 			children = (
 				B0EC71B7A293AEDA186A1E96 /* Pods-Refined Dictation.debug.xcconfig */,
 				8ABBA07580B958550DDAF5B9 /* Pods-Refined Dictation.release.xcconfig */,
-				B609DD33EF445011B39048DE /* Pods-Refined DictationTests.debug.xcconfig */,
-				8706F39B204CE53572445B57 /* Pods-Refined DictationTests.release.xcconfig */,
 				34FB49B7118883150F4AAA5C /* Pods-Refined DictationUITests.debug.xcconfig */,
 				CAA4B7451E9D24EB6DF8DE74 /* Pods-Refined DictationUITests.release.xcconfig */,
+				C52EE2DBD4A45326DA73C1C5 /* Pods-Refined DictationTests.debug.xcconfig */,
+				45BEDD4D3447CD7084160725 /* Pods-Refined DictationTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -490,6 +484,51 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7EA543E31FD33D1C008E007E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */,
+				84F096A61FAC1006007E9E36 /* RecordingViewController.swift */,
+				84F096A81FAC749D007E9E36 /* VerificationViewController.swift */,
+				072B88F51FCD1F4800D712AC /* ShareViewController.swift */,
+				071EA66C1FCC22D60066BE07 /* HistoryTableViewController.swift */,
+				071EA66A1FCC07A00066BE07 /* FavouriteTableViewController.swift */,
+				07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */,
+				071EA6421FCC038E0066BE07 /* FavouriteTableViewCell.swift */,
+				7E74F7591FC224220000648B /* StartViewController.swift */,
+				07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7EA5440A1FD33D77008E007E /* LibrariesWithoutPod */ = {
+			isa = PBXGroup;
+			children = (
+				7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */,
+			);
+			path = LibrariesWithoutPod;
+			sourceTree = "<group>";
+		};
+		7EA5440B1FD33DA7008E007E /* OtherResources */ = {
+			isa = PBXGroup;
+			children = (
+				299FF21E1FAD5AA00012595B /* audio-file.flac */,
+				8496EEF21FA72B2500232112 /* Info.plist */,
+				07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */,
+				7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */,
+			);
+			path = OtherResources;
+			sourceTree = "<group>";
+		};
+		7EA5440C1FD33DFB008E007E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				8496EEEA1FA72B2500232112 /* Main.storyboard */,
+				8496EEEF1FA72B2500232112 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		8496EEDA1FA72B2500232112 = {
 			isa = PBXGroup;
 			children = (
@@ -518,28 +557,13 @@
 			children = (
 				29F71C1E1FB91BE7005C7205 /* Refined Dictation.entitlements */,
 				7E74F75A1FC224230000648B /* AppDelegate.swift */,
-				7E74F7591FC224220000648B /* StartViewController.swift */,
-				07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */,
-				2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */,
-				84F096A61FAC1006007E9E36 /* RecordingViewController.swift */,
-				84F096A81FAC749D007E9E36 /* VerificationViewController.swift */,
-				072B88F51FCD1F4800D712AC /* ShareViewController.swift */,
-				071EA66C1FCC22D60066BE07 /* HistoryTableViewController.swift */,
-				071EA66A1FCC07A00066BE07 /* FavouriteTableViewController.swift */,
-				07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */,
-				071EA6421FCC038E0066BE07 /* FavouriteTableViewCell.swift */,
-				8496EEEA1FA72B2500232112 /* Main.storyboard */,
-				7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */,
-				07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */,
+				7EA5440A1FD33D77008E007E /* LibrariesWithoutPod */,
+				7EA5440B1FD33DA7008E007E /* OtherResources */,
+				7EA543E31FD33D1C008E007E /* ViewControllers */,
+				7EA5440C1FD33DFB008E007E /* Storyboards */,
 				8496EEED1FA72B2500232112 /* Assets.xcassets */,
-				8496EEEF1FA72B2500232112 /* LaunchScreen.storyboard */,
-				8496EEF21FA72B2500232112 /* Info.plist */,
 				072B891E1FCD27A500D712AC /* Header.h */,
-				7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */,
-				294AF5091FB4EA330014356D /* KeychainItemAccessibility.swift */,
-				294AF5301FB4EA330014356D /* KeychainWrapper.swift */,
 				299FF21F1FAD5AA00012595B /* dataObjs.swift */,
-				299FF21E1FAD5AA00012595B /* audio-file.flac */,
 			);
 			path = "Refined Dictation";
 			sourceTree = "<group>";
@@ -603,12 +627,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8496EF0E1FA72B2500232112 /* Build configuration list for PBXNativeTarget "Refined DictationTests" */;
 			buildPhases = (
-				2A3ACED3360CAC8E6300AF44 /* [CP] Check Pods Manifest.lock */,
+				CE845DCCBAE5DB1ED9E27C3E /* [CP] Check Pods Manifest.lock */,
 				8496EEF31FA72B2500232112 /* Sources */,
 				8496EEF41FA72B2500232112 /* Frameworks */,
 				8496EEF51FA72B2500232112 /* Resources */,
-				AB7FE21C87BFC8DA74299E24 /* [CP] Embed Pods Frameworks */,
-				2C691BFE22BD518EF269EA51 /* [CP] Copy Pods Resources */,
+				5A006E883ABAE94ABEA5FE1B /* [CP] Embed Pods Frameworks */,
+				C4938A543DD729D98A4E538D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1008,39 +1032,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2A3ACED3360CAC8E6300AF44 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Refined DictationTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2C691BFE22BD518EF269EA51 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3984B3DA987753B660E2DB3E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1087,6 +1078,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A006E883ABAE94ABEA5FE1B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7D26305C00F9718C4EBBF1A1 /* [CP] Check Pods Manifest.lock */ = {
@@ -1155,24 +1166,37 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AB7FE21C87BFC8DA74299E24 /* [CP] Embed Pods Frameworks */ = {
+		C4938A543DD729D98A4E538D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE845DCCBAE5DB1ED9E27C3E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Refined DictationTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F4330AA8C17DFB231A303F99 /* [CP] Copy Pods Resources */ = {
@@ -1182,11 +1206,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseTwitterAuthUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseFacebookAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseTwitterAuthUI.bundle,
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
@@ -1216,8 +1240,6 @@
 				071EA6431FCC038E0066BE07 /* FavouriteTableViewCell.swift in Sources */,
 				299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */,
 				7E74F75B1FC224230000648B /* StartViewController.swift in Sources */,
-				294AF5321FB4EA330014356D /* KeychainWrapper.swift in Sources */,
-				294AF5311FB4EA330014356D /* KeychainItemAccessibility.swift in Sources */,
 				84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */,
 				072B88F61FCD1F4800D712AC /* ShareViewController.swift in Sources */,
 				2916D4B21FB9337A00F8271C /* InitializationViewController.swift in Sources */,
@@ -1232,7 +1254,6 @@
 				07FE21DF1FAFCCEB006FE00F /* CommonFilterTests.swift in Sources */,
 				7E383EB01FBFAE3A004BCF80 /* simplediff.swift in Sources */,
 				07FE22931FB03958006FE00F /* SpeechFilterTests.swift in Sources */,
-				2916D4B31FB9337A00F8271C /* InitializationViewController.swift in Sources */,
 				8496EEFC1FA72B2500232112 /* Refined_DictationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1243,7 +1264,6 @@
 			files = (
 				7E383EB11FBFAE3A004BCF80 /* simplediff.swift in Sources */,
 				8496EF071FA72B2500232112 /* Refined_DictationUITests.swift in Sources */,
-				2916D4B41FB9337A00F8271C /* InitializationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1453,7 +1473,7 @@
 		};
 		8496EF0F1FA72B2500232112 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B609DD33EF445011B39048DE /* Pods-Refined DictationTests.debug.xcconfig */;
+			baseConfigurationReference = C52EE2DBD4A45326DA73C1C5 /* Pods-Refined DictationTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1472,7 +1492,7 @@
 		};
 		8496EF101FA72B2500232112 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8706F39B204CE53572445B57 /* Pods-Refined DictationTests.release.xcconfig */;
+			baseConfigurationReference = 45BEDD4D3447CD7084160725 /* Pods-Refined DictationTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
