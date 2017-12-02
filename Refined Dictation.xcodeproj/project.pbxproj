@@ -41,7 +41,6 @@
 		84F096A71FAC1006007E9E36 /* RecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A61FAC1006007E9E36 /* RecordingViewController.swift */; };
 		84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F096A81FAC749D007E9E36 /* VerificationViewController.swift */; };
 		D4DC59781DC3C5A68CB1D11B /* Pods_Refined_Dictation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B43AAF71306A2655FE13F6B /* Pods_Refined_Dictation.framework */; };
-		E42CFF3EDA2D9477D51BA064 /* Pods_Refined_DictationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9CEB24020945325424E2619 /* Pods_Refined_DictationTests.framework */; };
 		EB9FBB824B6C8B6D2961085F /* Pods_Refined_DictationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C238D9B695ED6AFF11214407 /* Pods_Refined_DictationUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -393,10 +392,8 @@
 		8496EF081FA72B2500232112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F096A61FAC1006007E9E36 /* RecordingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingViewController.swift; sourceTree = "<group>"; };
 		84F096A81FAC749D007E9E36 /* VerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
-		8706F39B204CE53572445B57 /* Pods-Refined DictationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests.release.xcconfig"; sourceTree = "<group>"; };
 		8ABBA07580B958550DDAF5B9 /* Pods-Refined Dictation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined Dictation.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation.release.xcconfig"; sourceTree = "<group>"; };
 		B0EC71B7A293AEDA186A1E96 /* Pods-Refined Dictation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined Dictation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation.debug.xcconfig"; sourceTree = "<group>"; };
-		B609DD33EF445011B39048DE /* Pods-Refined DictationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C238D9B695ED6AFF11214407 /* Pods_Refined_DictationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_DictationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA4B7451E9D24EB6DF8DE74 /* Pods-Refined DictationUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Refined DictationUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Refined DictationUITests/Pods-Refined DictationUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D9CEB24020945325424E2619 /* Pods_Refined_DictationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Refined_DictationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -416,7 +413,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E42CFF3EDA2D9477D51BA064 /* Pods_Refined_DictationTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,8 +432,6 @@
 			children = (
 				B0EC71B7A293AEDA186A1E96 /* Pods-Refined Dictation.debug.xcconfig */,
 				8ABBA07580B958550DDAF5B9 /* Pods-Refined Dictation.release.xcconfig */,
-				B609DD33EF445011B39048DE /* Pods-Refined DictationTests.debug.xcconfig */,
-				8706F39B204CE53572445B57 /* Pods-Refined DictationTests.release.xcconfig */,
 				34FB49B7118883150F4AAA5C /* Pods-Refined DictationUITests.debug.xcconfig */,
 				CAA4B7451E9D24EB6DF8DE74 /* Pods-Refined DictationUITests.release.xcconfig */,
 			);
@@ -603,12 +597,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8496EF0E1FA72B2500232112 /* Build configuration list for PBXNativeTarget "Refined DictationTests" */;
 			buildPhases = (
-				2A3ACED3360CAC8E6300AF44 /* [CP] Check Pods Manifest.lock */,
 				8496EEF31FA72B2500232112 /* Sources */,
 				8496EEF41FA72B2500232112 /* Frameworks */,
 				8496EEF51FA72B2500232112 /* Resources */,
-				AB7FE21C87BFC8DA74299E24 /* [CP] Embed Pods Frameworks */,
-				2C691BFE22BD518EF269EA51 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1008,39 +999,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2A3ACED3360CAC8E6300AF44 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Refined DictationTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2C691BFE22BD518EF269EA51 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3984B3DA987753B660E2DB3E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1153,26 +1111,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined Dictation/Pods-Refined Dictation-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AB7FE21C87BFC8DA74299E24 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac-Defines-NSData+zlib/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Refined DictationTests/Pods-Refined DictationTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F4330AA8C17DFB231A303F99 /* [CP] Copy Pods Resources */ = {
@@ -1453,7 +1391,6 @@
 		};
 		8496EF0F1FA72B2500232112 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B609DD33EF445011B39048DE /* Pods-Refined DictationTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1472,7 +1409,6 @@
 		};
 		8496EF101FA72B2500232112 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8706F39B204CE53572445B57 /* Pods-Refined DictationTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
