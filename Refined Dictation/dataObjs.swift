@@ -136,7 +136,7 @@ class CommonFilter{
         return false;
     }
     
-    // used to import the ExcludedCommonWordsList
+    // MARK: used to import the ExcludedCommonWordsList from file
     static internal func readFromFile(filename: String, firstNumLines: Int) -> Array<String>{
         // File location
         let fileURL = Bundle.main.path(forResource: filename, ofType: "txt")
@@ -164,10 +164,11 @@ class CommonFilter{
 // MARK: Static class to handle searches and favourites
 class RecentDictsAndFavs{
     // Only the first HISTORY_GO_BACK_DATE_COUNT are retrieved upon launch
-    static var recentDictations = [String:NSDate]()      // query by date: https://stackoverflow.com/a/38599978
-    static var favourites = [String:NSDate]()
+    static var recentDictations = [(String, NSDate, Bool)]()      // query by date: https://stackoverflow.com/a/38599978
+    static var favourites = [(String, NSDate, Bool)]()
     static var userID = String()
     
+    // 'manual constructor' for the static class. ALWAYS call this upon initializing this class
     static open func InitLists(_ usr: User){
         userID = usr.uid
         
@@ -184,21 +185,45 @@ class RecentDictsAndFavs{
         let backupTime = Double((backupDate.timeIntervalSince1970 * 1000.0).rounded())
         // queryEndingAtValue(ServerValue.timestamp()) is implied
         ref.child("users/\(userID)/dictations").queryOrdered(byChild: "timestamp").queryStarting(atValue: backupTime).observeSingleEvent(of: .value, with: { (snapshot) in
-            recentDictations = snapshot.value as? [String : NSDate] ?? [:]
+            let ret = snapshot.value as? [(String, String?, String?, Double, Double, TimeInterval, Bool)] ?? []
+            
+            recentDictations = ret.map {
+                ($0.2 ?? ($0.1 ?? $0.0), NSDate(timeIntervalSince1970: $0.5/1000), $0.6)  // divide by 1000 to get seconds: https://stackoverflow.com/a/30244373
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+
+        // get user's favourites
+        ref.child("users/\(userID)/favourtes").observeSingleEvent(of: .value, with: { (snapshot) in
+             let ret = snapshot.value as? [(String, TimeInterval)] ?? []
+            favourites = ret.map{ ($0.0, NSDate(timeIntervalSince1970: $0.1/1000), true)}
         }) { (error) in
             print(error.localizedDescription)
         }
         
-        // get user's favourites
-        ref.child("users/\(userID)/favourtes").observeSingleEvent(of: .value, with: { (snapshot) in
-            favourites = snapshot.value as? [String : NSDate] ?? [:]
-        }) { (error) in
-            print(error.localizedDescription)
-        }
     }
     
-    static open func newFav(_ entry: [String:NSDate]){
-            ref.child("users/\(userID)/favourtes").setValue(entry)
+    
+    // MARK: New Favourite conforming to recentDictations/favourites format: (phrase, dictation timestamp, Favourited)
+    static open func newFav(_ entry: (String, NSDate?, Bool?)){
+        // guard
+        if (entry.2 != nil && entry.2 == false) {
+            return
+        }
+        
+        var timestamp: Any?
+        if entry.1 != nil {
+            timestamp = NSNumber(value: entry.1!.timeIntervalSince1970)
+        }
+        
+        let insert = [ ["phrase": entry.0],
+                       ["timestamp": timestamp ?? ServerValue.timestamp()]
+            ]
+        
+        ref.child("users/\(userID)/favourtes").setValue(insert)
+        
+        
     }
     
     // called upon exiting the favourite screen. Passes in ALL the favourites that got 'unhearted'
@@ -219,6 +244,7 @@ class RecentDictsAndFavs{
     static open func getMoreDictationHistory(){
         
     }
+    
 }
 
 // MARK: per-dictation class used to call Watson STT API and handle data
@@ -384,22 +410,26 @@ class FinalResult{
 
     }
     
+    // MARK: Called when this newly dictated FinalResult obj is favourited
     open func favDictation(){
         let insertResult: String? = editedResult ?? rawResult
-        RecentDictsAndFavs.newFav([insertResult ?? rawResult : NSDate()])
+        // conform to the interface of the method: (Phrase, timestamp, Favourited)
+        RecentDictsAndFavs.newFav( (insertResult ?? rawResult, nil, true) )
     }
     
-    private func insertDictationToFIR(){
+    open func insertDictationToFIR(){
+        let key = ref.child("users").childByAutoId().key
         let post = ["rawResult": rawResult,
                     "filteredResult": filteredResult ?? "",
                     "editedResult": editedResult ?? "",
                     "STTTime": STTTime,
                     "filterTime": filterTime,
-                    "timestamp": ServerValue.timestamp()    // timestamping firebase data: https://stackoverflow.com/a/30244373
+                    "timestamp": ServerValue.timestamp(),    // timestamping firebase data: https://stackoverflow.com/a/30244373
                                                             // This is stored in miliseconds since EPOCH time, in UTC
+                    "Favourited": false
             ] as [String : Any]
         let userID = Auth.auth().currentUser!.uid
-        let childUpdates = ["/users/\(userID)/dictations/": post]
+        let childUpdates = ["/users/\(userID)/dictations/\(key)/": post]
         ref.updateChildValues(childUpdates)
     }
     
