@@ -47,6 +47,7 @@ class InitializationViewController: UIViewController {
             recording?.recBegin()
             RecordingButton.setImage(UIImage(named: "stop"), for: UIControlState.normal)
             buttonState = "stopRecButton"
+            
             DoneButton.isEnabled = false
         }
         else{ //buttonState == "stopRecButton" -> stop recording button was pressed

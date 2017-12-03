@@ -70,5 +70,5 @@ class CommonFilterTests: XCTestCase {
 //        //"c" is in UserFilterWords, and its value is true, should return true
 //        XCTAssert(testObj.isOnList(word: "c3"))
 //    }
-//
+
 }

@@ -26,7 +26,7 @@
 		7E383EB11FBFAE3A004BCF80 /* simplediff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */; };
 		7E74F75B1FC224230000648B /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74F7591FC224220000648B /* StartViewController.swift */; };
 		7E74F75C1FC224230000648B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E74F75A1FC224230000648B /* AppDelegate.swift */; };
-		7EA5440E1FD37E3D008E007E /* FirebaseDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA5440D1FD37E36008E007E /* FirebaseDatabaseTests.swift */; };
+		7EA5440E1FD37E3D008E007E /* RecentDictsAndFavs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA5440D1FD37E36008E007E /* RecentDictsAndFavs.swift */; };
 		7EBBD3451FBCF5E400B9C7E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */; };
 		7EBBD3461FBCF5E400B9C7E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */; };
 		7EBBD3471FBCF5E400B9C7E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */; };
@@ -375,7 +375,7 @@
 		7E383EAD1FBFAE3A004BCF80 /* simplediff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = simplediff.swift; path = "Refined Dictation/LibrariesWithoutPod/simplediff.swift"; sourceTree = SOURCE_ROOT; };
 		7E74F7591FC224220000648B /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7E74F75A1FC224230000648B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7EA5440D1FD37E36008E007E /* FirebaseDatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseTests.swift; sourceTree = "<group>"; };
+		7EA5440D1FD37E36008E007E /* RecentDictsAndFavs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentDictsAndFavs.swift; sourceTree = "<group>"; };
 		7EBBD3441FBCF5E400B9C7E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8496EEE31FA72B2500232112 /* Refined Dictation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Refined Dictation.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8496EEEB1FA72B2500232112 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -577,7 +577,7 @@
 				07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */,
 				8496EEFB1FA72B2500232112 /* Refined_DictationTests.swift */,
 				8496EEFD1FA72B2500232112 /* Info.plist */,
-				7EA5440D1FD37E36008E007E /* FirebaseDatabaseTests.swift */,
+				7EA5440D1FD37E36008E007E /* RecentDictsAndFavs.swift */,
 			);
 			path = "Refined DictationTests";
 			sourceTree = "<group>";
@@ -1257,7 +1257,7 @@
 				07FE21DF1FAFCCEB006FE00F /* CommonFilterTests.swift in Sources */,
 				7E383EB01FBFAE3A004BCF80 /* simplediff.swift in Sources */,
 				07FE22931FB03958006FE00F /* SpeechFilterTests.swift in Sources */,
-				7EA5440E1FD37E3D008E007E /* FirebaseDatabaseTests.swift in Sources */,
+				7EA5440E1FD37E3D008E007E /* RecentDictsAndFavs.swift in Sources */,
 				8496EEFC1FA72B2500232112 /* Refined_DictationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
