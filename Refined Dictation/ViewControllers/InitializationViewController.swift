@@ -54,10 +54,6 @@ class InitializationViewController: UIViewController {
             InstructionLabel.text = "..."
             recording?.recStop()
             
-            #if DEBUG
-                print("raw:" + (recording?.rawResult)!)
-            #endif
-            
             if(updateUsrFilterLib(rawstring: (recording?.rawResult)!)){
                 InstructionLabel.text = "Press done or tap the red button to redo your recording"
                 DoneButton.isEnabled = true

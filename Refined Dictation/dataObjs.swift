@@ -151,7 +151,7 @@ class CommonFilter{
     // MARK: Called when an entry in userFilterWords has been created/updated
     static internal func updateFIR(_ word: String){
         if userFilterWords[word] != nil {
-            ref.child("users/\(usrID)/userFilterWords").setValue([word:userFilterWords[word]!])
+            ref.child("users/\(usrID)/userFilterWords").updateChildValues([word:userFilterWords[word]!])
         }
     }
 }
@@ -181,8 +181,9 @@ class RecentDictsAndFavs{
         let backupTime = Double((backupDate.timeIntervalSince1970 * 1000.0).rounded())
         // queryEndingAtValue(ServerValue.timestamp()) is implied
         ref.child("users/\(userID)/dictations").queryOrdered(byChild: "timestamp").queryStarting(atValue: backupTime).observeSingleEvent(of: .value, with: { (snapshot) in
+//            let ret = snapshot.value as? NSDictionary
+            // TODO: HOW THE FUCK DO YOU GET ALL THE NODES?? https://firebase.google.com/docs/database/ios/read-and-write
             let ret = snapshot.value as? [(String, String?, String?, Double, Double, TimeInterval, Bool)] ?? []
-            
             recentDictations = ret.map {
                 ($0.2 ?? ($0.1 ?? $0.0), NSDate(timeIntervalSince1970: $0.5/1000), $0.6)  // divide by 1000 to get seconds: https://stackoverflow.com/a/30244373
             }
@@ -191,51 +192,50 @@ class RecentDictsAndFavs{
         }
 
         // get user's favourites
-        ref.child("users/\(userID)/favourtes").observeSingleEvent(of: .value, with: { (snapshot) in
-             let ret = snapshot.value as? [(String, TimeInterval)] ?? []
-            favourites = ret.map{ ($0.0, NSDate(timeIntervalSince1970: $0.1/1000), true)}
+        ref.child("users/\(userID)/favourtes").observeSingleEvent(of: .value, with: {(snapshot) in
+            if let favDict = snapshot.value as? [String:TimeInterval]{
+                favourites = favDict.map{ ($0.0, NSDate(timeIntervalSince1970: $0.1/1000), true)}
+            } else {
+                // no favourtes
+            }
         }) { (error) in
             print(error.localizedDescription)
         }
-        
     }
     
     
     // MARK: New Favourite conforming to recentDictations/favourites format: (phrase, dictation timestamp, Favourited)
-    static open func newFav(_ entry: (String, NSDate?, Bool?)){
+    static open func newFav(_ entry: (phrase: String, timestampInNSDate: NSDate?, favourited: Bool?)){
         // guard
-        if (entry.2 != nil && entry.2 == false) {
+        if (entry.favourited != nil && entry.favourited == false) {
             return
         }
         
         var timestamp: Any?
-        if entry.1 != nil {
-            timestamp = NSNumber(value: entry.1!.timeIntervalSince1970)
+        if entry.timestampInNSDate != nil {
+            timestamp = NSNumber(value: entry.timestampInNSDate!.timeIntervalSince1970)
         }
         
-        let insert = [ ["phrase": entry.0],
-                       ["timestamp": timestamp ?? ServerValue.timestamp()]
-            ]
+        // insert current time as timestamp if NSDate was not provided by the func caller
+        let insert = [entry.phrase: timestamp ?? ServerValue.timestamp()]
+        ref.child("users/\(userID)/favourtes").updateChildValues(insert)
         
-        ref.child("users/\(userID)/favourtes").setValue(insert)
-        
-        
+        // ensure the dictation entry in firebase set to favourited: true
+        let query = ref.child("users/\(userID)/dictations").queryOrdered(byChild: "finaResult").queryEqual(toValue: entry.phrase)
+        query.observeSingleEvent(of: .value, with: {(snapshot) in
+            
+        })
     }
     
     // called upon exiting the favourite screen. Passes in ALL the favourites that got 'unhearted'
-    static open func unFav(_ entries: Dictionary<String, NSDate>){
-        for (phrase, _) in entries {
-            // Remove the entr from the DB
-            ref.child("users/\(userID)/favourtes").child(phrase).removeValue { error, _ in
-                if error != nil {
-                    print("error \(error!)")
-                }
-            }
-            
-        }
-        
+    static open func unFav(_ entries: [(phrase: String, timestampInNSDate: NSDate?, favourited: Bool?)]){
+
+
+        // ensure the dictation entry in firebase set to favourited: false
+
+
     }
-    
+
     // MARK: retrieve DEFAULT_HISTORY_COUNT more dictation records
     static open func getMoreDictationHistory(){
         
@@ -341,23 +341,36 @@ class SpeechFilter {
 
 
 // MARK: per-dictation class used to output the final results, and book-keep
-class FinalResult{
+class FinalResult {
     // properties:
     var rawResult: String
     var filteredResult: String? // nil if nothing filtered
     var editedResult:String?    // nil if no edits were made from super.filterResult: String
+    var finalResult: String     // the first non-nil of edited -> filtered -> raw. Exists because of firebase's garbage query capabilities
     var STTTime: Double
     var filterTime: Double
     
     // constructor:
     init(raw: String, filtered: String?, edited: String?, STTT: Double, filterT: Double){
-        rawResult = raw
+        // determine what to assign finalResult: String
+        if edited == nil {
+            finalResult = edited!
+        }
+        else if filtered != nil{
+            finalResult = filtered!
+        }
+        else{
+            finalResult = raw
+        }
+        
+        // fill in other data
+        if edited == nil {
+            editedResult = edited!
+        }
         if filtered != nil{
-            filteredResult = filtered
+            filteredResult = filtered!
         }
-        if edited != nil {
-            editedResult = edited
-        }
+        rawResult = raw
         STTTime = STTT
         filterTime = filterT
     }
@@ -408,9 +421,8 @@ class FinalResult{
     
     // MARK: Called when this newly dictated FinalResult obj is favourited
     open func favDictation(){
-        let insertResult: String? = editedResult ?? rawResult
         // conform to the interface of the method: (Phrase, timestamp, Favourited)
-        RecentDictsAndFavs.newFav( (insertResult ?? rawResult, nil, true) )
+        RecentDictsAndFavs.newFav( (finalResult, nil, true) )
     }
     
     open func insertDictationToFIR(){
@@ -418,6 +430,7 @@ class FinalResult{
         let post = ["rawResult": rawResult,
                     "filteredResult": filteredResult ?? "",
                     "editedResult": editedResult ?? "",
+                    "finaResult": finalResult,
                     "STTTime": STTTime,
                     "filterTime": filterTime,
                     "timestamp": ServerValue.timestamp(),    // timestamping firebase data: https://stackoverflow.com/a/30244373
@@ -428,10 +441,8 @@ class FinalResult{
         let childUpdates = ["/users/\(userID)/dictations/\(key)/": post]
         ref.updateChildValues(childUpdates)
     }
-    
-    
-    
 }
+
 
 
 // return an array of the individual words in string, and the word count
@@ -469,6 +480,8 @@ func getWordList(str: String, option: String = "word") -> ([String], Int){
     }
     return (wordsList, wordCnt)
 }
+    
+
 
 
 // MARK: timer class for statistics
@@ -487,4 +500,5 @@ class timer {
     }
     
 }
+
 

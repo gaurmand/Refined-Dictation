@@ -53,8 +53,11 @@ class RecordingViewController: UIViewController {
             recording?.recBegin()
             RecordingButton.setImage(UIImage(named: "stop"), for: UIControlState.normal)
             buttonState = "stopRecButton"
-            
             DoneButton.isEnabled = false
+            
+//            // DEBUG: TEST
+//            let a = FinalResult(raw: "String", filtered: "filteredString", edited: "EditedString", STTT: 0.1111, filterT: 0.2222)
+//            a.insertDictationToFIR()
         }
         else{ //buttonState == "stopRecButton" -> stop recording button was pressed
             InstructionLabel.text = "..."
