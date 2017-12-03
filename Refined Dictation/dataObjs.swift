@@ -100,7 +100,6 @@ class CommonFilter{
             userFilterWords[word] = INIT_CONFIDENCE
             updateFIR(word)
         }
-        return true
     }
     
     // MARK: user removed a word in editor
@@ -113,15 +112,13 @@ class CommonFilter{
 
     // MARK: user changed a word in editor to another word
     // instead of lowering the confidence lvl by 20 like we did for removing, we lower it by 10, and increment the new word by 10
-    static open func changed(from: String, to: String) -> Bool {
+    static open func changed(from: String, to: String) {
         if(userFilterWords[from] != nil){
             userFilterWords[from]! -= 10
             updateFIR(from)
         }
         userFilterWords[to] = 10
         updateFIR(to)
-
-        return true
     }
     
     
