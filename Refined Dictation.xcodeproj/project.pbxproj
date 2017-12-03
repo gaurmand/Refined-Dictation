@@ -12,6 +12,7 @@
 		071EA66D1FCC22D60066BE07 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071EA66C1FCC22D60066BE07 /* HistoryTableViewController.swift */; };
 		072B88F61FCD1F4800D712AC /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072B88F51FCD1F4800D712AC /* ShareViewController.swift */; };
 		07672A281FCC2A0A0047E1DC /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */; };
+		07D712051FD3A72B00FF08B6 /* FinalResultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D712041FD3A72B00FF08B6 /* FinalResultsTests.swift */; };
 		07FDAB161FB7F63C00D7D19A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */; };
 		07FE21DF1FAFCCEB006FE00F /* CommonFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */; };
 		07FE22111FB01AE8006FE00F /* ExcludedCommonWordsList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */; };
@@ -360,6 +361,7 @@
 		072B88F51FCD1F4800D712AC /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		072B891E1FCD27A500D712AC /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		07D712041FD3A72B00FF08B6 /* FinalResultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalResultsTests.swift; sourceTree = "<group>"; };
 		07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		07FE21DE1FAFCCEB006FE00F /* CommonFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFilterTests.swift; sourceTree = "<group>"; };
 		07FE22101FB01AE8006FE00F /* ExcludedCommonWordsList.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ExcludedCommonWordsList.txt; sourceTree = "<group>"; };
@@ -578,6 +580,7 @@
 				8496EEFB1FA72B2500232112 /* Refined_DictationTests.swift */,
 				8496EEFD1FA72B2500232112 /* Info.plist */,
 				7EA5440D1FD37E36008E007E /* RecentDictsAndFavs.swift */,
+				07D712041FD3A72B00FF08B6 /* FinalResultsTests.swift */,
 			);
 			path = "Refined DictationTests";
 			sourceTree = "<group>";
@@ -1259,6 +1262,7 @@
 				07FE22931FB03958006FE00F /* SpeechFilterTests.swift in Sources */,
 				7EA5440E1FD37E3D008E007E /* RecentDictsAndFavs.swift in Sources */,
 				8496EEFC1FA72B2500232112 /* Refined_DictationTests.swift in Sources */,
+				07D712051FD3A72B00FF08B6 /* FinalResultsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,7 +23,6 @@ class InitializationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DoneButton.isEnabled = false
         
         // pass in a proper values
         recording = SpeechRecog()
@@ -47,7 +46,7 @@ class InitializationViewController: UIViewController {
             recording?.recBegin()
             RecordingButton.setImage(UIImage(named: "stop"), for: UIControlState.normal)
             buttonState = "stopRecButton"
-            
+            DoneButton.title = "Done"
             DoneButton.isEnabled = false
         }
         else{ //buttonState == "stopRecButton" -> stop recording button was pressed
@@ -60,13 +59,12 @@ class InitializationViewController: UIViewController {
             
             if(updateUsrFilterLib(rawstring: (recording?.rawResult)!)){
                 InstructionLabel.text = "Press done or tap the red button to redo your recording"
-                DoneButton.isEnabled = true
             }
             else{
                 InstructionLabel.text = "Your speech was not recognized, please tap the red button to redo your recording"
-                DoneButton.isEnabled = false
+                DoneButton.title = "Skip"
             }
-            
+            DoneButton.isEnabled = true
             RecordingButton.setImage(UIImage(named: "record"), for: UIControlState.normal)
             buttonState = "startRecButton"
         }
@@ -100,7 +98,6 @@ class InitializationViewController: UIViewController {
             return false
         }
 
- 
         for index in 0...(StrArr.count - 1){    //finds tics by comparing prompt to the spoken sentence and adds them to userFilterLib
             if(index > promptStrArr.count - 1 ){
                 CommonFilter.added(StrArr[index])
@@ -111,9 +108,7 @@ class InitializationViewController: UIViewController {
                 CommonFilter.added(StrArr[index])
             }
         }
-        
-        
-        
+
         return true
     }
 }

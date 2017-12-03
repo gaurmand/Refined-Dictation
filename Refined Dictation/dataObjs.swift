@@ -364,28 +364,29 @@ class FinalResult{
     
     // funcs:
     // VER2: Pass result of textbox upon submission. If there are changes between filterResult and after
-    open func updateIfEdited(after: String)->Bool{
-        //        self.editedResult = after;
-        //        // VER2: instead of just comparing lemmatized word stems, compare strings to catch any necessary filtering of e.g., strugging -> struggle
-        //        let (wordsInEdited, editedWC) = getWordList(str: after)
-        //        let (wordsInFiltered, filteredWC) = getWordList(str: super.filterResult)
-        //
-        //        var j = 0
-        //        var missing: String?
-        //        for (i, word) in wordsInFiltered.enumerated(){
-        //            // mismatch detected
-        //            if(word != wordsInEdited[j]){
-        //                // determine if word(s) changed by looking forward up to 5 words until match
-        ////                var tempI = 0
-        //                for index in stride(from: i, through: i+5, by: 1){
-        //                    wordsInEdited[index]
-        //                }
-        //            }
-        //            else{
-        //                missing = missing! + word
-        //            }
-        //
-        //        }
+    open func updateIfEdited()->Bool{
+        let beforeArr = getWordList(str: filteredResult!, option: "word")
+        let afterArr = getWordList(str: editedResult!, option: "word")
+        let processedArr = simplediff(before: beforeArr.0, after: afterArr.0)
+        
+        for elem in processedArr{
+            if(elem.type == ChangeType.insert){
+                for word in elem.elements{
+                    CommonFilter.added(word)
+                }
+            }
+            if(elem.type == ChangeType.delete){
+                for word in elem.elements{
+                    CommonFilter.removed(word)
+                }
+            }
+//            else if(elem.type == ChangeType.noop){
+//                for word in elem.elements{
+//
+//                }
+//            }
+        }
+        
         return true
     }
     

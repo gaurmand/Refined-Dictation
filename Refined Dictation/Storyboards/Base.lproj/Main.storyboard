@@ -663,7 +663,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fag-ve-1po" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ewK-e1-n1R">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -734,7 +734,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Initialization" id="FSh-ZB-wiD">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="zvJ-Rv-wmq">
+                        <barButtonItem key="rightBarButtonItem" title="Skip" id="zvJ-Rv-wmq">
                             <connections>
                                 <action selector="SetIsNotFirstLaunchFlag:" destination="nia-0o-tuA" id="IET-q7-c6H"/>
                             </connections>
@@ -774,8 +774,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="j2D-ci-akA"/>
-        <segue reference="mmm-6a-6it"/>
-        <segue reference="hDo-K8-jJj"/>
-        <segue reference="fmf-k2-rGx"/>
+        <segue reference="COk-7b-qVU"/>
+        <segue reference="cgD-ia-1Iu"/>
+        <segue reference="CBb-00-BCh"/>
     </inferredMetricsTieBreakers>
 </document>

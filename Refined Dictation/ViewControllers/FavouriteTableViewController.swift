@@ -17,7 +17,7 @@ class FavouriteTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let y = SpeechRecog()
         Favourites = ["ayy", "dispose of", "uncomment", "right", "bar button", "recreate", "table", "numb", "number", "numberof", "didReceiveMemoryWarning", "o", "a", "n", "I", "dequeue"]
 
         // Uncomment the following line to preserve selection between presentations
