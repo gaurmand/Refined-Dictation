@@ -43,7 +43,7 @@ class CommonFilter{
     
     //creates empty dictionaries
     private static var ExcludedCommonWords = [String:Bool]()    // Bool to support turning on and off words to exclude from filtering
-    private static var userFilterWords = [String: Int]()    // Int to describle a confidence % level. Any word below THRESHOLD_CONFIDENCE will not be used in filtering
+    private static var userFilterWords = [String: Int]()    // Int to describle a confidence % level. Any word below THRESHOLD_CONFIDENCE will not be filtered
     private static var usrID = String()
     
     
@@ -93,7 +93,7 @@ class CommonFilter{
     // Return false if failed
     static open func added(_ word: String) {
         if(userFilterWords[word] != nil && userFilterWords[word]! < 100){
-            userFilterWords[word]! += 20
+            userFilterWords[word]! -= 20
             updateFIR(word)
         }
         else{
@@ -105,21 +105,21 @@ class CommonFilter{
     // MARK: user removed a word in editor
     static open func removed(_ word: String) {
         if(userFilterWords[word] != nil){
-            userFilterWords[word]! -= 20
+            userFilterWords[word]! += 20
             updateFIR(word)
         }
     }
 
-    // MARK: user changed a word in editor to another word
-    // instead of lowering the confidence lvl by 20 like we did for removing, we lower it by 10, and increment the new word by 10
-    static open func changed(from: String, to: String) {
-        if(userFilterWords[from] != nil){
-            userFilterWords[from]! -= 10
-            updateFIR(from)
-        }
-        userFilterWords[to] = 10
-        updateFIR(to)
-    }
+//    // MARK: user changed a word in editor to another word
+//    // instead of lowering the confidence lvl by 20 like we did for removing, we lower it by 10, and increment the new word by 10
+//    static open func changed(from: String, to: String) {
+//        if(userFilterWords[from] != nil){
+//            userFilterWords[from]! -= 10
+//            updateFIR(from)
+//        }
+//        userFilterWords[to] = 10
+//        updateFIR(to)
+//    }
     
     
     // MARK: Check if the word is in the current list.
@@ -181,18 +181,27 @@ class RecentDictsAndFavs{
         let backupTime = Double((backupDate.timeIntervalSince1970 * 1000.0).rounded())
         // queryEndingAtValue(ServerValue.timestamp()) is implied
         ref.child("users/\(userID)/dictations").queryOrdered(byChild: "timestamp").queryStarting(atValue: backupTime).observeSingleEvent(of: .value, with: { (snapshot) in
-//            let ret = snapshot.value as? NSDictionary
-            // TODO: HOW THE FUCK DO YOU GET ALL THE NODES?? https://firebase.google.com/docs/database/ios/read-and-write
-            let ret = snapshot.value as? [(String, String?, String?, Double, Double, TimeInterval, Bool)] ?? []
-            recentDictations = ret.map {
-                ($0.2 ?? ($0.1 ?? $0.0), NSDate(timeIntervalSince1970: $0.5/1000), $0.6)  // divide by 1000 to get seconds: https://stackoverflow.com/a/30244373
+            // iterate over all the recentDicts that is retrieved: https://stackoverflow.com/a/41651119
+            for snap in snapshot.children {
+                let dictSnap = snap as! DataSnapshot
+                let dictEntry = dictSnap.value as! [String:AnyObject]
+                let phrase = dictEntry["finalResult"] as? String
+                let timestamp = dictEntry["timestamp"] as? TimeInterval
+                let isFavourited = dictEntry["favourited"] as? Bool
+
+                if (timestamp != nil && phrase != nil && isFavourited != nil){
+                    let timestampInNSDate = NSDate(timeIntervalSince1970: timestamp!/1000)
+                    let insert = (phrase!, timestampInNSDate, isFavourited!)
+                    // prepend entry
+                    recentDictations.insert(insert, at: 0)
+                }
             }
         }) { (error) in
             print(error.localizedDescription)
         }
 
         // get user's favourites
-        ref.child("users/\(userID)/favourtes").observeSingleEvent(of: .value, with: {(snapshot) in
+        ref.child("users/\(userID)/favourites").queryOrdered(byChild: "timestamp").observeSingleEvent(of: .value, with: {(snapshot) in
             if let favDict = snapshot.value as? [String:TimeInterval]{
                 favourites = favDict.map{ ($0.0, NSDate(timeIntervalSince1970: $0.1/1000), true)}
             } else {
@@ -211,45 +220,101 @@ class RecentDictsAndFavs{
             return
         }
         
-        var timestamp: Any?
-        if entry.timestampInNSDate != nil {
-            timestamp = NSNumber(value: entry.timestampInNSDate!.timeIntervalSince1970)
+        // check if its already in database."favourite"
+        var doesExist = false
+        let favouritesQuery = ref.child("users/\(userID)/favourites").queryOrdered(byChild: "phrase").queryEqual(toValue: entry.phrase)
+        favouritesQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() == true {
+                doesExist = true
+            }
+        })
+        if doesExist == false {
+            // Insert in favourite table in database
+            // convert NSDate to epoch time
+            var timestamp: Any?     // if not there, use setValue to create it
+            if entry.timestampInNSDate != nil {
+                timestamp = NSNumber(value: entry.timestampInNSDate!.timeIntervalSince1970)
+            }
+            // insert current time as timestamp if NSDate was not provided by the func caller
+            let insert = [entry.phrase: timestamp ?? ServerValue.timestamp()]
+            ref.child("users/\(userID)/favourtes").setValue(insert)
         }
         
-        // insert current time as timestamp if NSDate was not provided by the func caller
-        let insert = [entry.phrase: timestamp ?? ServerValue.timestamp()]
-        ref.child("users/\(userID)/favourtes").updateChildValues(insert)
-        
-        // ensure the dictation entry in firebase set to favourited: true
-        let query = ref.child("users/\(userID)/dictations").queryOrdered(byChild: "finaResult").queryEqual(toValue: entry.phrase)
-        query.observeSingleEvent(of: .value, with: {(snapshot) in
-            
+        // ensure the dictation entry in database."dictations" set to favourited: true
+        // find node autoID
+        var autoID: String?
+        let dictationsQuery = ref.child("users/\(userID)/dictations").queryOrdered(byChild: "finalResult").queryEqual(toValue: entry.phrase)
+        dictationsQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+            for snap in snapshot.children {
+                let dictSnap = snap as! DataSnapshot
+                let dictEntry = dictSnap.value as! [String:AnyObject]
+                let finalResult = dictEntry["finalResult"] as? String
+                let isFavourited = dictEntry["favourited"] as? Bool ?? false    // if not there, use setValue to create it
+                // set autoID if it is determined that an update is needed
+                if (finalResult == entry.phrase && isFavourited == false){
+                    autoID = dictSnap.key
+                }
+            }
         })
+        // update value if necessary
+        if autoID != nil {
+            ref.child("users/\(userID)/dictations/\(autoID!)").setValue(["favourited": true])
+        }
     }
     
     // called upon exiting the favourite screen. Passes in ALL the favourites that got 'unhearted'
-    static open func unFav(_ entries: [(phrase: String, timestampInNSDate: NSDate?, favourited: Bool?)]){
-
-
-        // ensure the dictation entry in firebase set to favourited: false
-
-
-    }
-
-    // MARK: retrieve DEFAULT_HISTORY_COUNT more dictation records
-    static open func getMoreDictationHistory(){
+    static open func unFav(_ entry: (phrase: String, timestampInNSDate: NSDate?, favourited: Bool?)){
+        // guard
+        if (entry.favourited != nil && entry.favourited == true) {
+            return
+        }
         
+        // check if its already in database."favourite"
+        var doesExist = false
+        let favouritesQuery = ref.child("users/\(userID)/favourites").queryOrdered(byChild: "phrase").queryEqual(toValue: entry.phrase)
+        favouritesQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() == true {
+                doesExist = true
+            }
+        })
+        if doesExist == true {
+            // delete from favourite table in database
+            ref.child("users/\(userID)/favourites").child(entry.phrase).removeValue { error in
+                if error.0 != nil {
+//                    print("error \(error)")
+                }
+            }
+        }
+        
+        // ensure the dictation entry in database."dictations" set to favourited: false
+        // find node autoID
+        var autoID: String?
+        let dictationsQuery = ref.child("users/\(userID)/dictations").queryOrdered(byChild: "finalResult").queryEqual(toValue: entry.phrase)
+        dictationsQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+            for snap in snapshot.children {
+                let dictSnap = snap as! DataSnapshot
+                let dictEntry = dictSnap.value as! [String:AnyObject]
+                let finalResult = dictEntry["finalResult"] as? String
+                let isFavourited = dictEntry["favourited"] as? Bool ?? true    // if not there, use setValue to create it
+                // set autoID if it is determined that an update is needed
+                if (finalResult == entry.phrase && isFavourited == true){
+                    autoID = dictSnap.key
+                }
+            }
+        })
+        // update value if necessary
+        if autoID != nil {
+            ref.child("users/\(userID)/dictations/\(autoID!)").setValue(["favourited": false])
+        }
     }
-    
 }
 
 // MARK: per-dictation class used to call Watson STT API and handle data
 // instantiated on scenes with the red recording button
 class SpeechRecog{
+    
     // properties:
-//    #if DEBUG
-//    var speechPath = ""
-//    #endif
+
     var speechToText: SpeechToText
     var rawResult = ""
     var recordTime = 0.0
@@ -269,6 +334,7 @@ class SpeechRecog{
     
     
     // funcs:
+    
     // called when red recording button is tapped
     // Result string will be returned piece-by-piece, and appended to self.result
     open func recBegin(){
@@ -304,9 +370,11 @@ class SpeechRecog{
 // MARK: per-dictation class used to filter the STT result by comparing against the user's CommonFilter
 class SpeechFilter {
     // properties:
+    
     var rawResult = ""
     var filteredResult = ""
     var filterTime: Double = 0.0
+    
     
     // constructor:
     init(_ raw: String){
@@ -318,7 +386,9 @@ class SpeechFilter {
         
     }
     
+    
     // funcs:
+    
     // MARK: Compare the SpeechRecog.result word-by-word with the CommonFilter Dictionary, and take out the match
     open func matchCommonTics() {
         timer.tic()
@@ -342,6 +412,7 @@ class SpeechFilter {
 
 // MARK: per-dictation class used to output the final results, and book-keep
 class FinalResult {
+    
     // properties:
     var rawResult: String
     var filteredResult: String? // nil if nothing filtered
@@ -349,6 +420,7 @@ class FinalResult {
     var finalResult: String     // the first non-nil of edited -> filtered -> raw. Exists because of firebase's garbage query capabilities
     var STTTime: Double
     var filterTime: Double
+    
     
     // constructor:
     init(raw: String, filtered: String?, edited: String?, STTT: Double, filterT: Double){
@@ -375,8 +447,10 @@ class FinalResult {
         filterTime = filterT
     }
     
+    
     // funcs:
-    // VER2: Pass result of textbox upon submission. If there are changes between filterResult and after
+    
+    // VER2: Pass in result of textbox upon submission. If there are changes between filterResult and after
     open func updateIfEdited()->Bool{
         let beforeArr = getWordList(str: filteredResult!, option: "word")
         let afterArr = getWordList(str: editedResult!, option: "word")
@@ -431,12 +505,12 @@ class FinalResult {
         let post = ["rawResult": rawResult,
                     "filteredResult": filteredResult ?? "",
                     "editedResult": editedResult ?? "",
-                    "finaResult": finalResult,
+                    "finalResult": finalResult,
                     "STTTime": STTTime,
                     "filterTime": filterTime,
                     "timestamp": ServerValue.timestamp(),    // timestamping firebase data: https://stackoverflow.com/a/30244373
                                                             // This is stored in miliseconds since EPOCH time, in UTC
-                    "Favourited": false
+                    "favourited": false
             ] as [String : Any]
         let userID = Auth.auth().currentUser!.uid
         let childUpdates = ["/users/\(userID)/dictations/\(key)/": post]
@@ -449,7 +523,7 @@ class FinalResult {
 // return an array of the individual words in string, and the word count
 // returned words will be lemmatized if option == "lemma" (e.g., struggling -> struggle)
 // returned words will be just words if option == "word" (e.g., struggling -> struggling)
-// defaults to "word"
+// defaulted to "word"
 // TODO: fix filtering of punctuation
 func getWordList(str: String, option: String = "word") -> ([String], Int){
     var wordCnt = 0;
@@ -492,7 +566,6 @@ class timer {
     private static var ticTimestamp: Date = Date()
     
     static func tic() {
-//        print("TICK.")
         ticTimestamp = Date()
     }
     

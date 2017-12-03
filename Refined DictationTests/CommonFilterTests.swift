@@ -10,6 +10,7 @@ import XCTest
 @testable import Refined_Dictation
 
 class CommonFilterTests: XCTestCase {
+    
 //
 //    func testConstructor(){
 //        let testUser = User()
