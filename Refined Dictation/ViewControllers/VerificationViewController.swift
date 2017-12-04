@@ -15,7 +15,8 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
     var recording: SpeechRecog?
     var filtering: SpeechFilter?
     var finalRes: FinalResult?
-    var isFavourite = false
+    var isFavourite: Bool?
+    var isPreviousViewRecord: Bool? //true if previous view is the recording screen
     
     @IBOutlet weak var DisplayFilteredTextField: UITextView!
     @IBOutlet weak var Outline: UIButton!
@@ -25,11 +26,14 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DisplayFilteredTextField.text = filtering?.filteredResult
+        DisplayFilteredTextField.text = finalRes!.filteredResult
         DisplayFilteredTextField.delegate = self
         //DisplayFilteredTextField.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
-        FavouriteButton.isHidden = true
-        ShareButton.isHidden = true
+
+        if (isPreviousViewRecord!){
+            FavouriteButton.isHidden = true
+            ShareButton.isHidden = true
+        }
 
     }
 
@@ -56,7 +60,7 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func TapFavouriteButton(_ sender: Any) {
-        if(isFavourite){
+        if(isFavourite!){
             FavouriteButton.setImage(UIImage(named: "hollowheart"), for: UIControlState.normal)
             isFavourite = false
             RecentDictsAndFavs.unFav((finalRes!.finalResult, nil, false))

@@ -50,6 +50,12 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        History = RecentDictsAndFavs.recentDictations
+        DisplayedResults = History
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -120,8 +126,10 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
-            filtering?.filteredResult = DisplayedResults[(tableView.indexPathForSelectedRow?.row)!].0 //makes filtered result equal to the string in the selected cell
-            destinationViewController.filtering = filtering
+            let finalString = DisplayedResults[(tableView.indexPathForSelectedRow?.row)!].0 //makes filtered result equal to the string in the selected cell
+            destinationViewController.finalRes = FinalResult(raw: "", filtered: finalString, edited: finalString, STTT: 0, filterT: 0)
+            destinationViewController.isPreviousViewRecord = false
+            destinationViewController.isFavourite = DisplayedResults[(tableView.indexPathForSelectedRow?.row)!].2
          }
     }
     

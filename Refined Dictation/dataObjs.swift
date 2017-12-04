@@ -236,7 +236,7 @@ class RecentDictsAndFavs{
             }
             // insert current time as timestamp if NSDate was not provided by the func caller
             let insertFIR = [entry.phrase: timestamp ?? ServerValue.timestamp()]
-            ref.child("users/\(userID)/favourtes").updateChildValues(insertFIR)
+            ref.child("users/\(userID)/favourites").updateChildValues(insertFIR)
             // sync local
             let insertLocal = (entry.phrase, entry.timestampInNSDate ?? NSDate(), true)
             favourites.insert(insertLocal, at: 0)
@@ -275,27 +275,31 @@ class RecentDictsAndFavs{
             return
         }
         
-        // check if its currently in database."favourite"
-        var doesExist = false
-        let favouritesQuery = ref.child("users/\(userID)/favourites").queryEqual(toValue: entry.phrase)
-        favouritesQuery.observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.exists() == true {
-                doesExist = true
-            }
-        })
+//        // check if its currently in database."favourite"
+//        var doesExist = false
+//        let favouritesQuery = ref.child("users/\(userID)/favourites").queryEqual(toValue: entry.phrase)
+//        favouritesQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+//            if snapshot.exists() == true {
+//                doesExist = true
+//            }
+//        })
+//
+//        if doesExist == true {
+//            // delete from favourite table in database
+//            ref.child("users/\(userID)/favourites").child(entry.phrase).setValue(nil)
+//
+//            // sync local
+//            if let index = favourites.index(where: {$0.0 == entry.phrase}) {
+//                favourites.remove(at: index)
+//            }
+//        }
         
-        if doesExist == true {
-            // delete from favourite table in database
-            ref.child("users/\(userID)/favourites").child(entry.phrase).removeValue { error in
-                if error.0 != nil {
-//                    print("error \(error)")
-                }
-            }
+            ref.child("users/\(userID)/favourites").child(entry.phrase).removeValue()
+
             // sync local
             if let index = favourites.index(where: {$0.0 == entry.phrase}) {
                 favourites.remove(at: index)
             }
-        }
         
         // ensure the dictation entry in database."dictations" set to favourited: false
         // find node autoID

@@ -69,8 +69,10 @@ class FavouriteTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
-            filtering?.filteredResult = Favourites[(tableView.indexPathForSelectedRow?.row)!].0   //set filtered result equal to the string displayed in the selected cell
-            destinationViewController.filtering = filtering
+            let finalString = Favourites[(tableView.indexPathForSelectedRow?.row)!].0 //makes filtered result equal to the string in the selected cell
+            destinationViewController.finalRes = FinalResult(raw: "", filtered: finalString, edited: finalString, STTT: 0, filterT: 0)
+            destinationViewController.isPreviousViewRecord = false
+            destinationViewController.isFavourite = true
         }
     }
  

@@ -74,21 +74,15 @@ class RecordingViewController: UIViewController {
     
     // MARK: Navigation
     @IBAction func unwindToRecordingView(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.source as? VerificationViewController {
-            
-        }
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
             destinationViewController.finalRes = FinalResult(raw: (filtering?.rawResult)!, filtered: filtering?.filteredResult, edited: nil, STTT: (recording?.recordTime)!, filterT: (filtering?.filterTime)!)
-            destinationViewController.filtering = filtering
+            destinationViewController.isPreviousViewRecord = true
+            destinationViewController.isFavourite = false
         }
-        else if let destinationViewController = segue.destination as? FavouriteTableViewController {
-            destinationViewController.filtering = filtering
-        }
-        else if let destinationViewController = segue.destination as? HistoryTableViewController {
-            destinationViewController.filtering = filtering
-        }
+
     }
 }
