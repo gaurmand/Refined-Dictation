@@ -96,18 +96,17 @@ class CommonFilter{
             userFilterWords[word]! -= 20
             updateFIR(word)
         }
-        else{
-            userFilterWords[word] = INIT_CONFIDENCE
-            updateFIR(word)
-        }
+        
     }
     
     // MARK: user removed a word in editor
     static open func removed(_ word: String) {
         if(userFilterWords[word] != nil){
             userFilterWords[word]! += 20
-            updateFIR(word)
+        }else{
+            userFilterWords[word] = INIT_CONFIDENCE
         }
+        updateFIR(word)
     }
 
 //    // MARK: user changed a word in editor to another word
@@ -220,9 +219,9 @@ class RecentDictsAndFavs{
             return
         }
         
-        // check if its already in database."favourite"
+        // check if its currently in database."favourite"
         var doesExist = false
-        let favouritesQuery = ref.child("users/\(userID)/favourites").queryOrdered(byChild: "phrase").queryEqual(toValue: entry.phrase)
+        let favouritesQuery = ref.child("users/\(userID)/favourites").queryEqual(toValue: entry.phrase)
         favouritesQuery.observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.exists() == true {
                 doesExist = true
@@ -236,8 +235,11 @@ class RecentDictsAndFavs{
                 timestamp = NSNumber(value: entry.timestampInNSDate!.timeIntervalSince1970)
             }
             // insert current time as timestamp if NSDate was not provided by the func caller
-            let insert = [entry.phrase: timestamp ?? ServerValue.timestamp()]
-            ref.child("users/\(userID)/favourtes").setValue(insert)
+            let insertFIR = [entry.phrase: timestamp ?? ServerValue.timestamp()]
+            ref.child("users/\(userID)/favourtes").updateChildValues(insertFIR)
+            // sync local
+            let insertLocal = (entry.phrase, entry.timestampInNSDate ?? NSDate(), true)
+            favourites.insert(insertLocal, at: 0)
         }
         
         // ensure the dictation entry in database."dictations" set to favourited: true
@@ -249,7 +251,7 @@ class RecentDictsAndFavs{
                 let dictSnap = snap as! DataSnapshot
                 let dictEntry = dictSnap.value as! [String:AnyObject]
                 let finalResult = dictEntry["finalResult"] as? String
-                let isFavourited = dictEntry["favourited"] as? Bool ?? false    // if not there, use setValue to create it
+                let isFavourited = dictEntry["favourited"] as? Bool ?? false    // if not there, use updateChildValue to create it
                 // set autoID if it is determined that an update is needed
                 if (finalResult == entry.phrase && isFavourited == false){
                     autoID = dictSnap.key
@@ -258,7 +260,11 @@ class RecentDictsAndFavs{
         })
         // update value if necessary
         if autoID != nil {
-            ref.child("users/\(userID)/dictations/\(autoID!)").setValue(["favourited": true])
+            ref.child("users/\(userID)/dictations/\(autoID!)/favourited)").setValue(true)
+            // sync local
+            if let index = recentDictations.index(where: {$0.0 == entry.phrase}) {
+                recentDictations[index].2 = true
+            }
         }
     }
     
@@ -269,20 +275,25 @@ class RecentDictsAndFavs{
             return
         }
         
-        // check if its already in database."favourite"
+        // check if its currently in database."favourite"
         var doesExist = false
-        let favouritesQuery = ref.child("users/\(userID)/favourites").queryOrdered(byChild: "phrase").queryEqual(toValue: entry.phrase)
+        let favouritesQuery = ref.child("users/\(userID)/favourites").queryEqual(toValue: entry.phrase)
         favouritesQuery.observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.exists() == true {
                 doesExist = true
             }
         })
+        
         if doesExist == true {
             // delete from favourite table in database
             ref.child("users/\(userID)/favourites").child(entry.phrase).removeValue { error in
                 if error.0 != nil {
 //                    print("error \(error)")
                 }
+            }
+            // sync local
+            if let index = favourites.index(where: {$0.0 == entry.phrase}) {
+                favourites.remove(at: index)
             }
         }
         
@@ -304,8 +315,18 @@ class RecentDictsAndFavs{
         })
         // update value if necessary
         if autoID != nil {
-            ref.child("users/\(userID)/dictations/\(autoID!)").setValue(["favourited": false])
+            ref.child("users/\(userID)/dictations/\(autoID!)/favourited)").setValue(false)
+            // sync local
+            if let index = recentDictations.index(where: {$0.0 == entry.phrase}) {
+                recentDictations[index].2 = false
+            }
         }
+    }
+    
+    // MARK: observer to append new favourites and recentDictations as the app runs
+    static private func observeNewEntries(){
+        
+        
     }
 }
 
@@ -425,7 +446,7 @@ class FinalResult {
     // constructor:
     init(raw: String, filtered: String?, edited: String?, STTT: Double, filterT: Double){
         // determine what to assign finalResult: String
-        if edited == nil {
+        if edited != nil {
             finalResult = edited!
         }
         else if filtered != nil{
@@ -436,7 +457,7 @@ class FinalResult {
         }
         
         // fill in other data
-        if edited == nil {
+        if edited != nil {
             editedResult = edited!
         }
         if filtered != nil{
@@ -451,7 +472,7 @@ class FinalResult {
     // funcs:
     
     // VER2: Pass in result of textbox upon submission. If there are changes between filterResult and after
-    open func updateIfEdited()->Bool{
+    open func updateIfEdited(){
         let beforeArr = getWordList(str: filteredResult!, option: "word")
         let afterArr = getWordList(str: editedResult!, option: "word")
         let processedArr = simplediff(before: beforeArr.0, after: afterArr.0)
@@ -474,11 +495,13 @@ class FinalResult {
 //            }
         }
         
-        return true
+        finalResult = getFinalResult()
+        insertDictationToFIR()
     }
     
-    open func getFinalResult() -> String {
-        
+    // MARK: select the first non-nil of: editedResult->filteredResult->rawResult
+
+    private func getFinalResult() -> String {
         if self.editedResult != nil {
             return self.editedResult!
         }
@@ -490,8 +513,6 @@ class FinalResult {
                 return rawResult
             }
         }
-        
-
     }
     
     // MARK: Called when this newly dictated FinalResult obj is favourited

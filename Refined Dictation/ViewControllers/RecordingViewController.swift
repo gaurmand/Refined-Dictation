@@ -63,13 +63,7 @@ class RecordingViewController: UIViewController {
             InstructionLabel.text = "..."
             recording?.recStop()
             
-            #if DEBUG
-                print("raw: " + (recording?.rawResult)!)
-            #endif
             filtering = SpeechFilter(recording!.rawResult) // begin filtering
-            #if DEBUG
-                print("filtered: " + (filtering?.filteredResult)!)
-            #endif
             
             InstructionLabel.text = "Press done or tap the red button to redo your recording"
             RecordingButton.setImage(UIImage(named: "record"), for: UIControlState.normal)
@@ -79,12 +73,16 @@ class RecordingViewController: UIViewController {
     }
     
     // MARK: Navigation
-    @IBAction func unwindToRecordingView(sender: UIStoryboardSegue) {}
+    @IBAction func unwindToRecordingView(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? VerificationViewController {
+            
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
+            destinationViewController.finalRes = FinalResult(raw: (filtering?.rawResult)!, filtered: filtering?.filteredResult, edited: nil, STTT: (recording?.recordTime)!, filterT: (filtering?.filterTime)!)
             destinationViewController.filtering = filtering
-            destinationViewController.recording = recording
         }
         else if let destinationViewController = segue.destination as? FavouriteTableViewController {
             destinationViewController.filtering = filtering

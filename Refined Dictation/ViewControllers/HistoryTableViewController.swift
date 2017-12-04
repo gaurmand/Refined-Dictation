@@ -13,8 +13,8 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
     var recording: SpeechRecog?
     var filtering: SpeechFilter?
     var finalRes: FinalResult?
-    var History = [Dictation]()
-    var DisplayedResults = [Dictation]()
+    var History = [(String, NSDate, Bool)]()
+    var DisplayedResults = [(String, NSDate, Bool)]()
     
     let searchController = UISearchController(searchResultsController: nil) //needed for search bar and searching
     
@@ -33,9 +33,9 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let DDay = "Nov-28-17"
-        History = [Dictation("ayy", DDay, false), Dictation("result", DDay, true), Dictation("w", DDay, true), Dictation("memory", DDay, true), Dictation("Haalf", DDay, false), Dictation("num", DDay, true), Dictation("numb", DDay, false), Dictation("number", DDay, true), Dictation("I", DDay, false), Dictation("between the", DDay, false), Dictation("ijk", DDay, true)]
+
+//        History = [Dictation("ayy", DDay, false), Dictation("result", DDay, true), Dictation("w", DDay, true), Dictation("memory", DDay, true), Dictation("Haalf", DDay, false), Dictation("num", DDay, true), Dictation("numb", DDay, false), Dictation("number", DDay, true), Dictation("I", DDay, false), Dictation("between the", DDay, false), Dictation("ijk", DDay, true)]
+        History = RecentDictsAndFavs.recentDictations
         DisplayedResults = History
         
         searchController.searchResultsUpdater = self
@@ -76,10 +76,21 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
         
         // Configure the cell...
         let currentResult = DisplayedResults[indexPath.row]
-        cell.TextLabel.text = currentResult.phrase
-        cell.DateLabel.text = currentResult.date
+        cell.TextLabel.text = currentResult.0
+        // Format NSDate to String
+        let formatter = DateFormatter()
+        // initially set the format based on your datepicker date
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let myString = formatter.string(from: currentResult.1 as Date)
+        // convert your string to date
+        let yourDate = formatter.date(from: myString)
+        //then again set the date format whhich type of output you need
+        formatter.dateFormat = "dd-MMM-yyyy"
+        // again convert your date to string
+        let myStringafd = formatter.string(from: yourDate!)
+        cell.DateLabel.text = myStringafd
         
-        if(currentResult.isFavourite){   //if result is favourited set image to solid heart
+        if(currentResult.2){   //if result is favourited set image to solid heart
             cell.FavouriteImage.image = UIImage(named: "solidheart")
         }
         else{   //if result is not favourited set image to hollow heart
@@ -109,7 +120,7 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
-            filtering?.filteredResult = DisplayedResults[(tableView.indexPathForSelectedRow?.row)!].phrase //makes filtered result equal to the string in the selected cell
+            filtering?.filteredResult = DisplayedResults[(tableView.indexPathForSelectedRow?.row)!].0 //makes filtered result equal to the string in the selected cell
             destinationViewController.filtering = filtering
          }
     }
@@ -117,10 +128,10 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
     //MARK: UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
         if(searchController.searchBar.text != ""){
-            var tempArr = [Dictation]()
-            for string in History{
-                if(string.phrase.lowercased().contains(searchController.searchBar.text!.lowercased())){
-                    tempArr.append(string)
+            var tempArr = [(String, NSDate, Bool)]()
+            for elem in History{
+                if(elem.0.lowercased().contains(searchController.searchBar.text!.lowercased())){
+                    tempArr.append(elem)
                 }
             }
             DisplayedResults = tempArr

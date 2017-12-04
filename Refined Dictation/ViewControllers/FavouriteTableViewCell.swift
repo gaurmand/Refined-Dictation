@@ -12,7 +12,8 @@ class FavouriteTableViewCell: UITableViewCell {
     
     //Properties
     @IBOutlet weak var TextLabel: UILabel!
-
+    @IBOutlet weak var DateLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -10,7 +10,6 @@
 		071EA6431FCC038E0066BE07 /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071EA6421FCC038E0066BE07 /* FavouriteTableViewCell.swift */; };
 		071EA66B1FCC07A00066BE07 /* FavouriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071EA66A1FCC07A00066BE07 /* FavouriteTableViewController.swift */; };
 		071EA66D1FCC22D60066BE07 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071EA66C1FCC22D60066BE07 /* HistoryTableViewController.swift */; };
-		072B88F61FCD1F4800D712AC /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072B88F51FCD1F4800D712AC /* ShareViewController.swift */; };
 		07672A281FCC2A0A0047E1DC /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */; };
 		07D712051FD3A72B00FF08B6 /* FinalResultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D712041FD3A72B00FF08B6 /* FinalResultsTests.swift */; };
 		07FDAB161FB7F63C00D7D19A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */; };
@@ -358,8 +357,6 @@
 		071EA6421FCC038E0066BE07 /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		071EA66A1FCC07A00066BE07 /* FavouriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewController.swift; sourceTree = "<group>"; };
 		071EA66C1FCC22D60066BE07 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
-		072B88F51FCD1F4800D712AC /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
-		072B891E1FCD27A500D712AC /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		07D712041FD3A72B00FF08B6 /* FinalResultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalResultsTests.swift; sourceTree = "<group>"; };
 		07FDAB151FB7F63C00D7D19A /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -494,7 +491,6 @@
 				2916D4AD1FB9337A00F8271C /* InitializationViewController.swift */,
 				84F096A61FAC1006007E9E36 /* RecordingViewController.swift */,
 				84F096A81FAC749D007E9E36 /* VerificationViewController.swift */,
-				072B88F51FCD1F4800D712AC /* ShareViewController.swift */,
 				071EA66C1FCC22D60066BE07 /* HistoryTableViewController.swift */,
 				071EA66A1FCC07A00066BE07 /* FavouriteTableViewController.swift */,
 				07672A271FCC2A0A0047E1DC /* HistoryTableViewCell.swift */,
@@ -566,7 +562,6 @@
 				7EA543E31FD33D1C008E007E /* ViewControllers */,
 				7EA5440C1FD33DFB008E007E /* Storyboards */,
 				8496EEED1FA72B2500232112 /* Assets.xcassets */,
-				072B891E1FCD27A500D712AC /* Header.h */,
 				299FF21F1FAD5AA00012595B /* dataObjs.swift */,
 			);
 			path = "Refined Dictation";
@@ -1247,7 +1242,6 @@
 				299FF2211FAD5AA00012595B /* dataObjs.swift in Sources */,
 				7E74F75B1FC224230000648B /* StartViewController.swift in Sources */,
 				84F096A91FAC749D007E9E36 /* VerificationViewController.swift in Sources */,
-				072B88F61FCD1F4800D712AC /* ShareViewController.swift in Sources */,
 				2916D4B21FB9337A00F8271C /* InitializationViewController.swift in Sources */,
 				071EA66D1FCC22D60066BE07 /* HistoryTableViewController.swift in Sources */,
 			);
@@ -1446,7 +1440,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG VER3";
-				SWIFT_OBJC_BRIDGING_HEADER = "Refined Dictation/Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1473,7 +1467,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = VER3;
-				SWIFT_OBJC_BRIDGING_HEADER = "Refined Dictation/Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

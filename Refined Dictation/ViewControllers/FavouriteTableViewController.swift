@@ -13,24 +13,19 @@ class FavouriteTableViewController: UITableViewController {
     var recording: SpeechRecog?
     var filtering: SpeechFilter?
     var finalRes: FinalResult?
-    var Favourites = [String]()
+    var Favourites = [(String, NSDate, Bool)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let y = SpeechRecog()
-        Favourites = ["ayy", "dispose of", "uncomment", "right", "bar button", "recreate", "table", "numb", "number", "numberof", "didReceiveMemoryWarning", "o", "a", "n", "I", "dequeue"]
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+//        Favourites = ["ayy", "dispose of", "uncomment", "right", "bar button", "recreate", "table", "numb", "number", "numberof", "didReceiveMemoryWarning", "o", "a", "n", "I", "dequeue"]
+        Favourites = RecentDictsAndFavs.favourites
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 
     // MARK: - Table view data source
 
@@ -49,54 +44,32 @@ class FavouriteTableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of CustomTableViewCell.")
         }
 
-        // Configure the cell...
-        cell.TextLabel.text = Favourites[indexPath.row]
+        
+        // Configure the cells...
+        cell.TextLabel.text = Favourites[indexPath.row].0
+        
+        // Format NSDate to String
+        let formatter = DateFormatter()
+        // initially set the format based on your datepicker date
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let myString = formatter.string(from: Favourites[indexPath.row].1 as Date)
+        // convert your string to date
+        let yourDate = formatter.date(from: myString)
+        //then again set the date format whhich type of output you need
+        formatter.dateFormat = "dd-MMM-yyyy"
+        // again convert your date to string
+        let myStringafd = formatter.string(from: yourDate!)
+        cell.DateLabel.text = myStringafd
         
         return cell
     }
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
-            filtering?.filteredResult = Favourites[(tableView.indexPathForSelectedRow?.row)!]   //set filtered result equal to the string displayed in the selected cell
+            filtering?.filteredResult = Favourites[(tableView.indexPathForSelectedRow?.row)!].0   //set filtered result equal to the string displayed in the selected cell
             destinationViewController.filtering = filtering
         }
     }

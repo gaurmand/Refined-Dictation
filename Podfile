@@ -10,13 +10,11 @@ target 'Refined Dictation' do
     pod 'Firebase/Auth'
     pod 'Firebase/Database'
     pod 'FirebaseUI', '~>4.0'
-    pod 'TwitterKit'
     pod 'ReachabilitySwift'
   target 'Refined DictationTests' do
     inherit! :search_paths
     # Pods for testing
     pod 'Firebase'  # firebase fked up. As seen here: https://stackoverflow.com/a/38254814
-
   end
 
   target 'Refined DictationUITests' do

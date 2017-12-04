@@ -21,12 +21,15 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var Outline: UIButton!
     @IBOutlet weak var FavouriteButton: UIButton!
     @IBOutlet weak var ConfirmButton: UIBarButtonItem!
+    @IBOutlet weak var ShareButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         DisplayFilteredTextField.text = filtering?.filteredResult
         DisplayFilteredTextField.delegate = self
         //DisplayFilteredTextField.keyboardDismissMode = UIScrollViewKeyboardDismissMode.onDrag
+        FavouriteButton.isHidden = true
+        ShareButton.isHidden = true
 
     }
 
@@ -56,10 +59,12 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
         if(isFavourite){
             FavouriteButton.setImage(UIImage(named: "hollowheart"), for: UIControlState.normal)
             isFavourite = false
+            RecentDictsAndFavs.unFav((finalRes!.finalResult, nil, false))
         }
         else{
             FavouriteButton.setImage(UIImage(named: "solidheart"), for: UIControlState.normal)
             isFavourite = true
+            RecentDictsAndFavs.newFav((finalRes!.finalResult, nil, true))
         }
     }
     
@@ -67,6 +72,11 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
         if(ConfirmButton.isEnabled == true){
             ConfirmButton.isEnabled = false
             DisplayFilteredTextField.resignFirstResponder()
+            finalRes?.editedResult = DisplayFilteredTextField.text
+            DisplayFilteredTextField.isEditable = false
+            FavouriteButton.isHidden = false
+            ShareButton.isHidden = false
+            finalRes?.updateIfEdited()
         }
     }
     
@@ -89,14 +99,6 @@ class VerificationViewController: UIViewController, UITextViewDelegate {
  
     // MARK: Navigation
      @IBAction func unwindToVerificationView(sender: UIStoryboardSegue) {}
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        DisplayFilteredTextField.resignFirstResponder() //Dismiss keyboard before segueing
-        
-        if let destinationViewController = segue.destination as? ShareViewController {
-            destinationViewController.filtering = filtering
-        }
-    }
  
 
 }
