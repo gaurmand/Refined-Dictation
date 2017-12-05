@@ -13,8 +13,8 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
     var recording: SpeechRecog?
     var filtering: SpeechFilter?
     var finalRes: FinalResult?
-    var History = [(String, NSDate, Bool)]()
-    var DisplayedResults = [(String, NSDate, Bool)]()
+    var History = [(String, NSDate?, Bool)]()
+    var DisplayedResults = [(phrase: String, timestampInNSDate: NSDate?, favourited: Bool)]()
     
     let searchController = UISearchController(searchResultsController: nil) //needed for search bar and searching
     
@@ -87,7 +87,7 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
         let formatter = DateFormatter()
         // initially set the format based on your datepicker date
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let myString = formatter.string(from: currentResult.1 as Date)
+        let myString = formatter.string(from: currentResult.1 as! Date)
         // convert your string to date
         let yourDate = formatter.date(from: myString)
         //then again set the date format whhich type of output you need
@@ -126,8 +126,8 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
-            let finalString = DisplayedResults[(tableView.indexPathForSelectedRow?.row)!].0 //makes filtered result equal to the string in the selected cell
-            destinationViewController.finalRes = FinalResult(raw: "", filtered: finalString, edited: finalString, STTT: 0, filterT: 0)
+            //destinationViewController.finalRes = FinalResult(raw: "", filtered: filtering?.filteredResult, edited: "", STTT: 0, filterT: 0)
+            destinationViewController.Dictation = DisplayedResults[(tableView.indexPathForSelectedRow?.row)!]
             destinationViewController.isPreviousViewRecord = false
             destinationViewController.isFavourite = DisplayedResults[(tableView.indexPathForSelectedRow?.row)!].2
          }
@@ -136,7 +136,7 @@ class HistoryTableViewController: UITableViewController, UISearchResultsUpdating
     //MARK: UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
         if(searchController.searchBar.text != ""){
-            var tempArr = [(String, NSDate, Bool)]()
+            var tempArr = [(phrase: String, timestampInNSDate: NSDate?, favourited: Bool)]()
             for elem in History{
                 if(elem.0.lowercased().contains(searchController.searchBar.text!.lowercased())){
                     tempArr.append(elem)

@@ -159,8 +159,8 @@ class CommonFilter{
 // MARK: Static class to handle searches and favourites
 class RecentDictsAndFavs{
     // Only the first HISTORY_GO_BACK_DATE_COUNT are retrieved upon launch
-    static var recentDictations = [(String, NSDate, Bool)]()      // query by date: https://stackoverflow.com/a/38599978
-    static var favourites = [(String, NSDate, Bool)]()
+    static var recentDictations = [(String, NSDate?, Bool)]()      // query by date: https://stackoverflow.com/a/38599978
+    static var favourites = [(String, NSDate?, Bool)]()
     static var userID = String()
     
     // 'manual constructor' for the static class. ALWAYS call this upon initializing this class
@@ -189,7 +189,7 @@ class RecentDictsAndFavs{
                 let isFavourited = dictEntry["favourited"] as? Bool
 
                 if (timestamp != nil && phrase != nil && isFavourited != nil){
-                    let timestampInNSDate = NSDate(timeIntervalSince1970: timestamp!/1000)
+                    let timestampInNSDate: NSDate? = NSDate(timeIntervalSince1970: timestamp!/1000)
                     let insert = (phrase!, timestampInNSDate, isFavourited!)
                     // prepend entry
                     recentDictations.insert(insert, at: 0)
@@ -213,15 +213,16 @@ class RecentDictsAndFavs{
     
     
     // MARK: New Favourite conforming to recentDictations/favourites format: (phrase, dictation timestamp, Favourited)
-    static open func newFav(_ entry: (phrase: String, timestampInNSDate: NSDate?, favourited: Bool?)){
+    // entry = (phrase, timestampInNSDate, favourited)
+    static open func newFav(_ entry: (String, NSDate?, Bool)){
         // guard
-        if (entry.favourited != nil && entry.favourited == false) {
+        if (entry.2 == false) {
             return
         }
         
         // check if its currently in database."favourite"
         var doesExist = false
-        let favouritesQuery = ref.child("users/\(userID)/favourites").queryEqual(toValue: entry.phrase)
+        let favouritesQuery = ref.child("users/\(userID)/favourites").queryEqual(toValue: entry.0)
         favouritesQuery.observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.exists() == true {
                 doesExist = true
@@ -231,21 +232,23 @@ class RecentDictsAndFavs{
             // Insert in favourite table in database
             // convert NSDate to epoch time
             var timestamp: Any?     // if not there, use setValue to create it
-            if entry.timestampInNSDate != nil {
-                timestamp = NSNumber(value: entry.timestampInNSDate!.timeIntervalSince1970)
+            if entry.1 != nil {
+                timestamp = NSNumber(value: entry.1!.timeIntervalSince1970)
             }
             // insert current time as timestamp if NSDate was not provided by the func caller
-            let insertFIR = [entry.phrase: timestamp ?? ServerValue.timestamp()]
+            let insertFIR = [entry.0: timestamp ?? ServerValue.timestamp()]
             ref.child("users/\(userID)/favourites").updateChildValues(insertFIR)
+            
             // sync local
-            let insertLocal = (entry.phrase, entry.timestampInNSDate ?? NSDate(), true)
+            let dateObj: NSDate? = entry.1 ?? NSDate()
+            let insertLocal = (entry.0, dateObj, true)
             favourites.insert(insertLocal, at: 0)
         }
         
         // ensure the dictation entry in database."dictations" set to favourited: true
         // find node autoID
         var autoID: String?
-        let dictationsQuery = ref.child("users/\(userID)/dictations").queryOrdered(byChild: "finalResult").queryEqual(toValue: entry.phrase)
+        let dictationsQuery = ref.child("users/\(userID)/dictations").queryOrdered(byChild: "finalResult").queryEqual(toValue: entry.0)
         dictationsQuery.observeSingleEvent(of: .value, with: { (snapshot) in
             for snap in snapshot.children {
                 let dictSnap = snap as! DataSnapshot
@@ -253,7 +256,7 @@ class RecentDictsAndFavs{
                 let finalResult = dictEntry["finalResult"] as? String
                 let isFavourited = dictEntry["favourited"] as? Bool ?? false    // if not there, use updateChildValue to create it
                 // set autoID if it is determined that an update is needed
-                if (finalResult == entry.phrase && isFavourited == false){
+                if (finalResult == entry.0 && isFavourited == false){
                     autoID = dictSnap.key
                 }
             }
@@ -262,22 +265,23 @@ class RecentDictsAndFavs{
         if autoID != nil {
             ref.child("users/\(userID)/dictations/\(autoID!)/favourited)").setValue(true)
             // sync local
-            if let index = recentDictations.index(where: {$0.0 == entry.phrase}) {
+            if let index = recentDictations.index(where: {$0.0 == entry.0}) {
                 recentDictations[index].2 = true
             }
         }
     }
     
     // called upon exiting the favourite screen. Passes in ALL the favourites that got 'unhearted'
-    static open func unFav(_ entry: (phrase: String, timestampInNSDate: NSDate?, favourited: Bool?)){
+    // entry = (phrase, timestampInNSDate, favourited)
+    static open func unFav(_ entry: (String, NSDate?, Bool)){
         // guard
-        if (entry.favourited != nil && entry.favourited == true) {
+        if (entry.2 == true) {
             return
         }
         
 //        // check if its currently in database."favourite"
 //        var doesExist = false
-//        let favouritesQuery = ref.child("users/\(userID)/favourites").queryEqual(toValue: entry.phrase)
+//        let favouritesQuery = ref.child("users/\(userID)/favourites").queryEqual(toValue: entry.0)
 //        favouritesQuery.observeSingleEvent(of: .value, with: { (snapshot) in
 //            if snapshot.exists() == true {
 //                doesExist = true
@@ -286,25 +290,25 @@ class RecentDictsAndFavs{
 //
 //        if doesExist == true {
 //            // delete from favourite table in database
-//            ref.child("users/\(userID)/favourites").child(entry.phrase).setValue(nil)
+//            ref.child("users/\(userID)/favourites").child(entry.0).setValue(nil)
 //
 //            // sync local
-//            if let index = favourites.index(where: {$0.0 == entry.phrase}) {
+//            if let index = favourites.index(where: {$0.0 == entry.0}) {
 //                favourites.remove(at: index)
 //            }
 //        }
         
-            ref.child("users/\(userID)/favourites").child(entry.phrase).removeValue()
+            ref.child("users/\(userID)/favourites").child(entry.0).removeValue()
 
             // sync local
-            if let index = favourites.index(where: {$0.0 == entry.phrase}) {
+            if let index = favourites.index(where: {$0.0 == entry.0}) {
                 favourites.remove(at: index)
             }
         
         // ensure the dictation entry in database."dictations" set to favourited: false
         // find node autoID
         var autoID: String?
-        let dictationsQuery = ref.child("users/\(userID)/dictations").queryOrdered(byChild: "finalResult").queryEqual(toValue: entry.phrase)
+        let dictationsQuery = ref.child("users/\(userID)/dictations").queryOrdered(byChild: "finalResult").queryEqual(toValue: entry.0)
         dictationsQuery.observeSingleEvent(of: .value, with: { (snapshot) in
             for snap in snapshot.children {
                 let dictSnap = snap as! DataSnapshot
@@ -312,7 +316,7 @@ class RecentDictsAndFavs{
                 let finalResult = dictEntry["finalResult"] as? String
                 let isFavourited = dictEntry["favourited"] as? Bool ?? true    // if not there, use setValue to create it
                 // set autoID if it is determined that an update is needed
-                if (finalResult == entry.phrase && isFavourited == true){
+                if (finalResult == entry.0 && isFavourited == true){
                     autoID = dictSnap.key
                 }
             }
@@ -321,7 +325,7 @@ class RecentDictsAndFavs{
         if autoID != nil {
             ref.child("users/\(userID)/dictations/\(autoID!)/favourited)").setValue(false)
             // sync local
-            if let index = recentDictations.index(where: {$0.0 == entry.phrase}) {
+            if let index = recentDictations.index(where: {$0.0 == entry.0}) {
                 recentDictations[index].2 = false
             }
         }

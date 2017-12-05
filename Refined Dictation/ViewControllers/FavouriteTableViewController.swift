@@ -13,7 +13,7 @@ class FavouriteTableViewController: UITableViewController {
     var recording: SpeechRecog?
     var filtering: SpeechFilter?
     var finalRes: FinalResult?
-    var Favourites = [(String, NSDate, Bool)]()
+    var Favourites = [(phrase: String, timestampInNSDate: NSDate?, favourited: Bool)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class FavouriteTableViewController: UITableViewController {
         let formatter = DateFormatter()
         // initially set the format based on your datepicker date
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let myString = formatter.string(from: Favourites[indexPath.row].1 as Date)
+        let myString = formatter.string(from: Favourites[indexPath.row].1! as! Date)
         // convert your string to date
         let yourDate = formatter.date(from: myString)
         //then again set the date format whhich type of output you need
@@ -69,9 +69,9 @@ class FavouriteTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationViewController = segue.destination as? VerificationViewController {
-            let finalString = Favourites[(tableView.indexPathForSelectedRow?.row)!].0 //makes filtered result equal to the string in the selected cell
-            destinationViewController.finalRes = FinalResult(raw: "", filtered: finalString, edited: finalString, STTT: 0, filterT: 0)
             destinationViewController.isPreviousViewRecord = false
+            //destinationViewController.finalRes = FinalResult(raw: nil, filtered: filtering?.filteredResult, edited: nil, STTT: 0, filterT: 0)
+            destinationViewController.Dictation = Favourites[(tableView.indexPathForSelectedRow?.row)!]
             destinationViewController.isFavourite = true
         }
     }
